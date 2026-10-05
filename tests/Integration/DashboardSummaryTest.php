@@ -340,7 +340,9 @@ it('AC8: after each change the next view equals the filters', function (string $
     wpEval("wp_unschedule_hook('tracefern_check');");
 
     if ($change === 'a fresh marker passes PENDING_FOR') {
-        wpEval("update_post_meta($never, '_tracefern_pending', time() - 3600 + 2);");
+        // ten seconds before it is "Not checked": room for the views before the change on a slow runner
+        // (two seconds were too few on CI's PHP 8.5 run 37357247672)
+        wpEval("update_post_meta($never, '_tracefern_pending', time() - 3600 + 10);");
     }
     if ($change === 'the queue unscheduled') {
         wpEval("wp_schedule_single_event(time() + 600, 'tracefern_check');");
@@ -361,7 +363,7 @@ it('AC8: after each change the next view equals the filters', function (string $
         'a pending marker set' => wpEval("update_post_meta($never, '_tracefern_pending', time());"),
         'the queue scheduled' => wpEval("wp_schedule_single_event(time() + 600, 'tracefern_check');"),
         'the queue unscheduled' => wpEval("wp_unschedule_hook('tracefern_check');"),
-        'a fresh marker passes PENDING_FOR' => sleep(3),
+        'a fresh marker passes PENDING_FOR' => sleep(11),
         default => throw new InvalidArgumentException('unknown change: '.$change),
     };
 
@@ -408,14 +410,15 @@ it('AC9: no cache is left after uninstall', function (): void {
 it('AC8 (amendment 2): the oldest fresh marker, not the youngest, ends the cache', function (): void {
     $older = attachmentWithEntry(null);
     $younger = attachmentWithEntry(null);
-    wpEval("update_post_meta($older, '_tracefern_pending', time() - 3600 + 2); update_post_meta($younger, '_tracefern_pending', time() - 60); wp_unschedule_hook('tracefern_check');");
+    // ten seconds of room before the older marker passes, as in AC8 (two were too few on a slow runner)
+    wpEval("update_post_meta($older, '_tracefern_pending', time() - 3600 + 10); update_post_meta($younger, '_tracefern_pending', time() - 60); wp_unschedule_hook('tracefern_check');");
 
     $before = shownAndListed();
     expect($before['shown'])->toBe($before['listed'])
         ->and($before['listed']['pending'])->toBe(2)
         ->and(summaryCacheExists())->toBeTrue();
 
-    sleep(3);
+    sleep(11);
     $after = shownAndListed();
 
     expect($after['listed']['pending'])->toBe(1)

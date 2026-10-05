@@ -3683,3 +3683,23 @@ README are where the disclosure lives.
   `composer check` (123), integration (262), multisite (9), release (17).
 - Reasoned: none.
 - Decided by Maurice: amendment 4.
+
+## 2026-10-05 — Two dashboard tests given room on a slow runner
+
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, pas de marge aan en push daarna".
+- Produced: SPEC-033's AC8 dataset "a fresh marker passes PENDING_FOR" and
+  "AC8 (amendment 2)" set their pending marker 10 seconds before it turns
+  "Not checked" (was 2) and wait 11 seconds (was 3). Tests only; what they
+  check is unchanged.
+- Measured: CI run 37357247672 on `97ff493`: every job green but
+  integration on PHP 8.5, where that AC8 dataset failed before its change
+  (one file "pending" in the list, "Not checked" in the widget): each case
+  of the test takes 5 to 8 seconds on that runner, so the two-second
+  window passed between the two views. The same test passed on PHP 8.3 and
+  8.4 in that run, locally, and in every earlier run; it is the only
+  failed run of the last 40. The "1 warning" was there in the two green
+  runs before. Locally: SPEC-033's 24 tests green with the new margins.
+- Reasoned: that the amendment-4 change (one array comparison) does not
+  bear on the timing.
+- Decided by Maurice: widen the margin, then push.
