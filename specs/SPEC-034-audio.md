@@ -2,9 +2,9 @@
 
 | Field      | Value                                             |
 |------------|---------------------------------------------------|
-| Status     | draft                                             |
+| Status     | approved                                          |
 | Author     | Maurice van Loon                                  |
-| Approved   | —                                                 |
+| Approved   | Maurice van Loon, 2026-10-05                      |
 | Supersedes | —                                                 |
 
 > Lifecycle: `draft` → maintainer approves → `approved` → tests-first →
@@ -165,14 +165,17 @@ fixed placeholders. The cover's origin is found through the audio's
    background check on a slow host can hit `max_execution_time`; AC4 then
    gives `interrupted`. Proposal: no size cap, the interruption reported as
    it is. Alternative: a cap (for instance 512 MB) above which the file is
-   `error` / `too_large` without reading it. Non-blocker.
+   `error` / `too_large` without reading it. Non-blocker. **Decided by
+   Maurice van Loon, 2026-10-05: no cap**; AC4 covers the interruption.
 2. **Wording that says "images".** The settings button ("Check images that
    were never checked"), the dashboard title and parts of the readme say
    images. Proposal: "files" where audio is included, the plugin name
-   unchanged. Non-blocker.
+   unchanged. Non-blocker. **Decided by Maurice van Loon, 2026-10-05:
+   "files" where audio is included.**
 3. **The name.** "Image Check" undersells audio. Out of scope here (see
    above); worth deciding before the readme's short description changes.
-   Non-blocker for this spec.
+   Non-blocker for this spec. **Decided by Maurice van Loon, 2026-10-05:
+   the name stays for now; renaming is a decision of its own.**
 
 ## Traceability
 

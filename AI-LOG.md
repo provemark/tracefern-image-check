@@ -3525,3 +3525,21 @@ README are where the disclosure lives.
   (the spec's tests are to measure it).
 - Decided by Maurice: measure audio, then draft the spec. The spec waits
   for his approval.
+
+## 2026-10-05 — SPEC-034 approved; AC4 measured before its test
+
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, keur SPEC-034 goed en volg je voorstellen".
+- Produced: SPEC-034 `approved`, with Maurice's decisions on its three open
+  questions (no size cap; "files" where audio is included; the name stays
+  for now).
+- Measured: before writing AC4's test, four damaged audio files through
+  the verifier v0.3.0's `bin/c2pa-verify`: a signed WAV cut 100 bytes into
+  its `C2PA` chunk and a signed MP3 cut inside its tag both have a
+  manifest (`Invalid`, `general.error`), which the plugin shows as "Does
+  not verify"; a WAV whose RIFF size is 2 and a 10-byte WAV head have none
+  (`general.error`; `wav` and `unknown`), which the plugin shows as "Could
+  not be checked" (`unreadable`, `unsupported`). AC4 as approved names the
+  first kind for "Could not be checked": an amendment is proposed.
+- Reasoned: none.
+- Decided by Maurice: approve SPEC-034 and its proposals.
