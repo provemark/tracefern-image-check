@@ -3500,3 +3500,28 @@ README are where the disclosure lives.
   next.
 - Reasoned: none.
 - Decided by Maurice: correct the line, then measure audio.
+
+## 2026-10-05 — Audio measured; SPEC-034 drafted
+
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, beide: eerst de changelog-regel, dan audio meten";
+  "akkoord, schrijf de spec voor audio als draft".
+- Produced: `specs/SPEC-034-audio.md` (draft): WAV, MP3 and FLAC checked
+  as images are, AVI and other formats left alone, extracted cover art
+  keeping its own verdict with its origin named, the readme updated.
+- Measured: in the test environment (WordPress 7.1.2, PHP 8.3, wp-env),
+  the verifier v0.3.0's signed WAV, MP3, FLAC and AVI fixtures through
+  `wp media import`: all four allowed by default (`audio/wav`,
+  `audio/mpeg`, `audio/flac`, `video/avi`), each stored byte for byte
+  (SHA-256 equal), only metadata read, nothing stored by the plugin. An
+  MP3 built with an `APIC` cover (the signed JPEG fixture) made a second,
+  JPEG attachment, byte for byte the cover, linked by the audio's
+  `_thumbnail_id`; the plugin queued and ran its image check on it
+  ("Valid", the test signer) while the MP3 stayed "not checked". The
+  test attachments were deleted afterwards. The image-only limit lives in
+  `UploadHook::MIME_TYPES`, used everywhere but `ExistingImages`, which
+  has the three types as fixed SQL placeholders.
+- Reasoned: that the browser and REST uploads treat audio as WP-CLI does
+  (the spec's tests are to measure it).
+- Decided by Maurice: measure audio, then draft the spec. The spec waits
+  for his approval.
