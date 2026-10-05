@@ -3543,3 +3543,26 @@ README are where the disclosure lives.
   first kind for "Could not be checked": an amendment is proposed.
 - Reasoned: none.
 - Decided by Maurice: approve SPEC-034 and its proposals.
+
+## 2026-10-05 — SPEC-034 amendment 1; its tests, red
+
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, keur amendement 1 goed en schrijf de tests".
+- Produced: SPEC-034 amendment 1 (AC4 as measured); the verifier v0.3.0's
+  audio fixtures and its signed AVI in `tests/Fixtures/` with their
+  source in the README; `tests/Integration/AudioTest.php` (AC1–AC7) and a
+  test in `tests/Unit/ReadmeTest.php` (AC8), with the test column of the
+  Traceability.
+- Measured: `pest --testsuite=Integration --group=SPEC-034`: 13 failed,
+  3 passed. The 13 fail because nothing is stored for audio (null where
+  `none` or `error` is expected; arrays not identical; the column and the
+  dashboard count without audio). The 3 that pass are AC5, a guard that
+  must stay green. AC5's Ogg first failed for the wrong reason: WordPress
+  refused the 64 zero bytes behind `OggS` as not audio; a first page with
+  a Vorbis identification header is read as `audio/ogg` (measured with
+  `finfo` in the container) and imports. `pest --testsuite=Unit`: 1 failed
+  (AC8), 121 passed. PHPStan and Pint clean.
+- Reasoned: AC7's "the audio's details do not show the cover's verdict"
+  is an absence, green today because the audio shows nothing; it becomes
+  meaningful once audio has a verdict.
+- Decided by Maurice: amendment 1; write the tests.

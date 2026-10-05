@@ -207,3 +207,15 @@ it('AC8: says that an offloaded original is read through the offload plugin', fu
         ->and($flat)->toContain('It makes no network calls of its own. When another plugin has moved the original image to cloud storage, the image is read through that plugin, once per check.')
         ->and(strlen($readme))->toBeLessThan(10240);
 })->group('SPEC-032');
+
+it('SPEC-034 AC8: the readme says WAV, MP3 and FLAC are checked, and video is not', function (): void {
+    $readme = (string) file_get_contents(dirname(__DIR__, 2).'/readme.txt');
+    $blocks = explode("\n\n", $readme, 3);
+    $short = trim(explode("\n", $blocks[1] ?? '')[0]);
+    $faq = trim((string) preg_replace('/\s+/', ' ', (string) preg_replace('/.*\n= Which formats are checked\? =\n(.*?)(\n= .*|\n== .*|$)/s', '$1', $readme)));
+
+    expect($short)->toContain('audio')
+        ->and($faq)->toContain('WAV')->toContain('MP3')->toContain('FLAC')
+        ->and($faq)->toContain('Video is not checked')
+        ->and(strlen($readme))->toBeLessThan(10240);
+})->group('SPEC-034');
