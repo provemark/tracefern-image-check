@@ -309,6 +309,18 @@ final class DashboardSummary
    substance, the text replaced); the note under the lines says "a file
    marked AI-generated". The queries, the cache and every count are
    unchanged.
+4. **2026-10-05, approved by Maurice van Loon: counts kept for other
+   formats are not used.** Found by updating a site from 0.1.9 to 0.2.0
+   (SPEC-034): the widget showed the counts 0.1.9 had kept, without the
+   audio, for up to `CACHE_FOR` (an hour), while the Media Library and the
+   Existing files section already showed three files "Not checked". The
+   kept counts now record the formats they counted (`UploadHook::MIME_TYPES`);
+   counts without that record, or for other formats, are counted again.
+   - **AC9 (new) — counts kept for other formats are counted again.**
+     Given counts kept as 0.1.9 kept them (no formats recorded) or for the
+     three image formats only, with a total that no longer holds; when the
+     widget counts; then it shows the library as it is, and keeps the
+     new counts with the formats recorded.
 
 ## Traceability
 
@@ -327,3 +339,4 @@ least one test; every source file maps back to this spec.
 | AC8 | `tests/Integration/DashboardSummaryTest.php` :: AC8 (eight changes), AC8 (amendment 2) | `DashboardSummary::register()`, `onMeta()`, `onPost()`, `forget()`, `staleAt()` |
 | AC9 | `tests/Integration/DashboardSummaryTest.php` :: AC9 (both); `tests/Multisite/MultisiteTest.php` :: SPEC-033 AC9 | `UploadHook::deactivate()`, `uninstall.php` |
 | Amendment 3 | `tests/Integration/DashboardSummaryTest.php` :: AC3; amendment 3: the widget counts files and says so; `summaryTotal()` in `tests/Pest.php` | `DashboardSummary::totalLine()`, `render()` |
+| AC9 (amendment 4) | `tests/Integration/DashboardSummaryTest.php` :: amendment 4: counts kept for other formats are counted again (two datasets) | `DashboardSummary::counts()` (`types`) |

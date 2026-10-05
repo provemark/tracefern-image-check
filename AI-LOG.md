@@ -3654,3 +3654,32 @@ README are where the disclosure lives.
   check`; `composer test:release` (Plugin Check on the build).
 - Reasoned: none.
 - Decided by Maurice: add the quotes, then push.
+
+## 2026-10-05 — An update from 0.1.9 tested; SPEC-033 amendment 4
+
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "wat is je advies"; "akkoord, doe eerst de update-test"; "akkoord,
+  keur amendement 4 goed en voer het uit".
+- Produced: SPEC-033 amendment 4 (AC9): the kept counts record the formats
+  they counted, and counts kept without them, or for other formats, are
+  counted again; its test; `DashboardSummary::counts()`.
+- Measured: in the release environment (WordPress 7.1.2, PHP 8.3, WP_DEBUG
+  on), the released 0.1.9 zip with a JPEG and a WAV, MP3 and FLAC
+  uploaded and checked, then updated in place to the 0.2.0 build of
+  `5b3cd4c`. Before the update: the image Valid, the audio "not checked"
+  with an empty column, one file counted. Right after: the image's check
+  untouched, the audio "Not checked" in the column, Existing files "4, 3
+  never checked", but the widget still 1 file and 0 "Not checked": the
+  counts 0.1.9 had kept (up to an hour). After "Check files that were
+  never checked": the three audio files checked (Valid, Valid, none), the
+  image left alone, the widget right. No PHP warning. The new test red
+  first (`TOTAL:0`, the kept total), then SPEC-033's 24 tests green.
+  The update repeated with the fixed build (`e37b57d`), 0.1.9's kept
+  counts in place: right after the update the widget showed 4 files, 3
+  "Not checked", as the Media Library did; after the button the three
+  audio files were checked (Valid, Valid, none) and the image left alone.
+  (A first try of this repeat failed in the helper script, a leading comma
+  in its ID list, and was run again from the start.) On `e37b57d`:
+  `composer check` (123), integration (262), multisite (9), release (17).
+- Reasoned: none.
+- Decided by Maurice: amendment 4.

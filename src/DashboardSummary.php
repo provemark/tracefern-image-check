@@ -84,7 +84,8 @@ final class DashboardSummary
         $now = time();
 
         $cache = get_transient(self::CACHE);
-        $valid = is_array($cache) && ($cache['queued'] ?? null) === $queued && is_int($cache['until'] ?? null) && $now < $cache['until'] && is_array($cache['counts'] ?? null);
+        // Counts kept for other formats, as 0.1.9 kept them before audio was checked, are counted again (amendment 4).
+        $valid = is_array($cache) && ($cache['types'] ?? null) === UploadHook::MIME_TYPES && ($cache['queued'] ?? null) === $queued && is_int($cache['until'] ?? null) && $now < $cache['until'] && is_array($cache['counts'] ?? null);
         if ($valid && is_array($cache['counts'][$variant] ?? null)) {
             $cached = self::cached($cache['counts'][$variant]);
             if ($cached !== null) {
@@ -102,7 +103,7 @@ final class DashboardSummary
         $until = self::staleAt($queued, $now);
         if (! in_array(null, $counts, true) && $until !== null) {
             $keep = $valid && $cache['until'] === $until ? $cache['counts'] : [];
-            set_transient(self::CACHE, ['queued' => $queued, 'until' => $until, 'counts' => [$variant => $counts] + $keep], self::CACHE_FOR);
+            set_transient(self::CACHE, ['types' => UploadHook::MIME_TYPES, 'queued' => $queued, 'until' => $until, 'counts' => [$variant => $counts] + $keep], self::CACHE_FOR);
         }
 
         return $counts;

@@ -430,3 +430,21 @@ it('amendment 3: the widget counts files and says so', function (): void {
         ->toContain('a file marked AI-generated is also in the line of its state')
         ->and(summaryTotal($html))->toBe(1);
 })->group('SPEC-033');
+
+it('amendment 4: counts kept for other formats are counted again', function (string $kept): void {
+    emptyTestEnvironment();
+    attachmentWithEntry(sampleEntry(['state' => 'Valid']));
+    // the plugin counts and keeps; then the kept counts are made to look as 0.1.9 left them, with a total that no longer holds
+    $out = wpEval(<<<PHP
+        Tracefern\\ImageCheck\\DashboardSummary::counts();
+        \$cache = get_transient(Tracefern\\ImageCheck\\DashboardSummary::CACHE);
+        foreach (\$cache['counts'] as \$variant => \$counts) { \$cache['counts'][\$variant]['total'] = 0; }
+        if ('$kept' === 'no formats') { unset(\$cache['types']); } else { \$cache['types'] = ['image/jpeg', 'image/png', 'image/webp']; }
+        set_transient(Tracefern\\ImageCheck\\DashboardSummary::CACHE, \$cache, 3600);
+        \$counts = Tracefern\\ImageCheck\\DashboardSummary::counts();
+        echo 'TOTAL:', \$counts['total'], ' TYPES:', wp_json_encode(get_transient(Tracefern\\ImageCheck\\DashboardSummary::CACHE)['types'] ?? null);
+        PHP);
+
+    expect($out)->toContain('TOTAL:1')
+        ->and($out)->toContain('TYPES:["image\/jpeg","image\/png","image\/webp","audio\/wav","audio\/x-wav","audio\/mpeg","audio\/flac"]');
+})->with(['no formats', 'three image formats'])->group('SPEC-033');
