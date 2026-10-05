@@ -339,3 +339,24 @@ Releases after 0.1.0:
   damaged image named the reason ("could not be read") as if it were the
   label; the Media Library shows "Could not be checked". `readme.txt` in
   `trunk/` and `tags/0.1.9/`, no new version, to be committed by Maurice.
+- **0.2.0, 2026-10-05** (SPEC-034, WAV, MP3 and FLAC checked as images
+  are, cover art with its own verdict; SPEC-025 amendment 2, SPEC-031
+  amendment 3 and SPEC-033 amendments 3 and 4): built from `2d382c1`
+  (SHA-256 `d2e1a573…0156f6ed`, 328,970 bytes, kept in
+  `build/submitted/`). Before the build: `composer check` (123),
+  integration (262), multisite (9) and the Release suite (17) green; an
+  update from the released 0.1.9 to the build tested in the release
+  environment (it found the stale dashboard counts SPEC-033 amendment 4
+  fixed); CI run 37360301784 green on `2d382c1` (9 jobs), after run
+  37357247672 had failed one timing-bound test on PHP 8.5, given more room
+  in `2d382c1`. `trunk/` was replaced by the build (`diff -r` empty, 12
+  files changed) and `tags/0.2.0` copied; Maurice committed them
+  (r3729555, 21:19). Measured: the plugin page showed 0.2.0 at once; the
+  plugin API and the download answered 0.1.9 and no zip for some minutes
+  from their caches, then, asked past the cache, 0.2.0 (last updated
+  19:19 GMT) and a public download holding the files of the build, as an
+  export of SVN `tags/0.2.0` does; `trunk/readme.txt` says `Stable tag:
+  0.2.0`; the page returns 200. Git tag `v0.2.0` on `2d382c1`, and a
+  GitHub release with the same zip (SHA-256 equal, files equal to SVN
+  `tags/0.2.0`), on Maurice's go. The readme-only SVN update prepared for
+  0.1.9's changelog line was never committed: 0.2.0 carries the readme.

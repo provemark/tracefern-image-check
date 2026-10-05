@@ -3703,3 +3703,23 @@ README are where the disclosure lives.
 - Reasoned: that the amendment-4 change (one array comparison) does not
   bear on the timing.
 - Decided by Maurice: widen the margin, then push.
+
+## 2026-10-05 — Release 0.2.0
+
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, zet release 0.2.0 klaar"; "svn commit is gedaan";
+  "akkoord, maak de tag en de GitHub-release"; "akkoord, leg de release
+  vast en zet alles uit".
+- Produced: the build of `2d382c1` kept in `build/submitted/`; a fresh
+  SVN working copy (trunk from the build, `tags/0.2.0`), committed by
+  Maurice as r3729555; annotated tag `v0.2.0` on `2d382c1`; GitHub release
+  0.2.0 with the zip; the record in `notes/wporg-submission.md` §5.
+- Measured: CI run 37360301784 green on `2d382c1` before the build;
+  `diff -r` of the build against `trunk/` empty; the plugin page on 0.2.0
+  at once, the API and the download after their caches (asked past them:
+  0.2.0, 19:19 GMT); the public download, an export of SVN `tags/0.2.0`
+  and the GitHub release's zip all hold the files of the build (SHA-256
+  `d2e1a573…0156f6ed` on GitHub equal to `build/submitted/`); page 200.
+- Reasoned: none.
+- Decided by Maurice: the release, the SVN commit, the tag and the
+  GitHub release.
