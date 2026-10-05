@@ -3460,3 +3460,23 @@ README are where the disclosure lives.
   SPEC-015 already maps to the error "unreadable".
 - Decided by Maurice: amendment 11 after his review; prepare 0.1.9. Push,
   tag and the WordPress.org release wait for his word.
+
+## 2026-10-05 — Release 0.1.9
+
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, push de plugin"; "akkoord, maak de SVN-commit klaar";
+  "svn commit is gedaan"; "akkoord, maak de tag en de GitHub-release als
+  CI groen is".
+- Produced: push of `main` to `4b2a6e4`; the build kept in
+  `build/submitted/`; a fresh SVN working copy (trunk from the build, five
+  new files added, `tags/0.1.9`), committed by Maurice as r3729107;
+  annotated tag `v0.1.9` on `4b2a6e4`; GitHub release 0.1.9 with the zip;
+  the record in `notes/wporg-submission.md` §5.
+- Measured: CI run 37326423835 green on `4b2a6e4` (9 jobs) before the tag;
+  `diff -r` of the build against `trunk/` empty before the commit; plugin
+  API 0.1.9 at 14:47 GMT; the public download, an export of SVN
+  `tags/0.1.9` and the GitHub release's zip all hold the files of the
+  build (zip SHA-256 `175b9c7f…7f9ec1de` on GitHub equal to
+  `build/submitted/`); page 200.
+- Reasoned: none.
+- Decided by Maurice: the push, the SVN commit, the tag and the release.

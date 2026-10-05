@@ -319,3 +319,19 @@ Releases after 0.1.0:
   the plugin page returns 200. Git tag `v0.1.8` on `5401874`, and a
   GitHub release with the same zip (SHA-256 equal, files equal to SVN
   `tags/0.1.8`), on Maurice's go.
+- **0.1.9, 2026-10-05** (verifier v0.3.0, a security release: a leaf
+  outside a name-constrained authority, with names that are not UTF-8, is
+  no longer `Trusted`; SPEC-006 amendment 11): built from `4b2a6e4`
+  (SHA-256 `175b9c7f…7f9ec1de`, kept in `build/submitted/`). Before the
+  build: `composer check` (121), integration (229), multisite (9) and the
+  Release suite (17) green; CI run 37326423835 green on `4b2a6e4` (9
+  jobs) before the tag. `trunk/` was replaced by the build (`diff -r`
+  empty), five new verifier files added (`Container/Avi…`, `Id3…`,
+  `Riff…`, `Wav…ManifestStoreExtractor.php`, `Hash/HardBindings.php`),
+  and `tags/0.1.9` copied; Maurice committed them (r3729107, 16:47).
+  Measured: the plugin API reported 0.1.9 (last updated 14:47 GMT) at
+  once; the public download and an export of SVN `tags/0.1.9` hold the
+  same files as the build; `trunk/readme.txt` says `Stable tag: 0.1.9`;
+  the plugin page returns 200. Git tag `v0.1.9` on `4b2a6e4`, and a
+  GitHub release with the same zip (SHA-256 equal, files equal to SVN
+  `tags/0.1.9`), on Maurice's go.
