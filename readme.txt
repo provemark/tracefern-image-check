@@ -215,6 +215,6 @@ licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).
 = 0.1.9 =
 
 * Security: bundles c2pa-verifier 0.3.0, fixing a wrong trusted signer under a name-constrained authority in all earlier versions.
-* An image damaged before its credentials shows "could not be read".
+* An image damaged before its credentials shows "Could not be checked".
 
 Earlier versions: https://github.com/provemark/tracefern-image-check/releases

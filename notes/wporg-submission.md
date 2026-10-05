@@ -335,3 +335,7 @@ Releases after 0.1.0:
   the plugin page returns 200. Git tag `v0.1.9` on `4b2a6e4`, and a
   GitHub release with the same zip (SHA-256 equal, files equal to SVN
   `tags/0.1.9`), on Maurice's go.
+- **2026-10-05, readme only** (0.1.9's changelog): the line about a
+  damaged image named the reason ("could not be read") as if it were the
+  label; the Media Library shows "Could not be checked". `readme.txt` in
+  `trunk/` and `tags/0.1.9/`, no new version, to be committed by Maurice.

@@ -3480,3 +3480,23 @@ README are where the disclosure lives.
   `build/submitted/`); page 200.
 - Reasoned: none.
 - Decided by Maurice: the push, the SVN commit, the tag and the release.
+
+## 2026-10-05 — 0.1.9's changelog line corrected (readme only)
+
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "maar ik zie bij de plugin dat de readme voor de gebruikers op de
+  plugin site niet actueel is"; "audio bijv"; "akkoord, beide: eerst de
+  changelog-regel, dan audio meten".
+- Produced: `readme.txt` (the 0.1.9 line now names the label "Could not be
+  checked"); the same file in the SVN working copy's `trunk/` and
+  `tags/0.1.9/`, for Maurice to commit; `notes/wporg-submission.md` §5.
+- Measured: the live `trunk/readme.txt` equal to the repository's before
+  the change; the plugin page and API on 0.1.9; `src/Display.php` shows
+  "Could not be checked" for an error, with "the file could not be read"
+  as its reason; `readme.txt` 10,231 bytes; `composer check` (121). The
+  bundled C2PA trust list is still upstream's latest (`99927ca`,
+  2026-08-14). The FAQ's "Video and audio are not checked" is true of the
+  plugin; whether it should check audio is a separate question, measured
+  next.
+- Reasoned: none.
+- Decided by Maurice: correct the line, then measure audio.
