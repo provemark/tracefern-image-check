@@ -3641,3 +3641,16 @@ README are where the disclosure lives.
 - Found: "Cover of cover" reads oddly when the audio's title is a file
   name; quotes around the title would help (a proposal, not built).
 - Decided by Maurice: close points 1–4 and 6 before the release.
+
+## 2026-10-05 — The cover's audio titles quoted
+
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, voeg de aanhalingstekens toe en push daarna".
+- Produced: `MediaScreens::coverLine()` quotes each title through a
+  translatable `“%s”` (`esc_html_x`, context "a quoted audio title"), so
+  "Cover of “cover”" reads as a title; the AC7 tests expect the quotes.
+- Measured: the three cover tests red first (the old wording), then
+  `pest --testsuite=Integration --group=SPEC-034` 30 passed; `composer
+  check`; `composer test:release` (Plugin Check on the build).
+- Reasoned: none.
+- Decided by Maurice: add the quotes, then push.

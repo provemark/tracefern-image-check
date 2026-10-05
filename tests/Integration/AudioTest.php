@@ -214,7 +214,7 @@ it('AC7: cover art keeps its own verdict and says whose cover it is', function (
         ->and(stable((array) storedEntry($cover)))->toBe(expectedEntry(fixturePath('fixture-signed.jpg'), defaultSettingsFile()))
         ->and(visibleText(columnHtml($mp3)))->toBe('No Content Credentials')
         ->and(visibleText(columnHtml($cover)))->toBe('Intact: signer not trusted')
-        ->and(visibleText($coverDetails))->toContain('Cover of Song <b>one</b>')
+        ->and(visibleText($coverDetails))->toContain('Cover of “Song <b>one</b>”')
         ->and($coverDetails)->toContain('Song &lt;b&gt;one&lt;/b&gt;')
         ->and(visibleText(detailsHtml($mp3, false)))->not->toContain('Intact');
 })->group('SPEC-034');
@@ -233,8 +233,8 @@ it('AC7: a cover WordPress shares between files names them, three at most', func
     expect($covers)->toHaveCount(1)
         ->and(visibleText(detailsHtml((int) reset($covers), false)))->toContain($expected);
 })->with([
-    'two files' => [2, 'Cover of Track 1, Track 2'],
-    'four files' => [4, 'Cover of Track 1, Track 2, Track 3 and more'],
+    'two files' => [2, 'Cover of “Track 1”, “Track 2”'],
+    'four files' => [4, 'Cover of “Track 1”, “Track 2”, “Track 3” and more'],
 ])->group('SPEC-034');
 
 it('AC1: with trust settings that hold the signer, audio is "Verified: trusted signer"', function (string $name): void {

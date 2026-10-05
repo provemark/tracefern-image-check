@@ -107,7 +107,11 @@ final class MediaScreens
         if ($audio === []) {
             return '';
         }
-        $titles = array_map(static fn (WP_Post|int $post): string => esc_html(get_post_field('post_title', $post)), array_slice($audio, 0, 3));
+        $titles = array_map(
+            /* translators: %s: an audio file's title, quoted as the language quotes it */
+            static fn (WP_Post|int $post): string => sprintf(esc_html_x('“%s”', 'a quoted audio title', 'tracefern-image-check-for-c2pa'), esc_html(get_post_field('post_title', $post))),
+            array_slice($audio, 0, 3),
+        );
         $list = count($audio) > 3
             /* translators: %s: the titles of three audio files */
             ? sprintf(esc_html__('%s and more', 'tracefern-image-check-for-c2pa'), implode(', ', $titles))
