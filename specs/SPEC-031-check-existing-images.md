@@ -226,6 +226,26 @@ the script that polls; the progress action answers `done`, `total` and
 `finished` for an administrator with the nonce, and refuses without
 either (error path). Not in the page when no run is going.
 
+## Amendment 3 (2026-10-05; approved by Maurice van Loon, 2026-10-05)
+
+SPEC-034 brings WAV, MP3 and FLAC in, and its open question 2 was decided:
+"files" where audio is included. The section and its texts change; what
+they do does not.
+
+- The section is "Existing files". Its count reads "N JPEG, PNG, WebP,
+  WAV, MP3 and FLAC files; M never checked", over `UploadHook::MIME_TYPES`.
+- The buttons are "Check files that were never checked" and "Check all
+  files again"; the explanation under them, the notice under the trust
+  settings, the progress ("Checking existing files: N of M done") and the
+  finish line ("Finished: N files checked") say files.
+- The readme follows: installation step 4 names "Check files that were
+  never checked"; the FAQ is "How do I check files again after changing
+  the trust settings?" and its answer names "Check all files again".
+- The settings notice for unreadable trust settings says "the last file
+  was checked".
+
+Every criterion that quotes one of these texts now quotes the new one.
+
 ## Traceability
 
 Filled at implementation (2026-09-29), with the names of amendment 1.

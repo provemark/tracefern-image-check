@@ -224,6 +224,17 @@ is more useful to a site than one made in a browser when someone scans
 (it is there for every image without anyone acting, and other code on
 the server can use it, SPEC-026).
 
+## Amendment 2 (2026-10-05; approved by Maurice van Loon, 2026-10-05)
+
+SPEC-034 brings WAV, MP3 and FLAC in, so the short description no longer
+says what is checked. AC1 now requires this short description, still
+within the 150 characters (141):
+
+> Verifies the Content Credentials (C2PA) of uploaded images and audio
+> (signature, hash and signer) and shows the verdict in the Media Library.
+
+It still says "verifies" and names the signer; AC2 to AC6 are unchanged.
+
 ## Traceability
 
 Filled when status becomes `implemented`. Every acceptance criterion maps to at

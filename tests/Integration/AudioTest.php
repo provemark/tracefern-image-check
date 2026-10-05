@@ -89,6 +89,18 @@ it('AC1: a signed WAV, MP3 or FLAC gets the verifier\'s verdict', function (stri
     'FLAC' => ['fixture-signed.flac', 'flac'],
 ])->group('SPEC-034');
 
+it('AC1: an MP3 uploaded through the browser\'s routes is checked as WP-CLI\'s import is', function (string $route): void {
+    assert($route === 'rest' || $route === 'async');
+    $source = fixturePath('fixture-signed.mp3');
+    $upload = httpUpload($route, $source, 'browser-'.$route.'.mp3', 'audio/mpeg');
+    runPendingChecks();
+
+    expect($upload['status'])->toBeIn([200, 201])
+        ->and($upload['id'])->toBeGreaterThan(0)
+        ->and(sameAsHostFile(keptPath($upload['id']), $source))->toBeTrue()
+        ->and(stable((array) storedEntry($upload['id'])))->toBe(expectedEntry($source, defaultSettingsFile()));
+})->with(['rest', 'async'])->group('SPEC-034');
+
 it('AC2: an unsigned one is "No Content Credentials"', function (string $name): void {
     $id = importMedia(fixturePath($name));
 

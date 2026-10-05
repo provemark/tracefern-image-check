@@ -156,7 +156,7 @@ it('AC3: says so when there are no images, and shows no lines', function (): voi
 
     $html = (string) dashboardWidget();
 
-    expect(visibleText($html))->toBe('No JPEG, PNG or WebP images yet.')
+    expect(visibleText($html))->toBe('No images or audio yet.')
         ->and(summaryLines($html))->toBe([])
         ->and(summaryTotal($html))->toBeNull();
 })->group('SPEC-033');
@@ -196,7 +196,7 @@ it('AC4: shows "—" for a total whose count failed, never 0', function (): void
     $html = (string) dashboardWidget('admin', '$GLOBALS["wpdb"]->suppress_errors(true); '.BREAK_TOTAL);
 
     expect(summaryTotal($html))->toBe('—')
-        ->and(visibleText($html))->not->toContain('No JPEG, PNG or WebP images yet.')
+        ->and(visibleText($html))->not->toContain('No images or audio yet.')
         ->and(summaryLines($html)['valid']['count'] ?? null)->toBe(1)
         ->and(strtolower(visibleText($html)))->toContain('could not be read');
 })->group('SPEC-033');
@@ -420,4 +420,13 @@ it('AC8 (amendment 2): the oldest fresh marker, not the youngest, ends the cache
 
     expect($after['listed']['pending'])->toBe(1)
         ->and($after['shown'])->toBe($after['listed']);
+})->group('SPEC-033');
+
+it('amendment 3: the widget counts files and says so', function (): void {
+    attachmentWithEntry(sampleEntry(['state' => 'Valid']));
+    $html = (string) dashboardWidget();
+
+    expect(visibleText($html))->toMatch('/\b1 JPEG, PNG, WebP, WAV, MP3 and FLAC file\b/u')
+        ->toContain('a file marked AI-generated is also in the line of its state')
+        ->and(summaryTotal($html))->toBe(1);
 })->group('SPEC-033');

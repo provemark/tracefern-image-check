@@ -301,6 +301,14 @@ final class DashboardSummary
    amendment 1; AC8 uses one marker, so it does not tell the two apart. A
    test with two fresh markers of different ages does, and is added once
    this is approved.
+3. **2026-10-05, approved by Maurice van Loon: audio counts too
+   (SPEC-034).** The library the widget sums is the files the plugin
+   checks, `UploadHook::MIME_TYPES`, now with WAV, MP3 and FLAC. The total
+   line reads "N JPEG, PNG, WebP, WAV, MP3 and FLAC files"; an empty site
+   shows "No images or audio yet." (AC with a PDF only: unchanged in
+   substance, the text replaced); the note under the lines says "a file
+   marked AI-generated". The queries, the cache and every count are
+   unchanged.
 
 ## Traceability
 

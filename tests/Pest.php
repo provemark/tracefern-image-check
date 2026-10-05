@@ -748,12 +748,13 @@ const TEST_SITE = 'http://localhost:8892';
  * administrator (wp-env's default account), through the route the block
  * editor uses (`rest`, POST /wp/v2/media) or the Media Library's
  * (`async`, async-upload.php). Returns the HTTP status, the body and the
- * attachment ID the response names (0 when it names none).
+ * attachment ID the response names (0 when it names none). $type is the
+ * Content-Type sent with the file (SPEC-034: audio too).
  *
  * @param  'rest'|'async'  $route
  * @return array{status: int, body: string, id: int}
  */
-function httpUpload(string $route, string $hostPath, string $filename): array
+function httpUpload(string $route, string $hostPath, string $filename, string $type = 'image/jpeg'): array
 {
     $jar = tmpDir().'/admin-cookies.txt';
     $body = tmpDir().'/upload-response.txt';
@@ -765,13 +766,13 @@ function httpUpload(string $route, string $hostPath, string $filename): array
         $status = (int) shell_exec('curl -s -o '.escapeshellarg($body).' -w "%{http_code}" -b '.escapeshellarg($jar)
             .' -H '.escapeshellarg('X-WP-Nonce: '.$nonce)
             .' -H '.escapeshellarg('Content-Disposition: attachment; filename='.$filename)
-            .' -H '.escapeshellarg('Content-Type: image/jpeg')
+            .' -H '.escapeshellarg('Content-Type: '.$type)
             .' --data-binary '.escapeshellarg('@'.$hostPath).' '.escapeshellarg(TEST_SITE.'/wp-json/wp/v2/media'));
     } else {
         $page = (string) shell_exec('curl -s -b '.escapeshellarg($jar).' '.escapeshellarg(TEST_SITE.'/wp-admin/upload.php'));
         $nonce = preg_match('/"_wpnonce":"([^"]+)"/', $page, $m) === 1 ? $m[1] : '';
         $status = (int) shell_exec('curl -s -o '.escapeshellarg($body).' -w "%{http_code}" -b '.escapeshellarg($jar)
-            .' -F '.escapeshellarg('async-upload=@'.$hostPath.';filename='.$filename.';type=image/jpeg')
+            .' -F '.escapeshellarg('async-upload=@'.$hostPath.';filename='.$filename.';type='.$type)
             .' -F '.escapeshellarg('name='.$filename).' -F action=upload-attachment -F '.escapeshellarg('_wpnonce='.$nonce)
             .' '.escapeshellarg(TEST_SITE.'/wp-admin/async-upload.php'));
     }
@@ -1283,13 +1284,13 @@ function summaryLines(string $html): array
 }
 
 /**
- * The widget's total: the number in "N JPEG, PNG and WebP images" (or
- * "1 … image"), or "—", or null when there is no total line.
+ * The widget's total: the number in "N JPEG, PNG, WebP, WAV, MP3 and FLAC
+ * files" (or "1 … file"), or "—", or null when there is no total line.
  */
 function summaryTotal(string $html): int|string|null
 {
     $text = visibleText($html);
-    if (preg_match('/(\d[\d,.]*|—) JPEG, PNG and WebP image/u', $text, $m) !== 1) {
+    if (preg_match('/(\d[\d,.]*|—) JPEG, PNG, WebP, WAV, MP3 and FLAC file/u', $text, $m) !== 1) {
         return null;
     }
 

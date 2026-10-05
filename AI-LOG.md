@@ -3566,3 +3566,24 @@ README are where the disclosure lives.
   is an absence, green today because the audio shows nothing; it becomes
   meaningful once audio has a verdict.
 - Decided by Maurice: amendment 1; write the tests.
+
+## 2026-10-05 — Wording amendments (SPEC-025, SPEC-031, SPEC-033); tests red
+
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, stel de teksten en de amendementen voor"; "akkoord,
+  keur de amendementen goed en test alles goed".
+- Produced: SPEC-025 amendment 2 (the short description names audio),
+  SPEC-031 amendment 3 ("files" in the Existing files section, its
+  messages and the readme), SPEC-033 amendment 3 (the widget counts and
+  names the six formats); the tests that quote these texts updated, and
+  new ones for the texts no test quoted (progress, finish, the
+  explanation, the trust notice, the widget's note); `httpUpload()` takes
+  a Content-Type; SPEC-034 AC1 also through the browser's two routes
+  (REST and async-upload).
+- Measured: a draft of `readme.txt` with every change, in the scratchpad:
+  10,155 bytes (limit 10,240), short description 141 characters (limit
+  150). `pest --testsuite=Unit`: 5 failed, 118 passed; `pest
+  --testsuite=Integration`: 32 failed, 216 passed. Every failure is the old
+  wording or audio with nothing stored. PHPStan and Pint clean.
+- Reasoned: none.
+- Decided by Maurice: the texts, the three amendments, version 0.2.0.

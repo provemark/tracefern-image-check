@@ -220,8 +220,8 @@ it('AC9: uninstall removes the run', function (): void {
 it('the settings page points at the buttons instead of "new uploads only"', function (): void {
     $page = settingsPageText();
 
-    expect($page)->toContain('Check images that were never checked')
-        ->and($page)->toContain('Check all images again')
+    expect($page)->toContain('Check files that were never checked')
+        ->and($page)->toContain('Check all files again')
         ->and(str_contains($page, 'Settings apply to new uploads only'))->toBeFalse();
 })->group('SPEC-031');
 
