@@ -238,6 +238,22 @@ None. Resolved by Maurice on 2026-09-26, as proposed in the draft:
     algorithm name, an exclusion's `xpath`). They become a status
     explanation, which the plugin escapes where it shows one. Nothing new
     is read or executed.
+11. **2026-10-05, approved by Maurice van Loon after his review.** The
+    bundled verifier moves to v0.3.0 (WAV, AVI, MP3 and FLAC, which this
+    plugin does not check, and a fix for a wrong `Trusted` under a name
+    constraint, present since v0.2.5). AC4's baseline rises from 634 to
+    695 `WordPress.Security.EscapeOutput.ExceptionNotEscaped` findings and
+    from 5 to 6 `WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode`;
+    every other count is unchanged. Measured per file on v0.2.9 and
+    v0.3.0: `Container/RiffManifestStoreExtractor.php` 0 → 38 (the walk
+    WebP, WAV and AVI now share), `Container/WebpManifestStoreExtractor.php`
+    26 → 0 (moved into it), `Container/Id3ManifestStoreExtractor.php`
+    0 → 36 (MP3 and FLAC), `Cose/PublicKey.php` 7 → 20 and one more
+    `base64_encode` (an RSA-PSS public key read as rsaEncryption, built as
+    PEM). The messages quote bytes from the file only as hex or printable
+    characters; they become a status explanation, which the verifier keeps
+    UTF-8 since v0.3.0 and the plugin escapes where it shows one. Nothing
+    new is read or executed.
 
 ## Traceability
 

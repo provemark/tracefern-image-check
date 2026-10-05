@@ -3429,3 +3429,34 @@ README are where the disclosure lives.
   page 200.
 - Reasoned: none.
 - Decided by Maurice: the push, the SVN commit, the tag and the release.
+
+## 2026-10-05 — Prepare 0.1.9: c2pa-verifier 0.3.0
+
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, zet de plugin op 0.3.0"; "akkoord, keur amendement 11
+  goed en voer 1–3 uit".
+- Produced: `composer.json` `^0.3.0` and the lock (v0.2.9 → v0.3.0);
+  `tests/Unit/MaintenanceCheckTest.php` (the locked version); SPEC-006
+  amendment 11 and `tests/wpcs-verifier-baseline.json` (634 → 695
+  `ExceptionNotEscaped`, 5 → 6 `obfuscation_base64_encode`); version 0.1.9
+  in the plugin header and `readme.txt`, with its changelog; `NOTES.md`.
+  Audio and video stay out of scope: the plugin checks JPEG, PNG and WebP.
+- Measured: `composer check` (121 passed); `composer test:release` with the
+  bump in a temporary local commit, reset after: 16 passed, AC4 failed on
+  exactly the two counts above; the WPCS findings per file on `git archive`
+  of v0.2.9 and v0.3.0 (`src/Cli` removed, as the build does): RIFF 0 → 38,
+  WebP 26 → 0, ID3 0 → 36, `Cose/PublicKey.php` 7 → 20 and one
+  `base64_encode`; the new messages quote file bytes only through
+  `Bytes::hex` or `Bytes::printable`; the verifier bundled by every plugin
+  tag (`git cat-file -p <tag>:composer.lock`): v0.2.5 or later in all, so
+  the name-constraint fix concerns every earlier version. The changelog's
+  first wording put `readme.txt` at 10,370 bytes, over the 10,240 that
+  `ReadmeTest` holds it to; shortened to 10,228 before the commit.
+  On `8e329cf`: `composer check` (121 passed), `composer test:release` (17
+  passed, the zip built from that commit), `composer test:integration`
+  (229 passed) and `composer test:multisite` (9 passed).
+- Reasoned: that an image damaged before its store now reaches
+  `Outcome::fromReport()` with `hasManifest` false and a failure, which
+  SPEC-015 already maps to the error "unreadable".
+- Decided by Maurice: amendment 11 after his review; prepare 0.1.9. Push,
+  tag and the WordPress.org release wait for his word.

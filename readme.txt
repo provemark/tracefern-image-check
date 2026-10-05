@@ -4,7 +4,7 @@ Tags: c2pa, content credentials, provenance, media library, ai
 Requires at least: 7.1
 Tested up to: 7.1
 Requires PHP: 8.3
-Stable tag: 0.1.8
+Stable tag: 0.1.9
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -212,8 +212,9 @@ licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).
 
 == Changelog ==
 
-= 0.1.8 =
+= 0.1.9 =
 
-* New: a Content Credentials box on the dashboard counts your images per verdict, each number a link to that list. Bundles c2pa-verifier 0.2.9.
+* Security: bundles c2pa-verifier 0.3.0, fixing a wrong trusted signer under a name-constrained authority in all earlier versions.
+* An image damaged before its credentials shows "could not be read".
 
 Earlier versions: https://github.com/provemark/tracefern-image-check/releases
