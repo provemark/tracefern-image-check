@@ -236,3 +236,76 @@ it('AC7: a cover WordPress shares between files names them, three at most', func
     'two files' => [2, 'Cover of Track 1, Track 2'],
     'four files' => [4, 'Cover of Track 1, Track 2, Track 3 and more'],
 ])->group('SPEC-034');
+
+it('AC1: with trust settings that hold the signer, audio is "Verified: trusted signer"', function (string $name): void {
+    setOption('tracefern_custom_trust', customSettingsJson());
+    try {
+        $id = importMedia(fixturePath($name));
+        $entry = (array) storedEntry($id);
+
+        expect(stable($entry))->toBe(expectedEntry(fixturePath($name), customSettingsFile()))
+            ->and($entry['state'] ?? null)->toBe('Trusted')
+            ->and(visibleText(columnHtml($id)))->toBe('Verified: trusted signer');
+    } finally {
+        resetTrustOptions();
+    }
+})->with(['fixture-signed.wav', 'fixture-signed.mp3', 'fixture-signed.flac'])->group('SPEC-034');
+
+it('AC1: WAV and FLAC uploaded through the browser\'s routes are checked as WP-CLI\'s import is', function (string $route, string $name, string $type): void {
+    assert($route === 'rest' || $route === 'async');
+    $source = fixturePath($name);
+    $upload = httpUpload($route, $source, 'browser-'.$route.'-'.$name, $type);
+    runPendingChecks();
+
+    expect($upload['status'])->toBeIn([200, 201])
+        ->and($upload['id'])->toBeGreaterThan(0)
+        ->and(sameAsHostFile(keptPath($upload['id']), $source))->toBeTrue()
+        ->and(stable((array) storedEntry($upload['id'])))->toBe(expectedEntry($source, defaultSettingsFile()));
+})->with([
+    'WAV, REST' => ['rest', 'fixture-signed.wav', 'audio/wav'],
+    'WAV, Media Library' => ['async', 'fixture-signed.wav', 'audio/wav'],
+    'FLAC, REST' => ['rest', 'fixture-signed.flac', 'audio/flac'],
+    'FLAC, Media Library' => ['async', 'fixture-signed.flac', 'audio/flac'],
+])->group('SPEC-034');
+
+it('the AI label: audio whose manifest says trained AI gets it, as images do (SPEC-003, SPEC-027)', function (): void {
+    $source = fixturePath('tracefern-ai-generated.mp3');
+    $id = importMedia($source);
+    $entry = (array) storedEntry($id);
+
+    expect(stable($entry))->toBe(expectedEntry($source, defaultSettingsFile()))
+        ->and($entry['ai'] ?? null)->toBeTrue()
+        ->and(visibleText(columnHtml($id)))->toContain('AI-generated (signed)')
+        ->and(verdict($id)['ai'] ?? null)->toBeTrue()
+        ->and(listedIds([$id], ['tracefern' => 'ai'])['ids'])->toBe([$id]);
+})->group('SPEC-034');
+
+it('changed since its check: an audio file overwritten without WordPress knowing (SPEC-014)', function (): void {
+    $id = importMedia(fixturePath('fixture-signed.mp3'));
+    $other = base64_encode((string) file_get_contents(fixturePath('fixture-unsigned.mp3')));
+    wpEval("file_put_contents(get_attached_file($id), base64_decode('$other')); touch(get_attached_file($id), time() + 5);");
+
+    expect(visibleText(columnHtml($id)))->toContain('Changed since its check')
+        ->and(visibleText(columnHtml($id)))->not->toContain('Intact')
+        ->and(visibleText(detailsHtml($id, true)))->toContain('Changed since its check');
+
+    wpCli(['tracefern', 'check', (string) $id]);
+
+    // as for an image (SPEC-014 AC4): the new file's own verdict, and it is not the file that was uploaded (SPEC-028)
+    expect(storedEntry($id)['state'] ?? null)->toBe('none')
+        ->and(visibleText(columnHtml($id)))->toContain('No Content Credentials')
+        ->and(visibleText(columnHtml($id)))->toContain('Changed after upload')
+        ->and(visibleText(columnHtml($id)))->not->toContain('Changed since its check');
+})->group('SPEC-034');
+
+it('changed after upload: an audio file rewritten after its check (SPEC-028)', function (): void {
+    $id = importMedia(fixturePath('fixture-signed.mp3'));
+    $altered = spec034AlteredMp3();
+    overwriteKeptFile($id, $altered);
+    wpCli(['tracefern', 'check', (string) $id]);
+
+    expect(storedEntry($id)['changed_after_upload'] ?? null)->toBeTrue()
+        ->and(storedEntry($id)['codes'] ?? [])->toContain('assertion.dataHash.mismatch')
+        ->and(visibleText(columnHtml($id)))->toContain('Does not verify')
+        ->and(visibleText(columnHtml($id)))->toContain('Changed after upload');
+})->group('SPEC-034');

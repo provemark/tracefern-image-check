@@ -3611,3 +3611,33 @@ README are where the disclosure lives.
   failed for four files, and passed again once restored.
 - Reasoned: none.
 - Decided by Maurice: the amendments; test everything.
+
+## 2026-10-05 — SPEC-034: the gaps closed before the release
+
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "Heb je nu alles goed getest?"; "akkoord, doe eerst punten 1–4
+  en 6".
+- Produced: tests for audio under trust settings that hold the signer
+  ("Verified", WAV, MP3, FLAC), for WAV and FLAC through the browser's two
+  upload routes, for the AI label on audio, and for "Changed since its
+  check" and "Changed after upload" on audio; a fixture
+  (`tracefern-ai-generated.mp3`, signed with c2patool's public test key,
+  `trainedAlgorithmicMedia`) with its README row; SPEC-034's Traceability.
+- Measured: `pest --testsuite=Integration --group=SPEC-034`: 30 passed.
+  The new tests passed at once, the behaviour being built; with the four
+  audio types removed from `UploadHook::MIME_TYPES` on purpose, all ten
+  failed, and passed again once restored. One expectation was too narrow:
+  after an overwritten audio file is checked again, the column also says
+  "Changed after upload", as for an image (SPEC-014 AC4 with SPEC-028).
+  The fixture: `Valid` with the AI claim here and in both `c2patool`
+  versions; no key text in it. In Chrome, on the test site (WordPress
+  7.1.2): the list view (audio with verdicts, the AI label, the cover as
+  its own image), the grid view's details of the cover ("Cover of
+  cover") and of the AI MP3, the dashboard widget (7 files: 5 intact, 1
+  AI, 2 none) and the Existing files section, all as the tests say.
+- Reasoned, not tested: audio offloaded to cloud storage (SPEC-032) and
+  on multisite, and a very large WAV on a slow host; the same code paths
+  as images and the interruption test stand for them.
+- Found: "Cover of cover" reads oddly when the audio's title is a file
+  name; quotes around the title would help (a proposal, not built).
+- Decided by Maurice: close points 1–4 and 6 before the release.
