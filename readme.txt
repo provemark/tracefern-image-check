@@ -4,11 +4,11 @@ Tags: c2pa, content credentials, provenance, media library, ai
 Requires at least: 7.1
 Tested up to: 7.1
 Requires PHP: 8.3
-Stable tag: 0.1.9
+Stable tag: 0.2.0
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
-Verifies the Content Credentials (C2PA) of uploaded images (signature, image hash and signer) and shows the verdict in the Media Library.
+Verifies the Content Credentials (C2PA) of uploaded images and audio (signature, hash and signer) and shows the verdict in the Media Library.
 
 == Description ==
 
@@ -21,22 +21,22 @@ certificate against the C2PA trust lists. Only when the signature and the
 hash hold does it show "AI-generated (signed)", and only when the signer
 is also on the trust list does it say "Verified".
 
-Content Credentials (C2PA) are a signed record inside an image file: who
+Content Credentials (C2PA) are a signed record inside a file: who
 made or edited it, with which tool, and whether generative AI was used.
-Tracefern Image Check for C2PA verifies that record for every JPEG, PNG and WebP you
-upload and shows the verdict where you already work with media.
+Tracefern Image Check for C2PA verifies that record for every JPEG, PNG, WebP, WAV, MP3
+and FLAC you upload and shows the verdict where you already work with media.
 
 * **Checked right after upload, on the original file**, not on the
   resized copies WordPress or your browser makes. The check runs in the
   background, so a file that trips it up can never break an upload.
-* **A verdict per image** in a Media Library column and in the attachment
+* **A verdict per file** in a Media Library column and in the attachment
   details: who signed it, when, and against which trust list.
 * **"AI-generated (signed)"** when a manifest that verifies says the image
   was made by generative AI, also after later edits, and **"AI-edited
   (signed)"** when AI edited it. Never on a file that does not verify.
 * **Sort and filter** the Media Library list by verdict, including all
   AI-generated images, and see the counts on the dashboard.
-* **Check existing images again** under Settings → Tracefern, or with
+* **Check existing files again** under Settings → Tracefern, or with
   WP-CLI: `wp tracefern check --all`.
 
 The verdicts:
@@ -69,12 +69,12 @@ C2PA verifier written in PHP, bundled with the plugin.
 
 1. Install and activate the plugin. The server needs PHP 8.3 or later with
    the `openssl` and `mbstring` extensions.
-2. Upload images as usual. Each JPEG, PNG and WebP is checked in the
+2. Upload as usual. Each JPEG, PNG, WebP, WAV, MP3 and FLAC is checked in the
    background, usually within seconds; until then it shows "Check pending".
 3. Optional: under Settings → Tracefern, choose whether to trust
    DigiCert timestamps, or paste your own trust settings.
-4. Images uploaded before the plugin was active show "Not checked". Press
-   "Check images that were never checked" under Settings → Tracefern.
+4. Files uploaded before the plugin was active show "Not checked". Press
+   "Check files that were never checked" under Settings → Tracefern.
 
 == Frequently Asked Questions ==
 
@@ -148,13 +148,13 @@ plugin keeps in cloud storage are checked there, up to 64 MB.
 
 = Which formats are checked? =
 
-JPEG, PNG and WebP. HEIC files are converted to JPEG by the browser before
-upload and arrive without their Content Credentials. Video and audio are
-not checked.
+JPEG, PNG and WebP images; WAV, MP3 and FLAC audio. An MP3's cover art is
+checked as an image of its own. HEIC files are converted to JPEG by the
+browser and arrive without their Content Credentials. Video is not checked.
 
-= How do I check images again after changing the trust settings? =
+= How do I check files again after changing the trust settings? =
 
-Under Settings → Tracefern, press "Check all images again"; the checks
+Under Settings → Tracefern, press "Check all files again"; the checks
 run in the background. Or with WP-CLI: `wp tracefern check --all`, or
 `--state=Invalid,error`, or attachment IDs; `--dry-run` shows what would
 be checked.
@@ -212,9 +212,8 @@ licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).
 
 == Changelog ==
 
-= 0.1.9 =
+= 0.2.0 =
 
-* Security: bundles c2pa-verifier 0.3.0, fixing a wrong trusted signer under a name-constrained authority in all earlier versions.
-* An image damaged before its credentials shows "Could not be checked".
+* New: WAV, MP3 and FLAC uploads are checked too.
 
 Earlier versions: https://github.com/provemark/tracefern-image-check/releases

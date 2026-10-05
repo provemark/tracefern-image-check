@@ -24,7 +24,8 @@ final class UploadHook
 {
     public const string META_KEY = '_tracefern_result';
 
-    public const array MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
+    /** The formats the plugin checks: images (SPEC-001) and, since SPEC-034, WAV, MP3 and FLAC. */
+    public const array MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'audio/wav', 'audio/x-wav', 'audio/mpeg', 'audio/flac'];
 
     /** Set while the last check had to run without trust settings (SPEC-004 AC6). */
     public const string TRUST_FAILED_OPTION = 'tracefern_trust_failed';

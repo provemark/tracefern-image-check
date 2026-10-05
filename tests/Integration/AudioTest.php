@@ -218,3 +218,21 @@ it('AC7: cover art keeps its own verdict and says whose cover it is', function (
         ->and($coverDetails)->toContain('Song &lt;b&gt;one&lt;/b&gt;')
         ->and(visibleText(detailsHtml($mp3, false)))->not->toContain('Intact');
 })->group('SPEC-034');
+
+it('AC7: a cover WordPress shares between files names them, three at most', function (int $files, string $expected): void {
+    emptyTestEnvironment();
+    $ids = [];
+    for ($i = 1; $i <= $files; $i++) {
+        $copy = tmpDir()."/shared-cover-$i.mp3";
+        copy(spec034CoverMp3(), $copy);
+        $ids[] = $id = importMedia($copy);
+        wpEval("wp_update_post(['ID' => $id, 'post_title' => 'Track $i']);");
+    }
+    $covers = array_unique(array_map(fn (int $id): int => (int) wpEval("echo (int) get_post_meta($id, '_thumbnail_id', true);"), $ids));
+
+    expect($covers)->toHaveCount(1)
+        ->and(visibleText(detailsHtml((int) reset($covers), false)))->toContain($expected);
+})->with([
+    'two files' => [2, 'Cover of Track 1, Track 2'],
+    'four files' => [4, 'Cover of Track 1, Track 2, Track 3 and more'],
+])->group('SPEC-034');

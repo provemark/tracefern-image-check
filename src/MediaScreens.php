@@ -75,10 +75,46 @@ final class MediaScreens
         $fields[self::COLUMN] = [
             'label' => esc_html__('Content Credentials', 'tracefern-image-check-for-c2pa'),
             'input' => 'html',
-            'html' => wp_kses_post(Display::details($entry, self::pendingSince($post->ID), time(), Display::changed($entry, self::currentOriginal($post->ID)))),
+            'html' => wp_kses_post(self::coverLine($post->ID).Display::details($entry, self::pendingSince($post->ID), time(), Display::changed($entry, self::currentOriginal($post->ID)))),
         ];
 
         return $fields;
+    }
+
+    /**
+     * For an image WordPress made from audio cover art, which audio it is the
+     * cover of (SPEC-034 AC7), so that its verdict is not read as the audio's.
+     * WordPress marks such an image with `_cover_hash` and points each audio
+     * at it with `_thumbnail_id`; one cover can serve several files. Titles
+     * are escaped; empty for any other attachment.
+     */
+    private static function coverLine(int $attachmentId): string
+    {
+        if (get_post_meta($attachmentId, '_cover_hash', true) === '') {
+            return '';
+        }
+        $audio = get_posts([
+            'post_type' => 'attachment',
+            'post_status' => 'inherit',
+            'post_mime_type' => 'audio',
+            'meta_key' => '_thumbnail_id', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- only for a cover image, on its details screen
+            'meta_value' => (string) $attachmentId, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value -- as above
+            'posts_per_page' => 4,
+            'no_found_rows' => true,
+            'orderby' => 'ID',
+            'order' => 'ASC',
+        ]);
+        if ($audio === []) {
+            return '';
+        }
+        $titles = array_map(static fn (WP_Post|int $post): string => esc_html(get_post_field('post_title', $post)), array_slice($audio, 0, 3));
+        $list = count($audio) > 3
+            /* translators: %s: the titles of three audio files */
+            ? sprintf(esc_html__('%s and more', 'tracefern-image-check-for-c2pa'), implode(', ', $titles))
+            : implode(', ', $titles);
+
+        /* translators: %s: the title(s) of the audio file(s) this image is the cover art of */
+        return '<p class="tracefern-cover">'.sprintf(esc_html__('Cover of %s', 'tracefern-image-check-for-c2pa'), $list).'</p>';
     }
 
     /**

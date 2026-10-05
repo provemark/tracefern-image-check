@@ -2,7 +2,7 @@
 
 | Field      | Value                                             |
 |------------|---------------------------------------------------|
-| Status     | approved                                          |
+| Status     | implemented                                       |
 | Author     | Maurice van Loon                                  |
 | Approved   | Maurice van Loon, 2026-10-05                      |
 | Supersedes | —                                                 |
@@ -207,11 +207,11 @@ least one test; every source file maps back to this spec.
 
 | Acceptance criterion | Test (file :: name / group) | Source (file/symbol) |
 |----------------------|-----------------------------|----------------------|
-| AC1 | tests/Integration/AudioTest.php :: AC1: a signed WAV, MP3 or FLAC gets the verifier's verdict (three datasets) / SPEC-034 | — |
-| AC2 | tests/Integration/AudioTest.php :: AC2: an unsigned one is "No Content Credentials" (three datasets) / SPEC-034 | — |
-| AC3 | tests/Integration/AudioTest.php :: AC3: changed after signing is "Does not verify" / SPEC-034 | — |
-| AC4 | tests/Integration/AudioTest.php :: AC4 (amendment 1): damaged after the manifest is "Does not verify" (two datasets); a WAV whose store is never reached, or a missing file, is "Could not be checked"; an interrupted audio check is error / interrupted / SPEC-034 | — |
-| AC5 | tests/Integration/AudioTest.php :: AC5: AVI, Ogg and PDF are still left alone (three datasets; a guard, green before and after) / SPEC-034 | — |
-| AC6 | tests/Integration/AudioTest.php :: AC6: audio is everywhere images are / SPEC-034 | — |
-| AC7 | tests/Integration/AudioTest.php :: AC7: cover art keeps its own verdict and says whose cover it is / SPEC-034 | — |
-| AC8 | tests/Unit/ReadmeTest.php :: SPEC-034 AC8: the readme says WAV, MP3 and FLAC are checked, and video is not / SPEC-034 | — |
+| AC1 | tests/Integration/AudioTest.php :: AC1: a signed WAV, MP3 or FLAC gets the verifier's verdict (three datasets); AC1: an MP3 uploaded through the browser's routes is checked as WP-CLI's import is (rest, async) / SPEC-034 | `UploadHook::MIME_TYPES` (WAV, MP3, FLAC); the upload, queue and check paths of SPEC-001/SPEC-013 unchanged |
+| AC2 | tests/Integration/AudioTest.php :: AC2: an unsigned one is "No Content Credentials" (three datasets) / SPEC-034 | `UploadHook::MIME_TYPES`; `Outcome::fromReport()` (unchanged) |
+| AC3 | tests/Integration/AudioTest.php :: AC3: changed after signing is "Does not verify" / SPEC-034 | `UploadHook::MIME_TYPES`; `Outcome::fromReport()` (unchanged) |
+| AC4 | tests/Integration/AudioTest.php :: AC4 (amendment 1): damaged after the manifest is "Does not verify" (two datasets); a WAV whose store is never reached, or a missing file, is "Could not be checked"; an interrupted audio check is error / interrupted / SPEC-034 | `Outcome::fromReport()` (SPEC-015, unchanged); `Checker` (unchanged) |
+| AC5 | tests/Integration/AudioTest.php :: AC5: AVI, Ogg and PDF are still left alone (three datasets; a guard, green before and after) / SPEC-034 | `UploadHook::MIME_TYPES` (AVI, Ogg and the rest left out) |
+| AC6 | tests/Integration/AudioTest.php :: AC6: audio is everywhere images are / SPEC-034 | `UploadHook::MIME_TYPES` through `MediaScreens`, `MediaSort`, `DashboardSummary`, `RecheckCommand`, `Verdict`; `ExistingImages::count()`, `next()` (seven placeholders) |
+| AC7 | tests/Integration/AudioTest.php :: AC7: cover art keeps its own verdict and says whose cover it is; AC7: a cover WordPress shares between files names them, three at most (two datasets) / SPEC-034 | `MediaScreens::coverLine()` |
+| AC8 | tests/Unit/ReadmeTest.php :: SPEC-034 AC8: the readme says WAV, MP3 and FLAC are checked, and video is not / SPEC-034 | `readme.txt` |

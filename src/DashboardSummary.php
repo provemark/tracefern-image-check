@@ -206,7 +206,7 @@ final class DashboardSummary
         $counts = self::counts();
 
         if ($counts['total'] === 0) {
-            echo '<p>'.esc_html__('No JPEG, PNG or WebP images yet.', 'tracefern-image-check-for-c2pa').'</p>';
+            echo '<p>'.esc_html__('No images or audio yet.', 'tracefern-image-check-for-c2pa').'</p>';
 
             return;
         }
@@ -230,7 +230,7 @@ final class DashboardSummary
             echo '<p>'.esc_html__('Some counts could not be read.', 'tracefern-image-check-for-c2pa').'</p>';
         }
 
-        echo '<p class="description">'.esc_html__('The lines need not add up to the total: an image marked AI-generated is also in the line of its state, and a result that cannot be read is in none.', 'tracefern-image-check-for-c2pa').'</p>';
+        echo '<p class="description">'.esc_html__('The lines need not add up to the total: a file marked AI-generated is also in the line of its state, and a result that cannot be read is in none.', 'tracefern-image-check-for-c2pa').'</p>';
 
         if (current_user_can('manage_options') && ($counts['unchecked'] ?? 0) > 0) {
             echo '<p><a href="'.esc_url(admin_url('options-general.php?page='.SettingsPage::SLUG)).'">'.esc_html__('Check them', 'tracefern-image-check-for-c2pa').'</a></p>';
@@ -240,12 +240,12 @@ final class DashboardSummary
     private static function totalLine(?int $total): string
     {
         if ($total === null) {
-            /* translators: shown instead of the number of images when it could not be counted. */
-            return __('— JPEG, PNG and WebP images', 'tracefern-image-check-for-c2pa');
+            /* translators: shown instead of the number of files when it could not be counted. */
+            return __('— JPEG, PNG, WebP, WAV, MP3 and FLAC files', 'tracefern-image-check-for-c2pa');
         }
 
-        /* translators: %s: the number of JPEG, PNG and WebP images in the Media Library. */
-        return sprintf(_n('%s JPEG, PNG and WebP image', '%s JPEG, PNG and WebP images', $total, 'tracefern-image-check-for-c2pa'), number_format_i18n($total));
+        /* translators: %s: the number of JPEG, PNG, WebP, WAV, MP3 and FLAC files in the Media Library. */
+        return sprintf(_n('%s JPEG, PNG, WebP, WAV, MP3 and FLAC file', '%s JPEG, PNG, WebP, WAV, MP3 and FLAC files', $total, 'tracefern-image-check-for-c2pa'), number_format_i18n($total));
     }
 
     /**

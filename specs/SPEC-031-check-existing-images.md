@@ -267,3 +267,4 @@ so the section can say when it finished (Scope).
 | AC9                  | ExistingImagesTest :: AC9   | `uninstall.php` (`tracefern_existing_images`) |
 | Settings sentence    | ExistingImagesTest :: the settings page points at the buttons | `SettingsPage::render()` |
 | AC10 (amendment 2)   | ExistingImagesTest :: AC10 (both) | `SettingsPage::existingRunProgress()` (capability and nonce, then the run), `progressLine()`, the `aria-live` line and `wp_print_inline_script_tag()` in `existingImages()` |
+| Amendment 3 | `tests/Unit/ExistingImagesTest.php` :: AC8; amendment 3: every text of the settings page that counted images says files; ExistingImagesTest (Integration) :: the settings page points at the buttons; `tests/Unit/ReadmeTest.php` :: SPEC-031: the readme points at the buttons before WP-CLI | `SettingsPage` (the section's texts, the notice, the progress and finish lines); `readme.txt` |

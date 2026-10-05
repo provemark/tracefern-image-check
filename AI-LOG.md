@@ -3587,3 +3587,27 @@ README are where the disclosure lives.
   wording or audio with nothing stored. PHPStan and Pint clean.
 - Reasoned: none.
 - Decided by Maurice: the texts, the three amendments, version 0.2.0.
+
+## 2026-10-05 — SPEC-034 built: WAV, MP3 and FLAC; 0.2.0
+
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, keur de amendementen goed en test alles goed".
+- Produced: `UploadHook::MIME_TYPES` with `audio/wav`, `audio/x-wav`,
+  `audio/mpeg` and `audio/flac`; `ExistingImages` counting and walking all
+  seven types; `MediaScreens::coverLine()` ("Cover of …" on an image
+  WordPress made from cover art, at most three titles, escaped); the texts
+  of SPEC-025, SPEC-031 and SPEC-033 amendments; `readme.txt` (10,155
+  bytes) and the plugin header at 0.2.0; SPEC-034 `implemented`, its
+  Traceability, and rows in SPEC-031's and SPEC-033's.
+- Measured: `composer check` (123 passed); `pest --testsuite=Integration`
+  (250 passed), `composer test:multisite` (9) and `composer test:release`
+  (17, after the fix below), each run again on the final commit. Two failures on the way, both
+  found by the suites: the widget test's `\bfile\b` met no word boundary
+  in `visibleText()` (a test fault; the widget was right), and Plugin
+  Check counted one replacement in `$wpdb->prepare()` where the seven
+  types were spread from the constant (`ReplacementsWrongNumber`); they
+  are named variables now, as the three were. The shared-cover test was
+  written after the code: with the list cut to two titles on purpose it
+  failed for four files, and passed again once restored.
+- Reasoned: none.
+- Decided by Maurice: the amendments; test everything.

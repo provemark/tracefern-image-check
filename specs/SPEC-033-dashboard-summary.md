@@ -326,3 +326,4 @@ least one test; every source file maps back to this spec.
 | AC7 | `tests/Integration/DashboardSummaryTest.php` :: AC7 | `DashboardSummary::counts()`, `cached()` |
 | AC8 | `tests/Integration/DashboardSummaryTest.php` :: AC8 (eight changes), AC8 (amendment 2) | `DashboardSummary::register()`, `onMeta()`, `onPost()`, `forget()`, `staleAt()` |
 | AC9 | `tests/Integration/DashboardSummaryTest.php` :: AC9 (both); `tests/Multisite/MultisiteTest.php` :: SPEC-033 AC9 | `UploadHook::deactivate()`, `uninstall.php` |
+| Amendment 3 | `tests/Integration/DashboardSummaryTest.php` :: AC3; amendment 3: the widget counts files and says so; `summaryTotal()` in `tests/Pest.php` | `DashboardSummary::totalLine()`, `render()` |

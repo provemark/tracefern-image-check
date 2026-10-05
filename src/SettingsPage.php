@@ -34,7 +34,7 @@ final class SettingsPage
         // saves: nothing of this is read on the front end (SPEC-012).
         add_action('admin_init', $this->registerSettings(...));
         add_action('admin_notices', $this->trustNotice(...));
-        // The "Existing images" buttons (SPEC-031).
+        // The "Existing files" buttons (SPEC-031, amendment 3).
         add_action('admin_post_tracefern_existing_start', $this->startExistingRun(...));
         add_action('admin_post_tracefern_existing_stop', $this->stopExistingRun(...));
         add_action('wp_ajax_tracefern_existing_progress', $this->existingRunProgress(...));
@@ -57,11 +57,11 @@ final class SettingsPage
         wp_send_json_success(['done' => $run['done'], 'total' => $run['total'], 'finished' => false, 'text' => self::progressLine($run['done'], $run['total'])]);
     }
 
-    /** "Checking existing images: N of M done. …", translated, numbers localised. */
+    /** "Checking existing files: N of M done. …", translated, numbers localised. */
     private static function progressLine(int $done, int $total): string
     {
         /* translators: 1: images done, 2: images in the run */
-        return sprintf(__('Checking existing images: %1$s of %2$s done. The checks run in the background.', 'tracefern-image-check-for-c2pa'), number_format_i18n($done), number_format_i18n($total));
+        return sprintf(__('Checking existing files: %1$s of %2$s done. The checks run in the background.', 'tracefern-image-check-for-c2pa'), number_format_i18n($done), number_format_i18n($total));
     }
 
     /**
@@ -190,7 +190,7 @@ final class SettingsPage
             /* translators: 1: list date, 2: commit */
             .sprintf(esc_html__('Bundled C2PA trust list: %1$s (commit %2$s of c2pa-org/conformance-public, CC BY 4.0).', 'tracefern-image-check-for-c2pa'), esc_html(TrustConfig::LIST_DATE), esc_html(TrustConfig::LIST_COMMIT))
             .'</p><p>'
-            .esc_html__('Settings apply to new uploads. To apply them to the images already in the Media Library, use "Check all images again" below.', 'tracefern-image-check-for-c2pa')
+            .esc_html__('Settings apply to new uploads. To apply them to the files already in the Media Library, use "Check all files again" below.', 'tracefern-image-check-for-c2pa')
             .'</p>';
 
         echo '<form method="post" action="options.php">';
@@ -221,9 +221,9 @@ final class SettingsPage
     {
         $run = ExistingImages::progress();
 
-        echo '<h2>'.esc_html__('Existing images', 'tracefern-image-check-for-c2pa').'</h2><p>'
-            /* translators: 1: number of JPEG, PNG and WebP images, 2: how many of them were never checked */
-            .sprintf(esc_html__('%1$s JPEG, PNG and WebP images; %2$s never checked.', 'tracefern-image-check-for-c2pa'), esc_html(number_format_i18n(ExistingImages::count('all'))), esc_html(number_format_i18n(ExistingImages::count('unchecked'))))
+        echo '<h2>'.esc_html__('Existing files', 'tracefern-image-check-for-c2pa').'</h2><p>'
+            /* translators: 1: number of JPEG, PNG, WebP, WAV, MP3 and FLAC files, 2: how many of them were never checked */
+            .sprintf(esc_html__('%1$s JPEG, PNG, WebP, WAV, MP3 and FLAC files; %2$s never checked.', 'tracefern-image-check-for-c2pa'), esc_html(number_format_i18n(ExistingImages::count('all'))), esc_html(number_format_i18n(ExistingImages::count('unchecked'))))
             .'</p>';
 
         if ($run !== null && $run['finished'] === null) {
@@ -256,15 +256,15 @@ final class SettingsPage
             $time = get_option('time_format');
             echo '<p>'
                 /* translators: 1: images checked, 2: date and time */
-                .sprintf(esc_html__('Finished: %1$s images checked, %2$s.', 'tracefern-image-check-for-c2pa'), esc_html(number_format_i18n($run['done'])), esc_html(wp_date((is_string($format) ? $format : 'Y-m-d').' '.(is_string($time) ? $time : 'H:i'), (int) $run['finished']) ?: ''))
+                .sprintf(esc_html__('Finished: %1$s files checked, %2$s.', 'tracefern-image-check-for-c2pa'), esc_html(number_format_i18n($run['done'])), esc_html(wp_date((is_string($format) ? $format : 'Y-m-d').' '.(is_string($time) ? $time : 'H:i'), (int) $run['finished']) ?: ''))
                 .'</p>';
         }
 
         echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'"><input type="hidden" name="action" value="tracefern_existing_start" />';
         wp_nonce_field('tracefern_existing_images');
-        echo '<p><button type="submit" name="mode" value="unchecked" class="button button-primary">'.esc_html__('Check images that were never checked', 'tracefern-image-check-for-c2pa').'</button> '
-            .'<button type="submit" name="mode" value="all" class="button">'.esc_html__('Check all images again', 'tracefern-image-check-for-c2pa').'</button></p>'
-            .'<p class="description">'.esc_html__('The checks run in the background, a few images at a time; new uploads go first. "Check all images again" applies the current trust settings and verifier to every image.', 'tracefern-image-check-for-c2pa').'</p></form>';
+        echo '<p><button type="submit" name="mode" value="unchecked" class="button button-primary">'.esc_html__('Check files that were never checked', 'tracefern-image-check-for-c2pa').'</button> '
+            .'<button type="submit" name="mode" value="all" class="button">'.esc_html__('Check all files again', 'tracefern-image-check-for-c2pa').'</button></p>'
+            .'<p class="description">'.esc_html__('The checks run in the background, a few files at a time; new uploads go first. "Check all files again" applies the current trust settings and verifier to every file.', 'tracefern-image-check-for-c2pa').'</p></form>';
     }
 
     /**
@@ -283,7 +283,7 @@ final class SettingsPage
         }
 
         echo '<div class="notice notice-warning"><p>'
-            .esc_html__('Tracefern Image Check for C2PA: the last image was checked without trust settings, because they could not be read. See Settings → Tracefern.', 'tracefern-image-check-for-c2pa')
+            .esc_html__('Tracefern Image Check for C2PA: the last file was checked without trust settings, because they could not be read. See Settings → Tracefern.', 'tracefern-image-check-for-c2pa')
             .'</p></div>';
     }
 }
