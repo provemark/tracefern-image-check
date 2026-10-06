@@ -3723,3 +3723,25 @@ README are where the disclosure lives.
 - Reasoned: none.
 - Decided by Maurice: the release, the SVN commit, the tag and the
   GitHub release.
+
+## 2026-10-06 — SPEC-035 (draft): check GIF uploads
+
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, volg je advies: B" (the plugin to c2pa-verifier 0.4.0,
+  with GIF uploads checked).
+- Produced: `specs/SPEC-035-gif.md` (draft), with amendments it proposes to
+  SPEC-001 AC5 and SPEC-015 AC1.
+- Measured: in the development environment (WordPress 7.1.2, PHP 8.3,
+  Imagick), three signed GIFs imported with `wp media import`: the
+  verifier's `fixture-signed.gif`, an animated GIF and a 3000×300 GIF (both
+  signed with `c2patool` 0.27.22 and the public test certificate): every
+  original unchanged (SHA-256 equal), `image/gif`, no plugin entry; the
+  large one attached as `-scaled.gif` with the original kept as
+  `original_image`, and the `-scaled` copy carries no manifest
+  (c2pa-verifier: `has_manifest` false). The verifier's verdicts on the
+  five GIF fixtures the spec names. The three uploads deleted afterwards.
+- Reasoned: that the browser's upload routes treat a GIF as `wp media
+  import` does; that the "not a JPEG, PNG or WebP" texts are stale since
+  0.2.0 (read in `Display` and `RecheckCommand`); that SPEC-015 AC1's GIF
+  bytes stop being an unknown format under c2pa-verifier 0.4.0.
+- Decided by Maurice: check GIF uploads (option B).
