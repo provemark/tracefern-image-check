@@ -3798,3 +3798,29 @@ README are where the disclosure lives.
   commit, 17 passed (the build, Plugin Check, the WPCS baseline).
 - Reasoned: none.
 - Decided by Maurice: build SPEC-035.
+
+## 2026-10-06 — SPEC-006 amendment 12 approved; 0.3.0 tested by hand
+
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, keur amendement 12 goed en test de plugin goed".
+- Produced: SPEC-006 amendment 12 marked approved.
+- Measured, beyond the suites, in the release environment (WordPress
+  7.1.2, PHP 8.3) with the built zip of `924580c` (plugin 0.3.0, bundled
+  c2pa-verifier `v0.4.0` at `324acf4` per `vendor/composer/installed.php`):
+  - seven fixtures imported with WP-CLI: the signed GIF `Valid`, the
+    unsigned `none`, the flipped `Invalid` (`assertion.dataHash.mismatch`),
+    the one cut in its block `Invalid` (`general.error`), the broken block
+    `error` / `unreadable`, the large GIF `Valid` on its original
+    (attached as `-scaled.gif`), the signed FLAC `Valid`;
+  - the upgrade: plugin 0.2.0 installed from wordpress.org, a signed GIF
+    uploaded under it (no entry, not counted), then the 0.3.0 zip over
+    it: the dashboard counts again (12 files), "never checked" is 1, `wp
+    tracefern check --unchecked --dry-run` lists that GIF, the check gives
+    `Valid`, "never checked" is 0;
+  - two GIFs uploaded through `wp-admin/media-new.php` in Chrome: checked
+    in the background, the column shows "Intact: signer not trusted" and
+    "Does not verify"; the dashboard widget reads "14 JPEG, PNG, GIF,
+    WebP, WAV, MP3 and FLAC files" with lines 8 + 3 + 1 + 2 = 14.
+  The test's attachments were deleted afterwards.
+- Reasoned: none.
+- Decided by Maurice: amendment 12 approved.
