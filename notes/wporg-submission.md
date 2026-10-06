@@ -360,3 +360,22 @@ Releases after 0.1.0:
   GitHub release with the same zip (SHA-256 equal, files equal to SVN
   `tags/0.2.0`), on Maurice's go. The readme-only SVN update prepared for
   0.1.9's changelog line was never committed: 0.2.0 carries the readme.
+- **0.3.0, 2026-10-06** (SPEC-035, GIF checked as the other images are;
+  c2pa-verifier 0.4.0, SPEC-006 amendment 12): built from `2d40bcd`
+  (SHA-256 `c2d2af58…54c358b2`, 332,709 bytes, kept in
+  `build/submitted/`). Before the build: `composer check` (125),
+  integration (275), multisite (9) and the Release suite (17) green; by
+  hand in the release environment, the built zip with seven fixtures, an
+  update from the released 0.2.0 (a GIF uploaded under 0.2.0 counted as
+  never checked, then checked `Valid`) and two GIFs uploaded through
+  `media-new.php` in Chrome; CI run 37455980280 green on `2d40bcd` (9
+  jobs), after run 37454054623 had failed Pint on a test added during the
+  build and Playground's download of `wp-cli.phar`. The Release suite ran
+  again on the build itself. `trunk/` was replaced by the build (`diff -r`
+  empty; 1 file added, 34 changed) and `tags/0.3.0` copied; Maurice
+  committed them (r3730701, 13:43). Measured: the plugin API reported
+  0.3.0 (last updated 11:43 GMT) within a minute; the page returns 200
+  and shows 0.3.0; the public download holds the files of the build, as
+  an export of SVN `tags/0.3.0` does. Git tag `v0.3.0` on `2d40bcd`, and
+  a GitHub release with the same zip (SHA-256 equal, files equal to SVN
+  `tags/0.3.0`), on Maurice's go.

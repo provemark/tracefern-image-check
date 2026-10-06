@@ -3842,3 +3842,22 @@ README are where the disclosure lives.
   8.4, 8.5 and multisite passed.
 - Reasoned: none.
 - Decided by Maurice: push.
+
+## 2026-10-06 — Release 0.3.0
+
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, zet release 0.3.0 klaar"; "svn commit is gedaan";
+  "akkoord, maak de tag en de GitHub-release".
+- Produced: the build of `2d40bcd` kept in `build/submitted/`; a fresh SVN
+  working copy (trunk from the build, `tags/0.3.0`), committed by Maurice
+  as r3730701; annotated tag `v0.3.0` on `2d40bcd`; GitHub release 0.3.0
+  with the zip; the record in `notes/wporg-submission.md` §5.
+- Measured: the Release suite (17) on the build; `diff -r` of the build
+  against `trunk/` empty; SVN `tags/0.3.0` exported and equal to the build;
+  the plugin API on 0.3.0 (last updated 11:43 GMT) and the page on 0.3.0;
+  the public download equal to the build; the GitHub release's zip
+  SHA-256 `c2d2af58…54c358b2`, equal to the build, its files equal to SVN
+  `tags/0.3.0`.
+- Reasoned: none.
+- Decided by Maurice: the release, the SVN commit, the tag and the GitHub
+  release.
