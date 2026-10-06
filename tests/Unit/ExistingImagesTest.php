@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+use Tracefern\ImageCheck\UploadHook;
 
 it('AC8: the section\'s texts are escaped and translatable, numbers localised', function (): void {
     $source = (string) file_get_contents(dirname(__DIR__, 2).'/src/SettingsPage.php');
@@ -29,7 +30,7 @@ it('amendment 3: every text of the settings page that counted images says files'
 
 it('SPEC-035: every query of ExistingImages names each checked type, no fewer', function (): void {
     $source = (string) file_get_contents(dirname(__DIR__, 2).'/src/ExistingImages.php');
-    $types = count(Tracefern\ImageCheck\UploadHook::MIME_TYPES);
+    $types = count(UploadHook::MIME_TYPES);
     preg_match_all('/\[([^\]]*)\] = UploadHook::MIME_TYPES;/', $source, $names);
     preg_match_all('/p\.post_mime_type IN \(([^)]*)\)/', $source, $lists);
 

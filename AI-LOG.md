@@ -3824,3 +3824,21 @@ README are where the disclosure lives.
   The test's attachments were deleted afterwards.
 - Reasoned: none.
 - Decided by Maurice: amendment 12 approved.
+
+## 2026-10-06 — Pint on the guard test
+
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, push de plugin en zet hetzelfde antwoord op #157".
+- Produced: `tests/Unit/ExistingImagesTest.php` as Pint formats it (an
+  imported `UploadHook`, operator spacing).
+- Measured: CI run 37454054623 on `578cec4` failed `composer check` on
+  PHP 8.3, 8.4 and 8.5 at `pint --test`: the guard test added during the
+  build was never linted, because only the test suites were run after it
+  (Pint had passed before it was written). Locally `composer check` now
+  passes (Pint, PHPStan, 125 unit tests). The same run's release job
+  failed on Playground's blueprint step: "Could not download
+  https://playground.wordpress.net/wp-cli.phar" (outside this repository;
+  locally the release suite passed, 17 tests). Integration on PHP 8.3,
+  8.4, 8.5 and multisite passed.
+- Reasoned: none.
+- Decided by Maurice: push.
