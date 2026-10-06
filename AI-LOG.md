@@ -3745,3 +3745,25 @@ README are where the disclosure lives.
   0.2.0 (read in `Display` and `RecheckCommand`); that SPEC-015 AC1's GIF
   bytes stop being an unknown format under c2pa-verifier 0.4.0.
 - Decided by Maurice: check GIF uploads (option B).
+
+## 2026-10-06 — SPEC-035 approved; its tests, red
+
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, keur SPEC-035 goed met de drie voorstellen".
+- Produced: SPEC-035 `approved` with Maurice's decisions on its three open
+  questions (0.3.0; the general texts; no cap) and its Traceability's test
+  column; `tests/Integration/GifTest.php` (12 tests); SPEC-001 AC5's GIF
+  dataset made a BMP (`UploadTest`), SPEC-015 AC1's GIF bytes made a BMP's
+  and its expected text the new one (`RobustnessTest`); `ReadmeTest`
+  SPEC-035 AC9; seven GIF fixtures with their rows in
+  `tests/Fixtures/README.md` (five copied from c2pa-verifier v0.4.0, one
+  large GIF signed for this spec with `c2patool` 0.27.22 and the public
+  test certificate, `Valid` in 0.27.22 and 0.28.1).
+- Measured: the test environment, c2pa-verifier still 0.3.0 in `vendor/`:
+  `GifTest` 9 failed (AC1–AC6: no entry stored; AC7: the old WP-CLI
+  warning), 3 passed (AC8, a guard, green before and after);
+  `RobustnessTest` AC1 failed on the old reason text; SPEC-001 15 passed
+  (the BMP dataset a guard); `ReadmeTest` SPEC-035 AC9 failed (no GIF in
+  the readme). Pint and PHPStan pass.
+- Reasoned: none.
+- Decided by Maurice: SPEC-035 approved with the three proposals.

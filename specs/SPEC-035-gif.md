@@ -2,9 +2,9 @@
 
 | Field      | Value                                             |
 |------------|---------------------------------------------------|
-| Status     | draft                                             |
+| Status     | approved                                          |
 | Author     | Maurice van Loon                                  |
-| Approved   | —                                                 |
+| Approved   | Maurice van Loon, 2026-10-06                      |
 | Supersedes | —                                                 |
 
 > Lifecycle: `draft` → maintainer approves → `approved` → tests-first →
@@ -171,17 +171,20 @@ constant (SPEC-034).
 ## Open questions
 
 1. **The version.** A new format, as audio was for 0.2.0. Proposal:
-   plugin 0.3.0. Non-blocker.
+   plugin 0.3.0. Non-blocker. **Decided by Maurice van Loon, 2026-10-06:
+   0.3.0.**
 2. **The two texts.** Proposal: "not a file type this plugin can check"
    in the details and "not a type this plugin checks" in WP-CLI, so that
    the next format does not make them stale again; the readme's FAQ is the
    one place that lists the formats. Alternative: list every format in
-   both. Non-blocker.
+   both. Non-blocker. **Decided by Maurice van Loon, 2026-10-06: the
+   general texts.**
 3. **Animated GIFs that are very large.** The verifier walks only the
    blocks before the first image and hashes the file streaming (its step
    261: 100 MB in 0.4 s); a slow host can still hit `max_execution_time`,
    which SPEC-013 reports as `interrupted`. Proposal: no cap, as decided
-   for audio in SPEC-034. Non-blocker.
+   for audio in SPEC-034. Non-blocker. **Decided by Maurice van Loon,
+   2026-10-06: no cap.**
 
 ## Amendments
 
@@ -191,12 +194,12 @@ None.
 
 | AC | Test | Implementation |
 |----|------|----------------|
-| AC1 | — | — |
-| AC2 | — | — |
-| AC3 | — | — |
-| AC4 | — | — |
-| AC5 | — | — |
-| AC6 | — | — |
-| AC7 | — | — |
-| AC8 | — | — |
-| AC9 | — | — |
+| AC1 | tests/Integration/GifTest.php :: AC1: a signed GIF gets the verifier's verdict; AC1: a GIF uploaded through the browser's REST route is checked as WP-CLI's import is; AC1: with trust settings that hold the signer, a GIF is "Verified: trusted signer" / SPEC-035 | — |
+| AC2 | tests/Integration/GifTest.php :: AC2: an unsigned GIF is "No Content Credentials" / SPEC-035 | — |
+| AC3 | tests/Integration/GifTest.php :: AC3: a GIF changed after signing is "Does not verify" / SPEC-035 | — |
+| AC4 | tests/Integration/GifTest.php :: AC4: a GIF cut inside its C2PA_GIF block is "Does not verify"; one broken before it "Could not be checked" / SPEC-035 | — |
+| AC5 | tests/Integration/GifTest.php :: AC5: a large GIF's original is checked, not its -scaled copy / SPEC-035 | — |
+| AC6 | tests/Integration/GifTest.php :: AC6: a GIF is everywhere images are / SPEC-035 | — |
+| AC7 | tests/Integration/GifTest.php :: AC7: WP-CLI skips a type it does not check without naming types; tests/Integration/RobustnessTest.php :: AC1: an unknown format is an error, not "no credential" (amended) / SPEC-035, SPEC-015 | — |
+| AC8 | tests/Integration/GifTest.php :: AC8: BMP, PDF and AVI are still left alone (a guard, green before and after); tests/Integration/UploadTest.php :: AC5: leaves other file types alone (the GIF dataset now a BMP) / SPEC-035, SPEC-001 | — |
+| AC9 | tests/Unit/ReadmeTest.php :: SPEC-035 AC9: the readme says GIF is checked / SPEC-035 | — |

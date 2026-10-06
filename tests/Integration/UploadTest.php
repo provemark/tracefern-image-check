@@ -42,7 +42,7 @@ it('AC5: leaves other file types alone', function (string $name, string $bytes):
     expect($id)->toBeGreaterThan(0)
         ->and(storedEntry($id))->toBeNull();
 })->with([
-    'a GIF' => ['other.gif', base64_decode('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')],
+    'a BMP' => ['other.bmp', base64_decode('Qk06AAAAAAAAADYAAAAoAAAAAQAAAAEAAAABABgAAAAAAAQAAAATCwAAEwsAAAAAAAAAAAAA////AA==')],   // a GIF until SPEC-035, which checks GIF
     'a PDF' => ['other.pdf', "%PDF-1.4\n1 0 obj<<>>endobj\ntrailer<<>>\n%%EOF\n"],
 ])->group('SPEC-001');
 

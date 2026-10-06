@@ -219,3 +219,13 @@ it('SPEC-034 AC8: the readme says WAV, MP3 and FLAC are checked, and video is no
         ->and($faq)->toContain('Video is not checked')
         ->and(strlen($readme))->toBeLessThan(10240);
 })->group('SPEC-034');
+
+it('SPEC-035 AC9: the readme says GIF is checked', function (): void {
+    $readme = (string) file_get_contents(dirname(__DIR__, 2).'/readme.txt');
+    $faq = trim((string) preg_replace('/\\s+/', ' ', (string) preg_replace('/.*\\n= Which formats are checked\\? =\\n(.*?)(\\n= .*|\\n== .*|$)/s', '$1', $readme)));
+    $description = (string) preg_replace('/.*\\n== Description ==\\n(.*?)\\n== .*/s', '$1', $readme);
+
+    expect($faq)->toContain('GIF')
+        ->and($description)->toContain('GIF')
+        ->and(strlen($readme))->toBeLessThan(10240);
+})->group('SPEC-035');

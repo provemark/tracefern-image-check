@@ -19,15 +19,15 @@ function withMustUsePlugin(string $name, string $code, callable $test): void
 }
 
 it('AC1: an unknown format is an error, not "no credential"', function (): void {
-    $gif = base64_encode((string) base64_decode('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'));
+    $bmp = 'Qk06AAAAAAAAADYAAAAoAAAAAQAAAAEAAAABABgAAAAAAAQAAAATCwAAEwsAAAAAAAAAAAAA////AA==';   // a GIF's bytes until SPEC-035: the verifier reads GIF since 0.4.0
     $id = attachmentWithEntry(null);
-    wpEval("\$file = wp_get_upload_dir()['basedir'].'/m15-not-a-jpeg.jpg'; file_put_contents(\$file, base64_decode('$gif')); update_attached_file($id, \$file); (new Tracefern\\ImageCheck\\UploadHook(new Tracefern\\ImageCheck\\Checker))->checkAndStore($id, \$file);");
+    wpEval("\$file = wp_get_upload_dir()['basedir'].'/m15-not-a-jpeg.jpg'; file_put_contents(\$file, base64_decode('$bmp')); update_attached_file($id, \$file); (new Tracefern\\ImageCheck\\UploadHook(new Tracefern\\ImageCheck\\Checker))->checkAndStore($id, \$file);");
     $unsigned = importMedia(fixturePath('fixture-unsigned.jpg'));
 
     expect(storedEntry($id)['state'] ?? null)->toBe('error')
         ->and(storedEntry($id)['reason'] ?? null)->toBe('unsupported')
         ->and(visibleText(detailsHtml($id, false)))->toContain('Could not be checked')
-        ->and(visibleText(detailsHtml($id, false)))->toContain('not a JPEG, PNG or WebP file')
+        ->and(visibleText(detailsHtml($id, false)))->toContain('not a file type this plugin can check')
         ->and(storedEntry($unsigned)['state'] ?? null)->toBe('none');
 })->group('SPEC-015');
 
