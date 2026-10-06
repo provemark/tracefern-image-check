@@ -242,11 +242,11 @@ final class DashboardSummary
     {
         if ($total === null) {
             /* translators: shown instead of the number of files when it could not be counted. */
-            return __('— JPEG, PNG, WebP, WAV, MP3 and FLAC files', 'tracefern-image-check-for-c2pa');
+            return __('— JPEG, PNG, GIF, WebP, WAV, MP3 and FLAC files', 'tracefern-image-check-for-c2pa');
         }
 
-        /* translators: %s: the number of JPEG, PNG, WebP, WAV, MP3 and FLAC files in the Media Library. */
-        return sprintf(_n('%s JPEG, PNG, WebP, WAV, MP3 and FLAC file', '%s JPEG, PNG, WebP, WAV, MP3 and FLAC files', $total, 'tracefern-image-check-for-c2pa'), number_format_i18n($total));
+        /* translators: %s: the number of JPEG, PNG, GIF, WebP, WAV, MP3 and FLAC files in the Media Library. */
+        return sprintf(_n('%s JPEG, PNG, GIF, WebP, WAV, MP3 and FLAC file', '%s JPEG, PNG, GIF, WebP, WAV, MP3 and FLAC files', $total, 'tracefern-image-check-for-c2pa'), number_format_i18n($total));
     }
 
     /**

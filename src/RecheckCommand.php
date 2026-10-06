@@ -39,10 +39,10 @@ final class RecheckCommand
      * : Attachment IDs to check.
      *
      * [--all]
-     * : Every JPEG, PNG and WebP attachment.
+     * : Every attachment of a type the plugin checks.
      *
      * [--unchecked]
-     * : The JPEG, PNG and WebP attachments that were never checked.
+     * : The attachments of a type the plugin checks that were never checked.
      *
      * [--state=<states>]
      * : Attachments whose last result is one of these, comma-separated:
@@ -149,8 +149,8 @@ final class RecheckCommand
     }
 
     /**
-     * The given IDs that are JPEG, PNG or WebP attachments; the others are
-     * skipped with a warning.
+     * The given IDs that are attachments of a type the plugin checks
+     * (`UploadHook::MIME_TYPES`); the others are skipped with a warning.
      *
      * @param  list<string>  $args
      * @return list<int>
@@ -163,7 +163,7 @@ final class RecheckCommand
             if ($id > 0 && get_post_type($id) === 'attachment' && in_array(get_post_mime_type($id), UploadHook::MIME_TYPES, true)) {
                 $ids[] = $id;
             } else {
-                WP_CLI::warning("Skipped {$arg}: not a JPEG, PNG or WebP attachment.");
+                WP_CLI::warning("Skipped {$arg}: not a type this plugin checks.");   // no list that a new format makes stale (SPEC-035 AC7)
             }
         }
 

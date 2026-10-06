@@ -18,7 +18,7 @@ it('AC8: the section\'s texts are escaped and translatable, numbers localised', 
 it('amendment 3: every text of the settings page that counted images says files', function (): void {
     $source = (string) file_get_contents(dirname(__DIR__, 2).'/src/SettingsPage.php');
 
-    expect($source)->toContain("'%1\$s JPEG, PNG, WebP, WAV, MP3 and FLAC files; %2\$s never checked.'")
+    expect($source)->toContain("'%1\$s JPEG, PNG, GIF, WebP, WAV, MP3 and FLAC files; %2\$s never checked.'")
         ->toContain("'Checking existing files: %1\$s of %2\$s done. The checks run in the background.'")
         ->toContain("'Finished: %1\$s files checked, %2\$s.'")
         ->toContain('a few files at a time; new uploads go first. "Check all files again" applies the current trust settings and verifier to every file.')
@@ -26,3 +26,15 @@ it('amendment 3: every text of the settings page that counted images says files'
         ->toContain('the last file was checked without trust settings')
         ->and(preg_match('/esc_html__\([\'"][^\'"]*\bimages?\b/', $source))->toBe(0);
 })->group('SPEC-031');
+
+it('SPEC-035: every query of ExistingImages names each checked type, no fewer', function (): void {
+    $source = (string) file_get_contents(dirname(__DIR__, 2).'/src/ExistingImages.php');
+    $types = count(Tracefern\ImageCheck\UploadHook::MIME_TYPES);
+    preg_match_all('/\[([^\]]*)\] = UploadHook::MIME_TYPES;/', $source, $names);
+    preg_match_all('/p\.post_mime_type IN \(([^)]*)\)/', $source, $lists);
+
+    expect($names[1])->not->toBeEmpty()
+        ->and(array_map(static fn (string $list): int => count(explode(',', $list)), $names[1]))->each->toBe($types)
+        ->and($lists[1])->toHaveCount(4)
+        ->and(array_map(static fn (string $list): int => substr_count($list, '%s'), $lists[1]))->each->toBe($types);
+})->group('SPEC-035');

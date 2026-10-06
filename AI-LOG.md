@@ -3767,3 +3767,34 @@ README are where the disclosure lives.
   the readme). Pint and PHPStan pass.
 - Reasoned: none.
 - Decided by Maurice: SPEC-035 approved with the three proposals.
+
+## 2026-10-06 — Check GIF uploads (SPEC-035); 0.3.0
+
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, bouw het".
+- Produced: `UploadHook::MIME_TYPES` with `image/gif`; c2pa-verifier
+  `^0.4.0` (lock on v0.4.0); the `unsupported` reason in `Display` and the
+  skip warning and `--all`/`--unchecked` help of `RecheckCommand` without a
+  list of formats; GIF in the format lists of `DashboardSummary` and
+  `SettingsPage`; comments in `UploadHook`; `ExistingImages` naming eight
+  types; `readme.txt` (GIF in the description, the steps and the FAQ; the
+  0.3.0 changelog; stable tag) and the plugin header at 0.3.0; SPEC-035
+  `implemented`; SPEC-006 amendment 12 (proposed, awaiting review) with
+  the WPCS baseline at 721 and `MaintenanceCheckTest` on v0.4.0; tests:
+  the format-list texts with GIF (`ExistingImagesTest`,
+  `DashboardSummaryTest`, the widget helper), a dataset for the kept
+  counts of 0.2.0, and a guard that `ExistingImages` names every type.
+- Measured: the full integration suite first gave 3 failures. Two were the
+  dashboard's kept-types test, which listed the types of 0.2.0; one,
+  SPEC-034 AC6, was a real fault: `ExistingImages` took the types by
+  position (`[$jpeg, $png, $webp, …] = UploadHook::MIME_TYPES`) with seven
+  placeholders, so with GIF third FLAC fell out of "Check files that were
+  never checked" and its count. The guard test was seen red (7, not 8)
+  before the fix. Then: Unit 125 passed, Integration 275 passed, Multisite
+  9 passed; Pint and PHPStan pass. The WPCS findings on the verifier's
+  `src/` at v0.3.0 and v0.4.0, per file (26 more `ExceptionNotEscaped`).
+  The release suite could not build before this commit (the build
+  archives HEAD, whose `composer.json` still asked for `^0.3.0`); on the
+  commit, 17 passed (the build, Plugin Check, the WPCS baseline).
+- Reasoned: none.
+- Decided by Maurice: build SPEC-035.

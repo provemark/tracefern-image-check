@@ -24,8 +24,8 @@ final class UploadHook
 {
     public const string META_KEY = '_tracefern_result';
 
-    /** The formats the plugin checks: images (SPEC-001) and, since SPEC-034, WAV, MP3 and FLAC. */
-    public const array MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'audio/wav', 'audio/x-wav', 'audio/mpeg', 'audio/flac'];
+    /** The formats the plugin checks: images (SPEC-001), since SPEC-034 WAV, MP3 and FLAC, since SPEC-035 GIF. */
+    public const array MIME_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'audio/wav', 'audio/x-wav', 'audio/mpeg', 'audio/flac'];
 
     /** Set while the last check had to run without trust settings (SPEC-004 AC6). */
     public const string TRUST_FAILED_OPTION = 'tracefern_trust_failed';
@@ -83,7 +83,7 @@ final class UploadHook
     }
 
     /**
-     * Takes the SHA-256 and size of an uploaded JPEG, PNG or WebP as it
+     * Takes the SHA-256 and size of an uploaded file of a checked type as it
      * arrives, before any other plugin on this filter changes it (SPEC-028):
      * kept for this request, and stored when the upload becomes an
      * attachment. A file that cannot be read gets none. Returns the upload
@@ -155,7 +155,7 @@ final class UploadHook
     }
 
     /**
-     * Marks a JPEG, PNG or WebP upload pending and schedules its check;
+     * Marks an upload of a checked type pending and schedules its check;
      * nothing is verified in the upload request.
      */
     public function onAddAttachment(int $attachmentId): void
@@ -238,7 +238,7 @@ final class UploadHook
     /**
      * Checks an image of a run over existing ones (SPEC-031) as
      * `wp tracefern check` does (SPEC-008): on the file the verdict
-     * describes now. An ID that is no longer a JPEG, PNG or WebP attachment
+     * describes now. An ID that is no longer an attachment of a checked type
      * is skipped.
      */
     private function runExisting(int $id): void
@@ -282,8 +282,8 @@ final class UploadHook
 
     /**
      * Checks one attachment now: with the admin memory limit, on the kept
-     * original, not on `-scaled`. An ID that is no longer a JPEG, PNG or
-     * WebP attachment is skipped.
+     * original, not on `-scaled`. An ID that is no longer an attachment
+     * of a checked type is skipped.
      */
     public function runScheduled(mixed $attachmentId): void
     {
@@ -301,7 +301,7 @@ final class UploadHook
     }
 
     /**
-     * Up to $limit pending JPEG, PNG and WebP attachments, oldest marker first.
+     * Up to $limit pending attachments of a checked type, oldest marker first.
      *
      * @return list<int>
      */

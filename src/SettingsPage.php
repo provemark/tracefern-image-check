@@ -222,8 +222,8 @@ final class SettingsPage
         $run = ExistingImages::progress();
 
         echo '<h2>'.esc_html__('Existing files', 'tracefern-image-check-for-c2pa').'</h2><p>'
-            /* translators: 1: number of JPEG, PNG, WebP, WAV, MP3 and FLAC files, 2: how many of them were never checked */
-            .sprintf(esc_html__('%1$s JPEG, PNG, WebP, WAV, MP3 and FLAC files; %2$s never checked.', 'tracefern-image-check-for-c2pa'), esc_html(number_format_i18n(ExistingImages::count('all'))), esc_html(number_format_i18n(ExistingImages::count('unchecked'))))
+            /* translators: 1: number of JPEG, PNG, GIF, WebP, WAV, MP3 and FLAC files, 2: how many of them were never checked */
+            .sprintf(esc_html__('%1$s JPEG, PNG, GIF, WebP, WAV, MP3 and FLAC files; %2$s never checked.', 'tracefern-image-check-for-c2pa'), esc_html(number_format_i18n(ExistingImages::count('all'))), esc_html(number_format_i18n(ExistingImages::count('unchecked'))))
             .'</p>';
 
         if ($run !== null && $run['finished'] === null) {

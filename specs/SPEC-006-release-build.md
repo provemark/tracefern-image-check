@@ -254,6 +254,21 @@ None. Resolved by Maurice on 2026-09-26, as proposed in the draft:
     characters; they become a status explanation, which the verifier keeps
     UTF-8 since v0.3.0 and the plugin escapes where it shows one. Nothing
     new is read or executed.
+12. **2026-10-06, proposed with SPEC-035; awaiting Maurice van Loon's
+    review.** The bundled verifier moves to v0.4.0
+    (GIF, which this plugin now checks, SPEC-035). AC4's baseline rises
+    from 695 to 721 `WordPress.Security.EscapeOutput.ExceptionNotEscaped`
+    findings; every other count is unchanged. Measured per file on
+    `git archive` of v0.3.0 and v0.4.0 (`vendor/` equal to v0.4.0's
+    `src/`): `Container/GifManifestStoreExtractor.php` 0 → 23 (the new
+    reader), `Container/Id3ManifestStoreExtractor.php`,
+    `IsobmffManifestStoreExtractor.php`, `JpegManifestStoreExtractor.php`
+    and `PngManifestStoreExtractor.php` one more each (each rethrows its
+    fault with `withStoreReached()`, the verifier's step 253),
+    `Container/RiffManifestStoreExtractor.php` one fewer. The new messages
+    carry numbers, and a byte of the file only as hex; they become a
+    status explanation, which the plugin escapes where it shows one.
+    Nothing new is read or executed.
 
 ## Traceability
 

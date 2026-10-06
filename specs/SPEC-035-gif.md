@@ -2,7 +2,7 @@
 
 | Field      | Value                                             |
 |------------|---------------------------------------------------|
-| Status     | approved                                          |
+| Status     | implemented                                       |
 | Author     | Maurice van Loon                                  |
 | Approved   | Maurice van Loon, 2026-10-06                      |
 | Supersedes | —                                                 |
@@ -194,12 +194,12 @@ None.
 
 | AC | Test | Implementation |
 |----|------|----------------|
-| AC1 | tests/Integration/GifTest.php :: AC1: a signed GIF gets the verifier's verdict; AC1: a GIF uploaded through the browser's REST route is checked as WP-CLI's import is; AC1: with trust settings that hold the signer, a GIF is "Verified: trusted signer" / SPEC-035 | — |
-| AC2 | tests/Integration/GifTest.php :: AC2: an unsigned GIF is "No Content Credentials" / SPEC-035 | — |
-| AC3 | tests/Integration/GifTest.php :: AC3: a GIF changed after signing is "Does not verify" / SPEC-035 | — |
-| AC4 | tests/Integration/GifTest.php :: AC4: a GIF cut inside its C2PA_GIF block is "Does not verify"; one broken before it "Could not be checked" / SPEC-035 | — |
-| AC5 | tests/Integration/GifTest.php :: AC5: a large GIF's original is checked, not its -scaled copy / SPEC-035 | — |
-| AC6 | tests/Integration/GifTest.php :: AC6: a GIF is everywhere images are / SPEC-035 | — |
-| AC7 | tests/Integration/GifTest.php :: AC7: WP-CLI skips a type it does not check without naming types; tests/Integration/RobustnessTest.php :: AC1: an unknown format is an error, not "no credential" (amended) / SPEC-035, SPEC-015 | — |
-| AC8 | tests/Integration/GifTest.php :: AC8: BMP, PDF and AVI are still left alone (a guard, green before and after); tests/Integration/UploadTest.php :: AC5: leaves other file types alone (the GIF dataset now a BMP) / SPEC-035, SPEC-001 | — |
-| AC9 | tests/Unit/ReadmeTest.php :: SPEC-035 AC9: the readme says GIF is checked / SPEC-035 | — |
+| AC1 | tests/Integration/GifTest.php :: AC1: a signed GIF gets the verifier's verdict; AC1: a GIF uploaded through the browser's REST route is checked as WP-CLI's import is; AC1: with trust settings that hold the signer, a GIF is "Verified: trusted signer" / SPEC-035 | `UploadHook::MIME_TYPES` (`image/gif`); c2pa-verifier `^0.4.0` (SPEC-006 amendment 12); the upload, queue and check paths unchanged |
+| AC2 | tests/Integration/GifTest.php :: AC2: an unsigned GIF is "No Content Credentials" / SPEC-035 | `UploadHook::MIME_TYPES`; `Outcome::fromReport()` (unchanged) |
+| AC3 | tests/Integration/GifTest.php :: AC3: a GIF changed after signing is "Does not verify" / SPEC-035 | `UploadHook::MIME_TYPES`; `Outcome::fromReport()` (unchanged) |
+| AC4 | tests/Integration/GifTest.php :: AC4: a GIF cut inside its C2PA_GIF block is "Does not verify"; one broken before it "Could not be checked" / SPEC-035 | `Outcome::fromReport()` (SPEC-015, unchanged) |
+| AC5 | tests/Integration/GifTest.php :: AC5: a large GIF's original is checked, not its -scaled copy / SPEC-035 | `UploadHook::shownFile()` (SPEC-001 AC4, unchanged) |
+| AC6 | tests/Integration/GifTest.php :: AC6: a GIF is everywhere images are / SPEC-035 | `UploadHook::MIME_TYPES` through `MediaScreens`, `MediaSort`, `DashboardSummary`, `RecheckCommand`, `Verdict`; `ExistingImages::count()`, `next()` (eight named types, guarded by `tests/Unit/ExistingImagesTest.php` :: SPEC-035: every query of ExistingImages names each checked type, no fewer); the format lists of `DashboardSummary` and `SettingsPage` |
+| AC7 | tests/Integration/GifTest.php :: AC7: WP-CLI skips a type it does not check without naming types; tests/Integration/RobustnessTest.php :: AC1: an unknown format is an error, not "no credential" (amended) / SPEC-035, SPEC-015 | `Display` (the `unsupported` reason), `RecheckCommand` (the skip warning and the `--all`/`--unchecked` help) |
+| AC8 | tests/Integration/GifTest.php :: AC8: BMP, PDF and AVI are still left alone (a guard, green before and after); tests/Integration/UploadTest.php :: AC5: leaves other file types alone (the GIF dataset now a BMP) / SPEC-035, SPEC-001 | `UploadHook::MIME_TYPES` (BMP, PDF, AVI left out) |
+| AC9 | tests/Unit/ReadmeTest.php :: SPEC-035 AC9: the readme says GIF is checked / SPEC-035 | `readme.txt` |

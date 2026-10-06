@@ -1284,13 +1284,13 @@ function summaryLines(string $html): array
 }
 
 /**
- * The widget's total: the number in "N JPEG, PNG, WebP, WAV, MP3 and FLAC
+ * The widget's total: the number in "N JPEG, PNG, GIF, WebP, WAV, MP3 and FLAC
  * files" (or "1 … file"), or "—", or null when there is no total line.
  */
 function summaryTotal(string $html): int|string|null
 {
     $text = visibleText($html);
-    if (preg_match('/(\d[\d,.]*|—) JPEG, PNG, WebP, WAV, MP3 and FLAC file/u', $text, $m) !== 1) {
+    if (preg_match('/(\d[\d,.]*|—) JPEG, PNG, GIF, WebP, WAV, MP3 and FLAC file/u', $text, $m) !== 1) {
         return null;
     }
 

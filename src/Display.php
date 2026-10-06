@@ -441,7 +441,7 @@ final class Display
             $words = match ($entry['reason']) {
                 'interrupted' => __('the check did not finish', 'tracefern-image-check-for-c2pa'),
                 'unreadable' => __('the file could not be read', 'tracefern-image-check-for-c2pa'),
-                'unsupported' => __('not a JPEG, PNG or WebP file', 'tracefern-image-check-for-c2pa'),
+                'unsupported' => __('not a file type this plugin can check', 'tracefern-image-check-for-c2pa'),   // SPEC-035 AC7
                 'too_large' => __('the file is larger than the plugin reads from external storage', 'tracefern-image-check-for-c2pa'),
                 default => __('the verifier failed', 'tracefern-image-check-for-c2pa'),
             };

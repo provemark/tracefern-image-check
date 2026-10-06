@@ -4,7 +4,7 @@ Tags: c2pa, content credentials, provenance, media library, ai
 Requires at least: 7.1
 Tested up to: 7.1
 Requires PHP: 8.3
-Stable tag: 0.2.0
+Stable tag: 0.3.0
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -23,8 +23,8 @@ is also on the trust list does it say "Verified".
 
 Content Credentials (C2PA) are a signed record inside a file: who
 made or edited it, with which tool, and whether generative AI was used.
-Tracefern Image Check for C2PA verifies that record for every JPEG, PNG, WebP, WAV, MP3
-and FLAC you upload and shows the verdict where you already work with media.
+Tracefern Image Check for C2PA verifies that record for every JPEG, PNG, GIF, WebP, WAV,
+MP3 and FLAC you upload and shows the verdict where you already work with media.
 
 * **Checked right after upload, on the original file**, not on the
   resized copies WordPress or your browser makes. The check runs in the
@@ -69,8 +69,8 @@ C2PA verifier written in PHP, bundled with the plugin.
 
 1. Install and activate the plugin. The server needs PHP 8.3 or later with
    the `openssl` and `mbstring` extensions.
-2. Upload as usual. Each JPEG, PNG, WebP, WAV, MP3 and FLAC is checked in the
-   background, usually within seconds; until then it shows "Check pending".
+2. Upload as usual. Each JPEG, PNG, GIF, WebP, WAV, MP3 and FLAC is checked
+   in the background, usually within seconds; until then it shows "Check pending".
 3. Optional: under Settings → Tracefern, choose whether to trust
    DigiCert timestamps, or paste your own trust settings.
 4. Files uploaded before the plugin was active show "Not checked". Press
@@ -148,7 +148,7 @@ plugin keeps in cloud storage are checked there, up to 64 MB.
 
 = Which formats are checked? =
 
-JPEG, PNG and WebP images; WAV, MP3 and FLAC audio. An MP3's cover art is
+JPEG, PNG, GIF and WebP images; WAV, MP3 and FLAC audio. An MP3's cover art is
 checked as an image of its own. HEIC files are converted to JPEG by the
 browser and arrive without their Content Credentials. Video is not checked.
 
@@ -212,8 +212,8 @@ licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).
 
 == Changelog ==
 
-= 0.2.0 =
+= 0.3.0 =
 
-* New: WAV, MP3 and FLAC uploads are checked too.
+* New: GIF uploads are checked too. Bundles c2pa-verifier 0.4.0.
 
 Earlier versions: https://github.com/provemark/tracefern-image-check/releases

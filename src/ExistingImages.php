@@ -98,12 +98,12 @@ final class ExistingImages
     public static function count(string $mode): int
     {
         $wpdb = Index::db();
-        [$jpeg, $png, $webp, $wav, $xWav, $mp3, $flac] = UploadHook::MIME_TYPES;
+        [$jpeg, $png, $gif, $webp, $wav, $xWav, $mp3, $flac] = UploadHook::MIME_TYPES;
 
         // Once per button press or settings page view: a count, not a loop.
         $count = $mode === 'unchecked'
-            ? $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM %i p WHERE p.post_type = 'attachment' AND p.post_mime_type IN (%s, %s, %s, %s, %s, %s, %s) AND NOT EXISTS (SELECT 1 FROM %i m WHERE m.post_id = p.ID AND m.meta_key IN (%s, %s))", $wpdb->posts, $jpeg, $png, $webp, $wav, $xWav, $mp3, $flac, $wpdb->postmeta, UploadHook::META_KEY, UploadHook::PENDING_KEY)) // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- once per press or page view
-            : $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM %i p WHERE p.post_type = 'attachment' AND p.post_mime_type IN (%s, %s, %s, %s, %s, %s, %s)", $wpdb->posts, $jpeg, $png, $webp, $wav, $xWav, $mp3, $flac)); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- once per press or page view
+            ? $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM %i p WHERE p.post_type = 'attachment' AND p.post_mime_type IN (%s, %s, %s, %s, %s, %s, %s, %s) AND NOT EXISTS (SELECT 1 FROM %i m WHERE m.post_id = p.ID AND m.meta_key IN (%s, %s))", $wpdb->posts, $jpeg, $png, $gif, $webp, $wav, $xWav, $mp3, $flac, $wpdb->postmeta, UploadHook::META_KEY, UploadHook::PENDING_KEY)) // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- once per press or page view
+            : $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM %i p WHERE p.post_type = 'attachment' AND p.post_mime_type IN (%s, %s, %s, %s, %s, %s, %s, %s)", $wpdb->posts, $jpeg, $png, $gif, $webp, $wav, $xWav, $mp3, $flac)); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- once per press or page view
 
         return is_numeric($count) ? (int) $count : 0;
     }
@@ -116,12 +116,12 @@ final class ExistingImages
     private static function next(string $mode, int $after): ?int
     {
         $wpdb = Index::db();
-        [$jpeg, $png, $webp, $wav, $xWav, $mp3, $flac] = UploadHook::MIME_TYPES;
+        [$jpeg, $png, $gif, $webp, $wav, $xWav, $mp3, $flac] = UploadHook::MIME_TYPES;
 
         // In the background queue, one row at a time; an index scan on ID.
         $id = $mode === 'unchecked'
-            ? $wpdb->get_var($wpdb->prepare("SELECT p.ID FROM %i p WHERE p.post_type = 'attachment' AND p.post_mime_type IN (%s, %s, %s, %s, %s, %s, %s) AND p.ID > %d AND NOT EXISTS (SELECT 1 FROM %i m WHERE m.post_id = p.ID AND m.meta_key IN (%s, %s)) ORDER BY p.ID ASC LIMIT 1", $wpdb->posts, $jpeg, $png, $webp, $wav, $xWav, $mp3, $flac, $after, $wpdb->postmeta, UploadHook::META_KEY, UploadHook::PENDING_KEY)) // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- one row per image, in the background
-            : $wpdb->get_var($wpdb->prepare("SELECT p.ID FROM %i p WHERE p.post_type = 'attachment' AND p.post_mime_type IN (%s, %s, %s, %s, %s, %s, %s) AND p.ID > %d ORDER BY p.ID ASC LIMIT 1", $wpdb->posts, $jpeg, $png, $webp, $wav, $xWav, $mp3, $flac, $after)); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- one row per image, in the background
+            ? $wpdb->get_var($wpdb->prepare("SELECT p.ID FROM %i p WHERE p.post_type = 'attachment' AND p.post_mime_type IN (%s, %s, %s, %s, %s, %s, %s, %s) AND p.ID > %d AND NOT EXISTS (SELECT 1 FROM %i m WHERE m.post_id = p.ID AND m.meta_key IN (%s, %s)) ORDER BY p.ID ASC LIMIT 1", $wpdb->posts, $jpeg, $png, $gif, $webp, $wav, $xWav, $mp3, $flac, $after, $wpdb->postmeta, UploadHook::META_KEY, UploadHook::PENDING_KEY)) // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- one row per image, in the background
+            : $wpdb->get_var($wpdb->prepare("SELECT p.ID FROM %i p WHERE p.post_type = 'attachment' AND p.post_mime_type IN (%s, %s, %s, %s, %s, %s, %s, %s) AND p.ID > %d ORDER BY p.ID ASC LIMIT 1", $wpdb->posts, $jpeg, $png, $gif, $webp, $wav, $xWav, $mp3, $flac, $after)); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- one row per image, in the background
 
         return is_numeric($id) ? (int) $id : null;
     }
