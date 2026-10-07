@@ -1,10 +1,10 @@
-=== Tracefern Image Check for C2PA ===
+=== Tracefern Media Check for Content Credentials (C2PA) ===
 Contributors: mauricevanloon
 Tags: c2pa, content credentials, provenance, media library, ai
 Requires at least: 7.1
 Tested up to: 7.1
 Requires PHP: 8.3
-Stable tag: 0.4.0
+Stable tag: 0.4.1
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -23,7 +23,7 @@ is also on the trust list does it say "Verified".
 
 Content Credentials (C2PA) are a signed record inside a file: who
 made or edited it, with which tool, and whether generative AI was used.
-Tracefern Image Check for C2PA verifies that record for every JPEG, PNG, GIF, WebP, WAV,
+Tracefern verifies that record for every JPEG, PNG, GIF, WebP, WAV,
 MP3, FLAC and plain text you upload and shows the verdict where you already work with media.
 
 * **Checked right after upload, on the original file**, not on the
@@ -34,8 +34,8 @@ MP3, FLAC and plain text you upload and shows the verdict where you already work
 * **"AI-generated (signed)"** when a manifest that verifies says the image
   was made by generative AI, also after later edits, and **"AI-edited
   (signed)"** when AI edited it. Never on a file that does not verify.
-* **Sort and filter** the Media Library list by verdict, including all
-  AI-generated images, and see the counts on the dashboard.
+* **Sort and filter** by verdict, AI-generated included, and see the
+  counts on the dashboard.
 * **Check existing files again** under Settings → Tracefern or with WP-CLI.
 
 The verdicts:
@@ -199,8 +199,8 @@ verifier itself is developed at https://github.com/provemark/c2pa-verifier.
 == Trust lists ==
 
 By default the plugin trusts the certificate authorities on the C2PA
-conformance programme's trust lists, bundled with the plugin (see
-`trust/README.md` for the date and source), and, optionally, the DigiCert
+conformance programme's trust lists, bundled with the plugin, and,
+optionally, the DigiCert
 Trusted Root G4 for timestamps. Settings → Tracefern shows the date of the
 bundled copy and lets an administrator replace the lists with their own
 trust settings. The plugin never downloads a list; a new copy comes with a
@@ -212,8 +212,8 @@ licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).
 
 == Changelog ==
 
-= 0.4.0 =
+= 0.4.1 =
 
-* New: plain-text (.txt) uploads are checked too. Bundles c2pa-verifier 0.5.0.
+* New name: Tracefern Media Check for Content Credentials (C2PA). Nothing else changes.
 
 Earlier versions: https://github.com/provemark/tracefern-image-check/releases

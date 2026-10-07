@@ -4001,3 +4001,18 @@ README are where the disclosure lives.
 - Measured: the unit suite: 4 red (the name, AC2, AC3, AC6), 125 passed.
 - Decided by Maurice: every open question as proposed (the privacy text's
   key; the readme shortened; the banner remade; version 0.4.1).
+
+## 2026-10-07 — SPEC-037 built: Tracefern Media Check for Content Credentials (C2PA); 0.4.1
+
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: build SPEC-037 (approved earlier).
+- Produced: the new display name in every shipped file and in `NOTES.md`;
+  "Tracefern reads …" in the privacy text and "Tracefern verifies …" in the
+  readme, where the full name would repeat itself; the readme shortened
+  (10,151 bytes with the 0.4.1 changelog line); the banner's source with the
+  name on two lines and "every file you upload", both banner PNGs remade;
+  version 0.4.1; SPEC-037 implemented with its Traceability.
+- Measured: `composer check` (129); the privacy tests in the test
+  environment (3); the banner rendered with headless Chrome at 1544×500 and
+  looked at, halved to 772×250.
+- Decided by Maurice: none beyond SPEC-037's decisions.

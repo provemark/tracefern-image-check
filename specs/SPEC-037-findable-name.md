@@ -2,7 +2,7 @@
 
 | Field      | Value                                             |
 |------------|---------------------------------------------------|
-| Status     | approved                                          |
+| Status     | implemented                                       |
 | Author     | Maurice van Loon                                  |
 | Approved   | Maurice van Loon, 2026-10-07                      |
 | Supersedes | SPEC-020's display name                           |
@@ -160,10 +160,10 @@ None.
 
 | AC | Test | Implementation |
 |----|------|----------------|
-| AC1 | tests/Unit/NameTest.php :: carries the Tracefern name in the main file and readme.txt / SPEC-037 | — |
-| AC2 | tests/Unit/NameTest.php :: SPEC-037 AC2: puts no trademark in front of the name / SPEC-037 | — |
-| AC3 | tests/Unit/NameTest.php :: SPEC-037 AC3: uses the old display name only in the history (every tracked file, so the built zip too) / SPEC-037 | — |
-| AC4 | tests/Integration/PrivacyTest.php :: AC1, AC2 (the new name, amended); tests/Release/ReleaseTest.php :: AC2 (the settings page heading) / SPEC-037 | — |
-| AC5 | by hand at the release: 0.4.0 replaced by 0.4.1 on a site with checked files and custom trust settings; the slug and text domain held by NameTest | — |
-| AC6 | tests/Unit/ReadmeTest.php :: SPEC-037 AC6: the readme leaves room for the next changelog line / SPEC-037 | — |
-| AC7 | tests/Unit/NameTest.php :: SPEC-037 AC3 (`banner.html`); the two PNGs by eye | — |
+| AC1 | tests/Unit/NameTest.php :: carries the Tracefern name in the main file and readme.txt / SPEC-037 | `tracefern-image-check-for-c2pa.php` (`Plugin Name`); `readme.txt` (title) |
+| AC2 | tests/Unit/NameTest.php :: SPEC-037 AC2: puts no trademark in front of the name / SPEC-037 | the name itself |
+| AC3 | tests/Unit/NameTest.php :: SPEC-037 AC3: uses the old display name only in the history (every tracked file, so the built zip too) / SPEC-037 | every shipped file: the main file, `readme.txt`, `README.md`, `src/SettingsPage.php`, `src/PrivacyPolicy.php`, `assets/admin.css`, `uninstall.php`, `trust/README.md`, `package.json`, `.wordpress-org/` (blueprint, banner source, icon source); `NOTES.md` |
+| AC4 | tests/Integration/PrivacyTest.php :: AC1, AC2 (the new name, amended); tests/Release/ReleaseTest.php :: AC2 (the settings page heading) / SPEC-037 | `SettingsPage` (title, heading, trust notice); the main file's two notices; `PrivacyPolicy::PLUGIN_NAME` and its text ("Tracefern reads …") |
+| AC5 | by hand at the release: 0.4.0 replaced by 0.4.1 on a site with checked files and custom trust settings; the slug and text domain held by NameTest | nothing that stores or names data changed (slug, text domain, options, meta keys, cron events) |
+| AC6 | tests/Unit/ReadmeTest.php :: SPEC-037 AC6: the readme leaves room for the next changelog line / SPEC-037 | `readme.txt`: "Tracefern verifies that record", the sort-and-filter bullet shortened, the `trust/README.md` aside removed (10,142 bytes before the changelog line) |
+| AC7 | tests/Unit/NameTest.php :: SPEC-037 AC3 (`banner.html`); the two PNGs by eye | `.wordpress-org/source/banner.html` (the name on two lines, "every file you upload"); `banner-1544x500.png` by headless Chrome, `banner-772x250.png` halved with `sips` |

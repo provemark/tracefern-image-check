@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Removes Tracefern Image Check for C2PA's data when the plugin is deleted (SPEC-005):
+ * Removes Tracefern Media Check for Content Credentials (C2PA)'s data when the plugin is deleted (SPEC-005):
  * the stored result of every checked image, its index (SPEC-007) and the
  * plugin's options. The images themselves stay. Deactivating does not run
  * this file. On multisite, every site of the network (SPEC-011): this file

@@ -1,4 +1,4 @@
-# Tracefern Image Check for C2PA
+# Tracefern Media Check for Content Credentials (C2PA)
 
 A WordPress plugin that verifies the Content Credentials (C2PA) of every
 uploaded image with [provemark/c2pa-verifier](https://github.com/provemark/c2pa-verifier)

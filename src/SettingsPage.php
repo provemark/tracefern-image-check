@@ -110,7 +110,7 @@ final class SettingsPage
     public function addPage(): void
     {
         add_options_page(
-            __('Tracefern Image Check for C2PA', 'tracefern-image-check-for-c2pa'),
+            __('Tracefern Media Check for Content Credentials (C2PA)', 'tracefern-image-check-for-c2pa'),
             __('Tracefern', 'tracefern-image-check-for-c2pa'),
             'manage_options',
             self::SLUG,
@@ -177,7 +177,7 @@ final class SettingsPage
         $custom = get_option(self::CUSTOM_OPTION, '');
         $digiCert = (bool) get_option(self::DIGICERT_OPTION, true);
 
-        echo '<div class="wrap"><h1>'.esc_html__('Tracefern Image Check for C2PA', 'tracefern-image-check-for-c2pa').'</h1>';
+        echo '<div class="wrap"><h1>'.esc_html__('Tracefern Media Check for Content Credentials (C2PA)', 'tracefern-image-check-for-c2pa').'</h1>';
 
         if (TrustConfig::isStale(new DateTimeImmutable)) {
             echo '<div class="notice notice-warning inline"><p>'
@@ -283,7 +283,7 @@ final class SettingsPage
         }
 
         echo '<div class="notice notice-warning"><p>'
-            .esc_html__('Tracefern Image Check for C2PA: the last file was checked without trust settings, because they could not be read. See Settings → Tracefern.', 'tracefern-image-check-for-c2pa')
+            .esc_html__('Tracefern Media Check for Content Credentials (C2PA): the last file was checked without trust settings, because they could not be read. See Settings → Tracefern.', 'tracefern-image-check-for-c2pa')
             .'</p></div>';
     }
 }

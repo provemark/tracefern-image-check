@@ -15,7 +15,7 @@ if (! defined('ABSPATH')) {
  */
 final class PrivacyPolicy
 {
-    public const string PLUGIN_NAME = 'Tracefern Image Check for C2PA';
+    public const string PLUGIN_NAME = 'Tracefern Media Check for Content Credentials (C2PA)';
 
     public function register(): void
     {
@@ -38,7 +38,7 @@ final class PrivacyPolicy
     public static function text(): string
     {
         return '<p class="privacy-policy-tutorial">'
-            .esc_html__('Tracefern Image Check for C2PA reads the Content Credentials (C2PA) of uploaded images and stores the result with each image. It sends nothing to anyone.', 'tracefern-image-check-for-c2pa')
+            .esc_html__('Tracefern reads the Content Credentials (C2PA) of uploaded images and stores the result with each image. It sends nothing to anyone.', 'tracefern-image-check-for-c2pa')
             .'</p><p>'
             .esc_html__('When an image is uploaded, this site checks the Content Credentials in the file and stores the result with the image: whether the credentials verify, the name of the signer and of its certificate\'s issuer as the file states them, the signing time, and whether the file says it was made by generative AI. The signer\'s name can be a person\'s name. This information is stored in this site\'s database, shown to users who can manage media, and not sent to anyone. It is deleted when the image is deleted, or when the plugin is removed.', 'tracefern-image-check-for-c2pa')
             .'</p>';

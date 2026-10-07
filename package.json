@@ -1,7 +1,7 @@
 {
   "name": "tracefern-image-check-for-c2pa",
   "private": true,
-  "description": "Development environment for Tracefern Image Check for C2PA; not shipped with the plugin.",
+  "description": "Development environment for Tracefern Media Check for Content Credentials (C2PA); not shipped with the plugin.",
   "license": "MIT",
   "scripts": {
     "env:start": "wp-env start",

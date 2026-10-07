@@ -1,6 +1,6 @@
 # Notes
 
-Decisions and open questions for Tracefern Image Check for C2PA. Each entry says what
+Decisions and open questions for Tracefern Media Check for Content Credentials (C2PA). Each entry says what
 is measured (a command was run) and what is reasoned (read or concluded).
 
 ## Decisions (2026-09-26)
@@ -42,7 +42,7 @@ wordpress.org is decided after M5.
 
 | what | value |
 |---|---|
-| name | Tracefern Image Check for C2PA |
+| name | Tracefern Media Check for Content Credentials (C2PA) |
 | slug, text domain | `tracefern-image-check-for-c2pa` |
 | namespace | `Tracefern\ImageCheck` |
 | prefix | `tracefern_` |

@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Plugin Name:       Tracefern Image Check for C2PA
+ * Plugin Name:       Tracefern Media Check for Content Credentials (C2PA)
  * Description:       Verifies the Content Credentials (C2PA) of uploaded images and shows the result in the Media Library.
- * Version:           0.4.0
+ * Version:           0.4.1
  * Requires at least: 7.1
  * Requires PHP:      8.3
  * Author:            Maurice van Loon
@@ -35,7 +35,7 @@ if (version_compare(PHP_VERSION, '8.3.0', '<')) {
             return;
         }
         echo '<div class="notice notice-error"><p>'
-            .esc_html__('Tracefern Image Check for C2PA needs PHP 8.3 or later and is not running.', 'tracefern-image-check-for-c2pa')
+            .esc_html__('Tracefern Media Check for Content Credentials (C2PA) needs PHP 8.3 or later and is not running.', 'tracefern-image-check-for-c2pa')
             .'</p></div>';
     });
 
@@ -49,7 +49,7 @@ if (! is_readable(__DIR__.'/vendor/autoload.php')) {
             return;
         }
         echo '<div class="notice notice-error"><p>'
-            .esc_html__('Tracefern Image Check for C2PA cannot run: its bundled libraries are missing. Reinstall the plugin.', 'tracefern-image-check-for-c2pa')
+            .esc_html__('Tracefern Media Check for Content Credentials (C2PA) cannot run: its bundled libraries are missing. Reinstall the plugin.', 'tracefern-image-check-for-c2pa')
             .'</p></div>';
     });
 
