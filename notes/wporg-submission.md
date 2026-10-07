@@ -390,9 +390,20 @@ Releases after 0.1.0:
   37601161239 green on `d1627b0` (9 jobs). By hand, on the build of
   `a3d327e` in the release environment: a signed text `Valid`, the same
   text with one letter changed `Invalid` (`assertion.dataHash.mismatch`),
-  through the prefixed verifier. **Not done this time**: an update from
-  the released 0.3.0 and an upload through `media-new.php` in Chrome, as
-  for 0.3.0. The readme is 10,224 bytes, 16 below its test's limit: the
+  through the prefixed verifier. After the release, in the release
+  environment (WordPress 7.1.3): plugin 0.3.0 installed from wordpress.org,
+  a signed text uploaded under it (no entry, not counted, not "never
+  checked"); then 0.4.0 installed over it from the public download (the
+  update check, `api.wordpress.org/plugins/update-check/1.1/`, still
+  offered 0.3.0 at 10:32 UTC, 39 minutes after the SVN commit, while the
+  plugin page and the info API showed 0.4.0): total 1, "never checked" 1,
+  `wp tracefern check --unchecked` gives `Valid` (`text`), then 0; two
+  texts uploaded through `wp-admin/media-new.php` (browser uploader) in
+  Chrome, checked once WP-Cron ran: the column shows "Intact: signer not
+  trusted" and "Does not verify", the dashboard widget "3 JPEG, PNG, GIF,
+  WebP, WAV, MP3, FLAC and text files" with 2 intact and 1 not verifying.
+  The update offer itself was not seen; the test attachments were
+  deleted. The readme is 10,224 bytes, 16 below its test's limit: the
   next release must move text out first. `trunk/` was replaced by the
   build (`diff -r` empty; 2 files added, 42 changed) and `tags/0.4.0`
   copied; Maurice committed them in his own terminal (r3732283, 11:53;

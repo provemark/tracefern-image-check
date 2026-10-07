@@ -3956,3 +3956,19 @@ README are where the disclosure lives.
   an upload through `media-new.php` in Chrome.
 - Decided by Maurice: the push, the SVN commit, the tag and the GitHub
   release.
+
+## 2026-10-07 — 0.4.0 tested by hand after the release
+
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "ja, doe de update-test en de upload in Chrome".
+- Produced: the result in `notes/wporg-submission.md` (the 0.4.0 entry).
+- Measured: in the release environment, 0.3.0 from wordpress.org with a
+  signed text uploaded under it (not stored, not counted); wordpress.org's
+  update check polled every two minutes for 30 minutes and asked directly
+  at 10:32 UTC: still 0.3.0; 0.4.0 installed over it from the public zip:
+  the text counted as never checked, checked `Valid`; two texts uploaded
+  through `media-new.php` in Chrome (logged in as wp-env's local test
+  admin): `Valid` and `Invalid` (`assertion.dataHash.mismatch`) after
+  WP-Cron ran, the column and the dashboard widget as expected.
+- Reasoned: none.
+- Decided by Maurice: run the two hand tests.
