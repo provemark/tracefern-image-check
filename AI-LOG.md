@@ -4016,3 +4016,21 @@ README are where the disclosure lives.
   environment (3); the banner rendered with headless Chrome at 1544×500 and
   looked at, halved to 772×250.
 - Decided by Maurice: none beyond SPEC-037's decisions.
+
+## 2026-10-07 — Release 0.4.1
+
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "ja, push en zet release 0.4.1 klaar"; "svn commit is gedaan";
+  "ja, maak de tag en de GitHub-release".
+- Produced: the build of `38ed6e2` kept in `build/submitted/`; a fresh SVN
+  working copy (trunk from the build, `tags/0.4.1`, the two banners in
+  `assets/`), committed by Maurice as r3732510; annotated tag `v0.4.1` on
+  `38ed6e2`; GitHub release 0.4.1 with the zip; the record in
+  `notes/wporg-submission.md` §5.
+- Measured: CI run 37615267783 (9 jobs green); the update from 0.4.0 by hand
+  (SPEC-037 AC5); `diff -r` of the build against `trunk/` and `tags/0.4.1`
+  empty; the plugin API and page on 0.4.1 with the new name; the public
+  download and SVN `tags/0.4.1` equal to the build; the release's zip
+  SHA-256 equal to the build; the search places (unchanged so far).
+- Decided by Maurice: the push, the SVN commit, the tag and the GitHub
+  release.
