@@ -413,3 +413,23 @@ Releases after 0.1.0:
   returns 200; the public download holds the files of the build, as an
   export of SVN `tags/0.4.0` does. Git tag `v0.4.0` on `d1627b0`, and a
   GitHub release with the same zip (SHA-256 equal), on Maurice's go.
+- **0.4.1, 2026-10-07** (SPEC-037, the display name becomes Tracefern
+  Media Check for Content Credentials (C2PA); nothing else changes): built
+  from `38ed6e2` (SHA-256 `d11086b4…`, kept in `build/submitted/`). Before
+  the build: `composer check` (129), integration (287), multisite (9) and
+  the Release suite (17) green; CI run 37615267783 green on `38ed6e2` (9
+  jobs). By hand (SPEC-037 AC5), in the release environment: 0.4.0 from
+  wordpress.org with custom trust settings and a JPEG, a text and an MP3
+  checked (`Trusted`), then the 0.4.1 build over it: the plugin stays
+  active, every stored result and the trust option are unchanged, a new
+  check gives 3 `Trusted`, the settings page and the privacy text show the
+  new name. `trunk/` replaced by the build and `tags/0.4.1` copied, with the
+  two new banners in `assets/`; Maurice committed them (r3732510, 13:55).
+  Measured: the plugin API reported 0.4.1 under the new name at once; the
+  page's title is the new name; the public download and an export of SVN
+  `tags/0.4.1` equal the build. Search places right after the release,
+  unchanged: `c2pa` 4 of 29, `content credentials` not in the first 30 of
+  4,269, `content credentials c2pa` 3 of 20, `image authenticity` 28 of 64
+  (the index is not rebuilt at once; measure again later). Git tag `v0.4.1`
+  on `38ed6e2`, and a GitHub release with the same zip (SHA-256 equal), on
+  Maurice's go.
