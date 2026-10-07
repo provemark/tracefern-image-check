@@ -3861,3 +3861,23 @@ README are where the disclosure lives.
 - Reasoned: none.
 - Decided by Maurice: the release, the SVN commit, the tag and the GitHub
   release.
+
+## 2026-10-07 — SPEC-036 (plain-text uploads) drafted
+
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "voeg tekst toe aan de WordPress-plugin"; after the explanation,
+  "akkoord met variant A en de meting" (text files in the Media Library,
+  not text in posts), then "ja, schrijf SPEC-036".
+- Produced: `specs/SPEC-036-plain-text.md` (draft): eight acceptance
+  criteria, four open questions with proposals.
+- Measured: in wp-env (WordPress 7.1, PHP 8.3, plugin 0.3.0):
+  `get_allowed_mime_types()` (`txt|asc|c|cc|h|srt` → `text/plain`, also
+  `text/csv`, `text/vtt`); `wp_check_filetype_and_ext()` and `finfo` on the
+  verifier's text fixtures (all `text/plain`), on its UTF-16LE text
+  (`application/octet-stream`, refused) and on a Latin-1 text and the
+  signed text with `FF` appended (`text/plain`); four texts imported with
+  `wp media import`: `text/plain`, bytes unchanged, metadata `filesize`
+  only, nothing stored by the plugin; two served over HTTP: the same bytes,
+  `Content-Type: text/plain`.
+- Reasoned: that the browser's routes treat a text as the import does.
+- Decided by Maurice: plain-text uploads (variant A); measure first.
