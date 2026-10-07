@@ -150,9 +150,10 @@ function backslashRemoteManifestJpeg(): string
  *
  * @return array<mixed>
  */
-function cliReport(string $path, ?string $settingsFile = null): array
+function cliReport(string $path, ?string $settingsFile = null, bool $text = false): array
 {
     $settings = $settingsFile === null ? '' : '--settings '.escapeshellarg($settingsFile).' ';
+    $settings .= $text ? '--text ' : '';   // SPEC-036: the verifier reads plain text only when asked
     exec(escapeshellarg(dirname(__DIR__).'/vendor/bin/c2pa-verify').' '.$settings.escapeshellarg($path).' 2>/dev/null', $lines);
     $report = json_decode(implode("\n", $lines), true);
 
@@ -166,9 +167,9 @@ function cliReport(string $path, ?string $settingsFile = null): array
  *
  * @return array<string, mixed>
  */
-function expectedEntry(string $path, ?string $settingsFile = null): array
+function expectedEntry(string $path, ?string $settingsFile = null, bool $text = false): array
 {
-    $report = cliReport($path, $settingsFile);
+    $report = cliReport($path, $settingsFile, $text);
     $manifests = is_array($report['manifests'] ?? null) ? $report['manifests'] : [];
     $active = $manifests[is_string($report['active_manifest'] ?? null) ? $report['active_manifest'] : ''] ?? [];
     $info = is_array($active) && is_array($active['signature_info'] ?? null) ? $active['signature_info'] : null;

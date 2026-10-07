@@ -3881,3 +3881,19 @@ README are where the disclosure lives.
   `Content-Type: text/plain`.
 - Reasoned: that the browser's routes treat a text as the import does.
 - Decided by Maurice: plain-text uploads (variant A); measure first.
+
+## 2026-10-07 — SPEC-036 approved; its tests, red
+
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord met alle voorstellen".
+- Produced: `specs/SPEC-036-plain-text.md` (approved, the four decisions,
+  Traceability rows for the tests); `tests/Integration/TextTest.php`; a
+  SPEC-036 test in `tests/Unit/ReadmeTest.php`; `cliReport()` and
+  `expectedEntry()` in `tests/Pest.php` can pass `--text`; five text
+  fixtures from c2pa-verifier v0.5.0 and their row in
+  `tests/Fixtures/README.md`.
+- Measured: the SPEC-036 group in the test environment: 8 integration
+  tests red (no result stored for a text) and 3 guards green (AC5, AC7, as
+  intended); the readme test red.
+- Decided by Maurice: every open question as proposed (text on by default;
+  the reader only for `text/plain`; all of `text/plain`; plugin 0.4.0).

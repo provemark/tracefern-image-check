@@ -2,9 +2,9 @@
 
 | Field      | Value                                             |
 |------------|---------------------------------------------------|
-| Status     | draft                                             |
+| Status     | approved                                          |
 | Author     | Maurice van Loon                                  |
-| Approved   | —                                                 |
+| Approved   | Maurice van Loon, 2026-10-07                      |
 | Supersedes | —                                                 |
 
 > Lifecycle: `draft` → maintainer approves → `approved` → tests-first →
@@ -174,20 +174,20 @@ final class Checker
    Here the site owner's own uploads are checked, the plugin only shows a
    verdict and never blocks, and a setting adds a screen and a state to
    test. Proposal: on, with the readme saying it is experimental.
-   Non-blocker.
+   Non-blocker. **Decided by Maurice van Loon, 2026-10-07: as proposed.**
 2. **The reader on for every file, or only for `text/plain`
    attachments?** On for every file is one line, but then a file of an
    image or audio type whose bytes are UTF-8 text (an administrator may
    upload one) becomes "No Content Credentials" instead of "Could not be
    checked". Proposal: only for `text/plain`, through a flag on
    `Checker::check()` that `UploadHook` sets from the attachment's type, so
-   that no other verdict moves (AC5). Non-blocker.
+   that no other verdict moves (AC5). Non-blocker. **Decided by Maurice van Loon, 2026-10-07: as proposed.**
 3. **All of `text/plain`, or only `.txt`?** WordPress gives `.asc`, `.c`,
    `.cc`, `.h` and `.srt` the same type. The verifier reads the content,
    not the name; any of them without a wrapper is "No Content
-   Credentials". Proposal: all of `text/plain`. Non-blocker.
+   Credentials". Proposal: all of `text/plain`. Non-blocker. **Decided by Maurice van Loon, 2026-10-07: as proposed.**
 4. **The version.** A new format, as GIF was for 0.3.0, and a new verifier
-   minor version. Proposal: plugin 0.4.0. Non-blocker.
+   minor version. Proposal: plugin 0.4.0. Non-blocker. **Decided by Maurice van Loon, 2026-10-07: as proposed.**
 
 ## Amendments
 
@@ -197,3 +197,11 @@ None.
 
 | AC | Test | Implementation |
 |----|------|----------------|
+| AC1 | tests/Integration/TextTest.php :: AC1: a signed text gets the verifier's verdict (two datasets); AC1: a text uploaded through the browser's REST route is checked as WP-CLI's import is; AC1: with trust settings that hold the signer, a text is "Verified: trusted signer" / SPEC-036 | — |
+| AC2 | tests/Integration/TextTest.php :: AC2: an unsigned text is "No Content Credentials" / SPEC-036 | — |
+| AC3 | tests/Integration/TextTest.php :: AC3: a text changed after signing is "Does not verify" / SPEC-036 | — |
+| AC4 | tests/Integration/TextTest.php :: AC4: two wrappers are "Does not verify"; a text that is not UTF-8 "Could not be checked" / SPEC-036 | — |
+| AC5 | tests/Integration/TextTest.php :: AC5: a UTF-8 text stored under a .jpg name is still not a type the plugin can check (a guard, green before and after); every other test file, unchanged / SPEC-036 | — |
+| AC6 | tests/Integration/TextTest.php :: AC6: a text is everywhere images are / SPEC-036 | — |
+| AC7 | tests/Integration/TextTest.php :: AC7: CSV and WebVTT are still left alone (a guard, green before and after) / SPEC-036 | — |
+| AC8 | tests/Unit/ReadmeTest.php :: SPEC-036 AC8: the readme says plain text is checked, experimentally and byte for byte / SPEC-036 | — |

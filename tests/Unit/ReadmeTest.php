@@ -229,3 +229,15 @@ it('SPEC-035 AC9: the readme says GIF is checked', function (): void {
         ->and($description)->toContain('GIF')
         ->and(strlen($readme))->toBeLessThan(10240);
 })->group('SPEC-035');
+
+it('SPEC-036 AC8: the readme says plain text is checked, experimentally and byte for byte', function (): void {
+    $readme = (string) file_get_contents(dirname(__DIR__, 2).'/readme.txt');
+    $faq = trim((string) preg_replace('/\\s+/', ' ', (string) preg_replace('/.*\\n= Which formats are checked\\? =\\n(.*?)(\\n= .*|\\n== .*|$)/s', '$1', $readme)));
+    $description = (string) preg_replace('/.*\\n== Description ==\\n(.*?)\\n== .*/s', '$1', $readme);
+
+    expect($faq)->toContain('plain text')
+        ->and($faq)->toContain('experimental')
+        ->and($faq)->toContain('byte for byte')
+        ->and($description)->toContain('text')
+        ->and(strlen($readme))->toBeLessThan(10240);
+})->group('SPEC-036');
