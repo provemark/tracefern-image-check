@@ -442,12 +442,12 @@ it('amendment 4: counts kept for other formats are counted again', function (str
         Tracefern\\ImageCheck\\DashboardSummary::counts();
         \$cache = get_transient(Tracefern\\ImageCheck\\DashboardSummary::CACHE);
         foreach (\$cache['counts'] as \$variant => \$counts) { \$cache['counts'][\$variant]['total'] = 0; }
-        if ('$kept' === 'no formats') { unset(\$cache['types']); } elseif ('$kept' === 'three image formats') { \$cache['types'] = ['image/jpeg', 'image/png', 'image/webp']; } else { \$cache['types'] = ['image/jpeg', 'image/png', 'image/webp', 'audio/wav', 'audio/x-wav', 'audio/mpeg', 'audio/flac']; }
+        if ('$kept' === 'no formats') { unset(\$cache['types']); } elseif ('$kept' === 'three image formats') { \$cache['types'] = ['image/jpeg', 'image/png', 'image/webp']; } elseif ('$kept' === 'the formats of 0.3.0, before text') { \$cache['types'] = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'audio/wav', 'audio/x-wav', 'audio/mpeg', 'audio/flac']; } else { \$cache['types'] = ['image/jpeg', 'image/png', 'image/webp', 'audio/wav', 'audio/x-wav', 'audio/mpeg', 'audio/flac']; }
         set_transient(Tracefern\\ImageCheck\\DashboardSummary::CACHE, \$cache, 3600);
         \$counts = Tracefern\\ImageCheck\\DashboardSummary::counts();
         echo 'TOTAL:', \$counts['total'], ' TYPES:', wp_json_encode(get_transient(Tracefern\\ImageCheck\\DashboardSummary::CACHE)['types'] ?? null);
         PHP);
 
     expect($out)->toContain('TOTAL:1')
-        ->and($out)->toContain('TYPES:["image\/jpeg","image\/png","image\/gif","image\/webp","audio\/wav","audio\/x-wav","audio\/mpeg","audio\/flac"]');   // GIF since SPEC-035
-})->with(['no formats', 'three image formats', 'the formats of 0.2.0, before GIF'])->group('SPEC-033');
+        ->and($out)->toContain('TYPES:["image\/jpeg","image\/png","image\/gif","image\/webp","audio\/wav","audio\/x-wav","audio\/mpeg","audio\/flac","text\/plain"]');   // GIF since SPEC-035, plain text since SPEC-036
+})->with(['no formats', 'three image formats', 'the formats of 0.2.0, before GIF', 'the formats of 0.3.0, before text'])->group('SPEC-033');

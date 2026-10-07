@@ -235,6 +235,17 @@ within the 150 characters (141):
 
 It still says "verifies" and names the signer; AC2 to AC6 are unchanged.
 
+## Amendment 3 (2026-10-07; approved by Maurice van Loon, 2026-10-07)
+
+SPEC-036 brings plain text in. AC1 now requires this short description,
+still within the 150 characters (147):
+
+> Verifies the Content Credentials (C2PA) of uploaded images, audio and
+> text (signature, hash and signer) and shows the verdict in the Media
+> Library.
+
+It still says "verifies" and names the signer; AC2 to AC6 are unchanged.
+
 ## Traceability
 
 Filled when status becomes `implemented`. Every acceptance criterion maps to at

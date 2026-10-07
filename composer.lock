@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7164f10941cab39d14bf1717989f00f3",
+    "content-hash": "a33bd052710d7fb24553e487e085c578",
     "packages": [
         {
             "name": "provemark/c2pa-verifier",
-            "version": "v0.4.0",
+            "version": "v0.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/provemark/c2pa-verifier.git",
-                "reference": "324acf41e1ad2eb5102068e4450f73881a03da64"
+                "reference": "56ca6d23a3a8eff9081b3141d2417ee4d88b8265"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/provemark/c2pa-verifier/zipball/324acf41e1ad2eb5102068e4450f73881a03da64",
-                "reference": "324acf41e1ad2eb5102068e4450f73881a03da64",
+                "url": "https://api.github.com/repos/provemark/c2pa-verifier/zipball/56ca6d23a3a8eff9081b3141d2417ee4d88b8265",
+                "reference": "56ca6d23a3a8eff9081b3141d2417ee4d88b8265",
                 "shasum": ""
             },
             "require": {
@@ -54,7 +54,7 @@
                     "name": "Maurice van Loon"
                 }
             ],
-            "description": "Verifier for C2PA Content Credentials in pure PHP: JPEG, PNG, WebP and ISOBMFF, with c2patool's verdict. Read and verify only; no signing, no keys, no network.",
+            "description": "Verifier for C2PA Content Credentials in pure PHP: JPEG, PNG, GIF, WebP, ISOBMFF (MP4, MOV, AVIF, HEIC), WAV, AVI, MP3 and FLAC, and plain text when turned on, with c2patool's verdict. Read and verify only; no signing, no keys, no network.",
             "keywords": [
                 "COSE",
                 "c2pa",
@@ -66,9 +66,9 @@
             ],
             "support": {
                 "issues": "https://github.com/provemark/c2pa-verifier/issues",
-                "source": "https://github.com/provemark/c2pa-verifier/tree/v0.4.0"
+                "source": "https://github.com/provemark/c2pa-verifier/tree/v0.5.0"
             },
-            "time": "2026-10-06T09:28:35+00:00"
+            "time": "2026-10-07T08:04:57+00:00"
         }
     ],
     "packages-dev": [

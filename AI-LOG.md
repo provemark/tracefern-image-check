@@ -3897,3 +3897,27 @@ README are where the disclosure lives.
   intended); the readme test red.
 - Decided by Maurice: every open question as proposed (text on by default;
   the reader only for `text/plain`; all of `text/plain`; plugin 0.4.0).
+
+## 2026-10-07 — SPEC-036 built: plain-text uploads checked
+
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: build SPEC-036 (approved earlier); "akkoord met beide
+  amendementen" (SPEC-006 amendment 13, SPEC-025 amendment 3).
+- Produced: `text/plain` in `UploadHook::MIME_TYPES`; `Checker::check()`
+  takes a text flag, which `UploadHook::checkAndStore()` sets from the
+  attachment's type, and builds the verifier with its text reader only
+  then; `ExistingImages` names nine types; c2pa-verifier `^0.5.0`
+  (`composer.json`, `composer.lock`); `readme.txt` (short description,
+  description, FAQ; two lines shortened to stay under 10,240 bytes);
+  SPEC-006 amendment 13 and `tests/wpcs-verifier-baseline.json`;
+  SPEC-025 amendment 3 and its test; `MaintenanceCheckTest` reads
+  `v0.5.0`; the dashboard test's format list names `text/plain`, with a
+  dataset for 0.3.0's formats; SPEC-036 implemented with its Traceability.
+- Measured: the `ExistingImages` guard red with the ninth type in the
+  constant, green after; the SPEC-036 group green (11 integration, the
+  readme test); WPCS security sniffs on v0.4.0 (the baseline's counts
+  exactly) and v0.5.0 (`ExceptionNotEscaped` 721 → 744, `fread` 2 → 4, all
+  in the new text reader); `composer check` (126); the full integration
+  suite (283 passed, 3 red on the dashboard test's pinned format list,
+  then that test's 4 datasets green).
+- Decided by Maurice: the two amendments.

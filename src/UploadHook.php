@@ -25,7 +25,7 @@ final class UploadHook
     public const string META_KEY = '_tracefern_result';
 
     /** The formats the plugin checks: images (SPEC-001), since SPEC-034 WAV, MP3 and FLAC, since SPEC-035 GIF. */
-    public const array MIME_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'audio/wav', 'audio/x-wav', 'audio/mpeg', 'audio/flac'];
+    public const array MIME_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'audio/wav', 'audio/x-wav', 'audio/mpeg', 'audio/flac', 'text/plain'];
 
     /** Set while the last check had to run without trust settings (SPEC-004 AC6). */
     public const string TRUST_FAILED_OPTION = 'tracefern_trust_failed';
@@ -507,7 +507,8 @@ final class UploadHook
         }
 
         $sha256 = null;
-        $entry = $this->checker->check($path, $settings, $trust, $sha256);
+        // SPEC-036: the verifier's text reader is on only for a text attachment, so no other verdict moves
+        $entry = $this->checker->check($path, $settings, $trust, $sha256, get_post_mime_type($attachmentId) === 'text/plain');
         // Which file this verdict describes (SPEC-014): a later change to it
         // shows as "Changed since its check".
         $relative = $path === '' ? null : self::relativeToUploads($path);

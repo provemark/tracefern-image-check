@@ -10,6 +10,7 @@ if (! defined('ABSPATH')) {
 
 use Closure;
 use DateTimeImmutable;
+use Provemark\C2paVerifier\Container\PlainTextManifestStoreExtractor;
 use Provemark\C2paVerifier\Trust\TrustSettings;
 use Provemark\C2paVerifier\Verifier\VerificationReport;
 use Provemark\C2paVerifier\Verifier\Verifier;
@@ -23,11 +24,11 @@ final class Checker
     /** The bundled verifier's version, read once per request. */
     private static ?string $version = null;
 
-    /** @var Closure(resource, ?TrustSettings): VerificationReport */
+    /** @var Closure(resource, ?TrustSettings, bool): VerificationReport */
     private Closure $verify;
 
     /**
-     * @param  (Closure(resource, ?TrustSettings): VerificationReport)|null  $verify  the verifier call; tests replace it
+     * @param  (Closure(resource, ?TrustSettings, bool): VerificationReport)|null  $verify  the verifier call; tests replace it
      */
     public function __construct(?Closure $verify = null)
     {
@@ -48,9 +49,10 @@ final class Checker
 
     /**
      * @param  ?string  $sha256  set to the SHA-256 of the bytes verified when they were copied from another plugin's storage (SPEC-032), else null
+     * @param  bool  $text  whether the verifier reads plain text too (SPEC-036): true only for a `text/plain` attachment
      * @return array<string, mixed>
      */
-    public function check(string $path, ?TrustSettings $settings = null, string $trust = 'none', ?string &$sha256 = null): array
+    public function check(string $path, ?TrustSettings $settings = null, string $trust = 'none', ?string &$sha256 = null, bool $text = false): array
     {
         $sha256 = null;
         $stream = self::streamPath($path) ? self::copyOfOffloaded($path, $sha256) : self::openLocal($path);
@@ -59,7 +61,7 @@ final class Checker
         }
 
         try {
-            return Outcome::fromReport(($this->verify)($stream, $settings), $this->version(), new DateTimeImmutable, $trust);
+            return Outcome::fromReport(($this->verify)($stream, $settings, $text), $this->version(), new DateTimeImmutable, $trust);
         } catch (Throwable) {
             // The message may hold paths or file content; the reason is enough.
             return Outcome::error('exception', $this->version(), new DateTimeImmutable, $trust);
@@ -166,9 +168,10 @@ final class Checker
     /**
      * @param  resource  $stream
      */
-    private static function verifyWithBundledVerifier($stream, ?TrustSettings $settings): VerificationReport
+    private static function verifyWithBundledVerifier($stream, ?TrustSettings $settings, bool $text = false): VerificationReport
     {
-        return (new Verifier)->verify($stream, $settings);
+        // plain text is opt-in in the verifier (its SPEC-060); SPEC-036 turns it on for a text attachment only
+        return ($text ? new Verifier(text: new PlainTextManifestStoreExtractor) : new Verifier)->verify($stream, $settings);
     }
 
     /**

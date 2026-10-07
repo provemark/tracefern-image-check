@@ -85,7 +85,7 @@ it('SPEC-025 AC1: the short description says it verifies', function (): void {
     $blocks = explode("\n\n", $readme, 3);
 
     expect(trim(explode("\n", $blocks[1] ?? '')[0]))
-        ->toBe('Verifies the Content Credentials (C2PA) of uploaded images and audio (signature, hash and signer) and shows the verdict in the Media Library.');
+        ->toBe('Verifies the Content Credentials (C2PA) of uploaded images, audio and text (signature, hash and signer) and shows the verdict in the Media Library.');   // amendment 3, SPEC-036
 })->group('SPEC-025');
 
 it('SPEC-025 AC2: the description opens with what is verified', function (): void {

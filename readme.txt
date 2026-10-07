@@ -8,7 +8,7 @@ Stable tag: 0.3.0
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
-Verifies the Content Credentials (C2PA) of uploaded images and audio (signature, hash and signer) and shows the verdict in the Media Library.
+Verifies the Content Credentials (C2PA) of uploaded images, audio and text (signature, hash and signer) and shows the verdict in the Media Library.
 
 == Description ==
 
@@ -24,7 +24,7 @@ is also on the trust list does it say "Verified".
 Content Credentials (C2PA) are a signed record inside a file: who
 made or edited it, with which tool, and whether generative AI was used.
 Tracefern Image Check for C2PA verifies that record for every JPEG, PNG, GIF, WebP, WAV,
-MP3 and FLAC you upload and shows the verdict where you already work with media.
+MP3, FLAC and plain text you upload and shows the verdict where you already work with media.
 
 * **Checked right after upload, on the original file**, not on the
   resized copies WordPress or your browser makes. The check runs in the
@@ -36,8 +36,7 @@ MP3 and FLAC you upload and shows the verdict where you already work with media.
   (signed)"** when AI edited it. Never on a file that does not verify.
 * **Sort and filter** the Media Library list by verdict, including all
   AI-generated images, and see the counts on the dashboard.
-* **Check existing files again** under Settings → Tracefern, or with
-  WP-CLI: `wp tracefern check --all`.
+* **Check existing files again** under Settings → Tracefern or with WP-CLI.
 
 The verdicts:
 
@@ -148,9 +147,10 @@ plugin keeps in cloud storage are checked there, up to 64 MB.
 
 = Which formats are checked? =
 
-JPEG, PNG, GIF and WebP images; WAV, MP3 and FLAC audio. An MP3's cover art is
-checked as an image of its own. HEIC files are converted to JPEG by the
-browser and arrive without their Content Credentials. Video is not checked.
+JPEG, PNG, GIF and WebP images; WAV, MP3 and FLAC audio; plain text (.txt),
+checked byte for byte (experimental in C2PA). An MP3's cover art is checked
+as an image of its own. The browser converts HEIC to JPEG without its
+Content Credentials. Video is not checked.
 
 = How do I check files again after changing the trust settings? =
 

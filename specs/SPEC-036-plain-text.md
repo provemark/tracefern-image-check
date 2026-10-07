@@ -2,7 +2,7 @@
 
 | Field      | Value                                             |
 |------------|---------------------------------------------------|
-| Status     | approved                                          |
+| Status     | implemented                                       |
 | Author     | Maurice van Loon                                  |
 | Approved   | Maurice van Loon, 2026-10-07                      |
 | Supersedes | —                                                 |
@@ -197,11 +197,11 @@ None.
 
 | AC | Test | Implementation |
 |----|------|----------------|
-| AC1 | tests/Integration/TextTest.php :: AC1: a signed text gets the verifier's verdict (two datasets); AC1: a text uploaded through the browser's REST route is checked as WP-CLI's import is; AC1: with trust settings that hold the signer, a text is "Verified: trusted signer" / SPEC-036 | — |
-| AC2 | tests/Integration/TextTest.php :: AC2: an unsigned text is "No Content Credentials" / SPEC-036 | — |
-| AC3 | tests/Integration/TextTest.php :: AC3: a text changed after signing is "Does not verify" / SPEC-036 | — |
-| AC4 | tests/Integration/TextTest.php :: AC4: two wrappers are "Does not verify"; a text that is not UTF-8 "Could not be checked" / SPEC-036 | — |
-| AC5 | tests/Integration/TextTest.php :: AC5: a UTF-8 text stored under a .jpg name is still not a type the plugin can check (a guard, green before and after); every other test file, unchanged / SPEC-036 | — |
-| AC6 | tests/Integration/TextTest.php :: AC6: a text is everywhere images are / SPEC-036 | — |
-| AC7 | tests/Integration/TextTest.php :: AC7: CSV and WebVTT are still left alone (a guard, green before and after) / SPEC-036 | — |
-| AC8 | tests/Unit/ReadmeTest.php :: SPEC-036 AC8: the readme says plain text is checked, experimentally and byte for byte / SPEC-036 | — |
+| AC1 | tests/Integration/TextTest.php :: AC1: a signed text gets the verifier's verdict (two datasets); AC1: a text uploaded through the browser's REST route is checked as WP-CLI's import is; AC1: with trust settings that hold the signer, a text is "Verified: trusted signer" / SPEC-036 | `UploadHook::MIME_TYPES` (`text/plain`); `UploadHook::checkAndStore()` (the text flag from `get_post_mime_type()`); `Checker::check()` (`$text`), `verifyWithBundledVerifier()` (the verifier with its text reader); c2pa-verifier `^0.5.0` (SPEC-006 amendment 13) |
+| AC2 | tests/Integration/TextTest.php :: AC2: an unsigned text is "No Content Credentials" / SPEC-036 | `UploadHook::MIME_TYPES`; `Outcome::fromReport()` (unchanged) |
+| AC3 | tests/Integration/TextTest.php :: AC3: a text changed after signing is "Does not verify" / SPEC-036 | `UploadHook::MIME_TYPES`; `Outcome::fromReport()` (unchanged) |
+| AC4 | tests/Integration/TextTest.php :: AC4: two wrappers are "Does not verify"; a text that is not UTF-8 "Could not be checked" / SPEC-036 | `Outcome::fromReport()` (SPEC-015, unchanged) |
+| AC5 | tests/Integration/TextTest.php :: AC5: a UTF-8 text stored under a .jpg name is still not a type the plugin can check (a guard, green before and after); every other test file, unchanged / SPEC-036 | `UploadHook::checkAndStore()` (the text flag only for `text/plain`) |
+| AC6 | tests/Integration/TextTest.php :: AC6: a text is everywhere images are / SPEC-036 | `UploadHook::MIME_TYPES` through `MediaScreens`, `MediaSort`, `DashboardSummary`, `RecheckCommand`, `Verdict`; `ExistingImages::count()`, `next()` (nine named types, guarded by `tests/Unit/ExistingImagesTest.php`) |
+| AC7 | tests/Integration/TextTest.php :: AC7: CSV and WebVTT are still left alone (a guard, green before and after) / SPEC-036 | `UploadHook::MIME_TYPES` (`text/csv`, `text/vtt` left out) |
+| AC8 | tests/Unit/ReadmeTest.php :: SPEC-036 AC8: the readme says plain text is checked, experimentally and byte for byte / SPEC-036 | `readme.txt` (the short description by SPEC-025 amendment 3, the description, the FAQ) |

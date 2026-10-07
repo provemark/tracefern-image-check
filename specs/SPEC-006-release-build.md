@@ -268,6 +268,21 @@ None. Resolved by Maurice on 2026-09-26, as proposed in the draft:
     carry numbers, and a byte of the file only as hex; they become a
     status explanation, which the plugin escapes where it shows one.
     Nothing new is read or executed.
+13. **2026-10-07, approved by Maurice van Loon after his review.** The bundled verifier moves to v0.5.0
+    (plain text, which this plugin now checks, SPEC-036). AC4's baseline
+    rises from 721 to 744 `WordPress.Security.EscapeOutput.ExceptionNotEscaped`
+    findings and from 2 to 4 `WordPress.WP.AlternativeFunctions.file_system_operations_fread`;
+    every other count is unchanged. Measured per file with the same sniffs
+    on `git archive` of v0.4.0 and on v0.5.0's `src/` from `vendor/`, both
+    without `src/Cli` (v0.4.0 gave the baseline's counts exactly):
+    `Container/PlainTextManifestStoreExtractor.php` 0 → 22 (21 messages,
+    one `fread` in `isText()`) and `Container/SelectorReader.php` 0 → 3
+    (two messages, one `fread` in `fill()`), the new text reader. The new
+    messages carry numbers, offsets and fixed text, one of them PHP's own
+    `preg_last_error_msg()`, never bytes of the file; they become a status
+    explanation, which the plugin escapes where it shows one. The two reads
+    take the stream in pieces of 64 KiB. Nothing new is executed.
+    `MaintenanceCheckTest` reads `v0.5.0` from the lock.
 
 ## Traceability
 
