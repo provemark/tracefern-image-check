@@ -379,3 +379,26 @@ Releases after 0.1.0:
   an export of SVN `tags/0.3.0` does. Git tag `v0.3.0` on `2d40bcd`, and
   a GitHub release with the same zip (SHA-256 equal, files equal to SVN
   `tags/0.3.0`), on Maurice's go.
+- **0.4.0, 2026-10-07** (SPEC-036, plain-text uploads checked, the
+  verifier's text reader on for `text/plain` attachments only;
+  c2pa-verifier 0.5.0, SPEC-006 amendment 13; SPEC-025 amendment 3):
+  built from `d1627b0` (SHA-256 `23a77ee6…8a6058d47`, 339,062 bytes, kept
+  in `build/submitted/`). Found while preparing it: the dashboard and the
+  settings page counted text files but did not name them; fixed in
+  `d1627b0`. Before the build: `composer check` (126), integration (287),
+  multisite (9) and the Release suite (17) green on `d1627b0`; CI run
+  37601161239 green on `d1627b0` (9 jobs). By hand, on the build of
+  `a3d327e` in the release environment: a signed text `Valid`, the same
+  text with one letter changed `Invalid` (`assertion.dataHash.mismatch`),
+  through the prefixed verifier. **Not done this time**: an update from
+  the released 0.3.0 and an upload through `media-new.php` in Chrome, as
+  for 0.3.0. The readme is 10,224 bytes, 16 below its test's limit: the
+  next release must move text out first. `trunk/` was replaced by the
+  build (`diff -r` empty; 2 files added, 42 changed) and `tags/0.4.0`
+  copied; Maurice committed them in his own terminal (r3732283, 11:53;
+  a first try through the session's `!` could not answer SVN's password
+  prompt). Measured: the plugin API reported 0.4.0 (last updated 09:53
+  GMT) at once; `trunk/readme.txt` says `Stable tag: 0.4.0`; the page
+  returns 200; the public download holds the files of the build, as an
+  export of SVN `tags/0.4.0` does. Git tag `v0.4.0` on `d1627b0`, and a
+  GitHub release with the same zip (SHA-256 equal), on Maurice's go.

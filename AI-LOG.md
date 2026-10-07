@@ -3937,3 +3937,22 @@ README are where the disclosure lives.
 - Measured: the settings-page label test red with the new expectation,
   green after the source; `composer check` (126).
 - Decided by Maurice: release 0.4.0.
+
+## 2026-10-07 — Release 0.4.0
+
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "ja, push de commit"; "svn commit is gedaan"; "ja, maak de tag en
+  de GitHub-release"; "ja, leg de release vast en push".
+- Produced: the build of `d1627b0` kept in `build/submitted/`; a fresh SVN
+  working copy (trunk from the build, `tags/0.4.0`), committed by Maurice
+  as r3732283; annotated tag `v0.4.0` on `d1627b0`; GitHub release 0.4.0
+  with the zip; the record in `notes/wporg-submission.md` §5.
+- Measured: CI run 37601161239 on `d1627b0` (9 jobs green); `diff -r` of
+  the build against `trunk/` and `tags/0.4.0` empty; the plugin API on
+  0.4.0 (09:53 GMT); the public download and an export of SVN
+  `tags/0.4.0` equal to the build; the GitHub release's zip SHA-256 equal
+  to the build.
+- Reasoned: none. Not done, unlike 0.3.0: the update test from 0.3.0 and
+  an upload through `media-new.php` in Chrome.
+- Decided by Maurice: the push, the SVN commit, the tag and the GitHub
+  release.
