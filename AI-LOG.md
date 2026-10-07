@@ -3972,3 +3972,20 @@ README are where the disclosure lives.
   WP-Cron ran, the column and the dashboard widget as expected.
 - Reasoned: none.
 - Decided by Maurice: run the two hand tests.
+
+## 2026-10-07 — SPEC-037 (a findable name) drafted
+
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "meer gebruikers van de plugin"; "ik wil die naam aanpassen om
+  vindbaarder te worden"; "ja, kies A en schrijf SPEC-037".
+- Produced: `specs/SPEC-037-findable-name.md` (draft): the name Tracefern
+  Media Check for Content Credentials (C2PA), seven criteria, four open
+  questions.
+- Measured: the directory API (active installs, downloads, ratings; the
+  place for `c2pa`, `content credentials`, `image authenticity`, `ai image`,
+  `ai label`); the first 15 results for `content credentials`; every
+  tracked file that names the plugin; the readme's size with the new name
+  (10,268 bytes).
+- Reasoned: the trademark rule from SPEC-020; that a display name can change
+  without a new review.
+- Decided by Maurice: option A for the name.
