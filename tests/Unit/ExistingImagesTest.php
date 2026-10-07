@@ -19,7 +19,7 @@ it('AC8: the section\'s texts are escaped and translatable, numbers localised', 
 it('amendment 3: every text of the settings page that counted images says files', function (): void {
     $source = (string) file_get_contents(dirname(__DIR__, 2).'/src/SettingsPage.php');
 
-    expect($source)->toContain("'%1\$s JPEG, PNG, GIF, WebP, WAV, MP3 and FLAC files; %2\$s never checked.'")
+    expect($source)->toContain("'%1\$s JPEG, PNG, GIF, WebP, WAV, MP3, FLAC and text files; %2\$s never checked.'")
         ->toContain("'Checking existing files: %1\$s of %2\$s done. The checks run in the background.'")
         ->toContain("'Finished: %1\$s files checked, %2\$s.'")
         ->toContain('a few files at a time; new uploads go first. "Check all files again" applies the current trust settings and verifier to every file.')

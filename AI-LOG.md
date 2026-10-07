@@ -3921,3 +3921,19 @@ README are where the disclosure lives.
   suite (283 passed, 3 red on the dashboard test's pinned format list,
   then that test's 4 datasets green).
 - Decided by Maurice: the two amendments.
+
+## 2026-10-07 — Release 0.4.0 prepared; the format labels name text
+
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "ja, zet release 0.4.0 klaar".
+- Produced: version 0.4.0 in the plugin header and `Stable tag`; the
+  changelog's 0.4.0 entry (10,224 bytes, 16 below the readme test's limit:
+  the next release must move text out first). Found while preparing: the
+  dashboard and the settings page counted text files but still labelled
+  them "JPEG, PNG, GIF, WebP, WAV, MP3 and FLAC files", which SPEC-036 AC6
+  missed; now "…, FLAC and text files" (`DashboardSummary`, `SettingsPage`),
+  and their three tests follow (`ExistingImagesTest`, `DashboardSummaryTest`,
+  `tests/Pest.php`).
+- Measured: the settings-page label test red with the new expectation,
+  green after the source; `composer check` (126).
+- Decided by Maurice: release 0.4.0.

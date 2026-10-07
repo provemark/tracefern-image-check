@@ -4,7 +4,7 @@ Tags: c2pa, content credentials, provenance, media library, ai
 Requires at least: 7.1
 Tested up to: 7.1
 Requires PHP: 8.3
-Stable tag: 0.3.0
+Stable tag: 0.4.0
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -212,8 +212,8 @@ licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).
 
 == Changelog ==
 
-= 0.3.0 =
+= 0.4.0 =
 
-* New: GIF uploads are checked too. Bundles c2pa-verifier 0.4.0.
+* New: plain-text (.txt) uploads are checked too. Bundles c2pa-verifier 0.5.0.
 
 Earlier versions: https://github.com/provemark/tracefern-image-check/releases

@@ -429,7 +429,7 @@ it('amendment 3: the widget counts files and says so', function (): void {
     attachmentWithEntry(sampleEntry(['state' => 'Valid']));
     $html = (string) dashboardWidget();
 
-    expect(visibleText($html))->toMatch('/\b1 JPEG, PNG, GIF, WebP, WAV, MP3 and FLAC file(?!s)/u')
+    expect(visibleText($html))->toMatch('/\b1 JPEG, PNG, GIF, WebP, WAV, MP3, FLAC and text file(?!s)/u')
         ->toContain('a file marked AI-generated is also in the line of its state')
         ->and(summaryTotal($html))->toBe(1);
 })->group('SPEC-033');

@@ -1291,7 +1291,7 @@ function summaryLines(string $html): array
 function summaryTotal(string $html): int|string|null
 {
     $text = visibleText($html);
-    if (preg_match('/(\d[\d,.]*|—) JPEG, PNG, GIF, WebP, WAV, MP3 and FLAC file/u', $text, $m) !== 1) {
+    if (preg_match('/(\d[\d,.]*|—) JPEG, PNG, GIF, WebP, WAV, MP3, FLAC and text file/u', $text, $m) !== 1) {
         return null;
     }
 
