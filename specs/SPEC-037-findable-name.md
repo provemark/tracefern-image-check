@@ -2,9 +2,9 @@
 
 | Field      | Value                                             |
 |------------|---------------------------------------------------|
-| Status     | draft                                             |
+| Status     | approved                                          |
 | Author     | Maurice van Loon                                  |
-| Approved   | —                                                 |
+| Approved   | Maurice van Loon, 2026-10-07                      |
 | Supersedes | SPEC-020's display name                           |
 
 > Lifecycle: `draft` → maintainer approves → `approved` → tests-first →
@@ -138,19 +138,19 @@ The display name becomes **Tracefern Media Check for Content Credentials
    text under its name (`wp_add_privacy_policy_content()`); a site's
    Privacy Policy Guide will show it under the new name, and may mark the
    text as changed. Proposal: accept that; the text itself only changes its
-   name. Non-blocker.
+   name. Non-blocker. **Decided by Maurice van Loon, 2026-10-07: as proposed.**
 2. **Room in the readme.** Proposal: "Tracefern Image Check for C2PA
    verifies that record" in the description becomes "Tracefern verifies
    that record" (the title already says the full name), and the bullet
    "Sort and filter the Media Library list by verdict, including all
    AI-generated images, and see the counts on the dashboard" becomes "Sort
    and filter by verdict, AI-generated included, and see the counts on the
-   dashboard". Together about 75 bytes. Non-blocker.
+   dashboard". Together about 75 bytes. Non-blocker. **Decided by Maurice van Loon, 2026-10-07: as proposed.**
 3. **The banner.** It is made from `banner.html` by a screenshot at
    1544×500 and halved. Proposal: the same way, the layout unchanged, the
-   name on two lines if it does not fit on one. Non-blocker.
+   name on two lines if it does not fit on one. Non-blocker. **Decided by Maurice van Loon, 2026-10-07: as proposed.**
 4. **The version.** No behaviour changes. Proposal: 0.4.1, with one
-   changelog line. Non-blocker.
+   changelog line. Non-blocker. **Decided by Maurice van Loon, 2026-10-07: as proposed.**
 
 ## Amendments
 
@@ -160,3 +160,10 @@ None.
 
 | AC | Test | Implementation |
 |----|------|----------------|
+| AC1 | tests/Unit/NameTest.php :: carries the Tracefern name in the main file and readme.txt / SPEC-037 | — |
+| AC2 | tests/Unit/NameTest.php :: SPEC-037 AC2: puts no trademark in front of the name / SPEC-037 | — |
+| AC3 | tests/Unit/NameTest.php :: SPEC-037 AC3: uses the old display name only in the history (every tracked file, so the built zip too) / SPEC-037 | — |
+| AC4 | tests/Integration/PrivacyTest.php :: AC1, AC2 (the new name, amended); tests/Release/ReleaseTest.php :: AC2 (the settings page heading) / SPEC-037 | — |
+| AC5 | by hand at the release: 0.4.0 replaced by 0.4.1 on a site with checked files and custom trust settings; the slug and text domain held by NameTest | — |
+| AC6 | tests/Unit/ReadmeTest.php :: SPEC-037 AC6: the readme leaves room for the next changelog line / SPEC-037 | — |
+| AC7 | tests/Unit/NameTest.php :: SPEC-037 AC3 (`banner.html`); the two PNGs by eye | — |

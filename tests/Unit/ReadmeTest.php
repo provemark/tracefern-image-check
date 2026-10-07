@@ -241,3 +241,7 @@ it('SPEC-036 AC8: the readme says plain text is checked, experimentally and byte
         ->and($description)->toContain('text')
         ->and(strlen($readme))->toBeLessThan(10240);
 })->group('SPEC-036');
+
+it('SPEC-037 AC6: the readme leaves room for the next changelog line', function (): void {
+    expect(strlen((string) file_get_contents(dirname(__DIR__, 2).'/readme.txt')))->toBeLessThanOrEqual(10240 - 60);
+})->group('SPEC-037');

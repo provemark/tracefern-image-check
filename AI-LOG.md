@@ -3989,3 +3989,15 @@ README are where the disclosure lives.
 - Reasoned: the trademark rule from SPEC-020; that a display name can change
   without a new review.
 - Decided by Maurice: option A for the name.
+
+## 2026-10-07 — SPEC-037 approved; its tests, red
+
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord met alle voorstellen".
+- Produced: SPEC-037 approved with the four decisions and Traceability rows;
+  `tests/Unit/NameTest.php` (the new name, AC2, AC3);
+  `tests/Unit/ReadmeTest.php` (AC6); the new name in
+  `tests/Integration/PrivacyTest.php` and `tests/Release/ReleaseTest.php`.
+- Measured: the unit suite: 4 red (the name, AC2, AC3, AC6), 125 passed.
+- Decided by Maurice: every open question as proposed (the privacy text's
+  key; the readme shortened; the banner remade; version 0.4.1).

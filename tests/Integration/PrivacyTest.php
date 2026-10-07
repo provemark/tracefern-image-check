@@ -12,7 +12,7 @@ it('AC1: puts the suggested text in the Privacy Policy Guide', function (): void
         (new Tracefern\ImageCheck\PrivacyPolicy)->register();
         do_action('admin_init');
         $entries = WP_Privacy_Policy_Content::get_suggested_policy_text();
-        echo json_encode(array_values(array_filter($entries, fn ($e) => ($e['plugin_name'] ?? '') === 'Tracefern Image Check for C2PA')));
+        echo json_encode(array_values(array_filter($entries, fn ($e) => ($e['plugin_name'] ?? '') === 'Tracefern Media Check for Content Credentials (C2PA)')));
         PHP);
     $entries = json_decode($out, true);
     $policy = is_array($entries) && is_array($entries[0] ?? null) && is_string($entries[0]['policy_text'] ?? null) ? $entries[0]['policy_text'] : '';
@@ -38,7 +38,7 @@ it('AC2: adds nothing outside the admin, and raises no notice', function (): voi
         // What this request registered (get_suggested_policy_text() also
         // lists texts of earlier requests, marked as removed).
         global $wp_privacy_policy_content;
-        $added = count($wp_privacy_policy_content['Tracefern Image Check for C2PA'] ?? []);
+        $added = count($wp_privacy_policy_content['Tracefern Media Check for Content Credentials (C2PA)'] ?? []);
         echo json_encode(['admin' => is_admin(), 'hooked' => has_action('admin_init', [$privacy, 'addText']) !== false, 'notices' => $notices, 'added' => $added]);
         PHP);
 

@@ -2,17 +2,18 @@
 
 declare(strict_types=1);
 
-// SPEC-020: the plugin is Tracefern Image Check for C2PA; "Provemark" is
-// left only where it names the bundled verifier or its organisation.
+// SPEC-020: the plugin is named Tracefern; "Provemark" is left only where it
+// names the bundled verifier or its organisation. SPEC-037: the display name
+// is Tracefern Media Check for Content Credentials (C2PA).
 
 it('carries the Tracefern name in the main file and readme.txt', function (): void {
     $root = dirname(__DIR__, 2);
     $main = (string) @file_get_contents($root.'/tracefern-image-check-for-c2pa.php');
     $readme = (string) file_get_contents($root.'/readme.txt');
 
-    expect($main)->toMatch('/^ \* Plugin Name:\s+Tracefern Image Check for C2PA$/m')
+    expect($main)->toMatch('/^ \* Plugin Name:\s+Tracefern Media Check for Content Credentials \(C2PA\)$/m')
         ->toMatch('/^ \* Text Domain:\s+tracefern-image-check-for-c2pa$/m')
-        ->and(strtok($readme, "\n"))->toBe('=== Tracefern Image Check for C2PA ===');
+        ->and(strtok($readme, "\n"))->toBe('=== Tracefern Media Check for Content Credentials (C2PA) ===');   // SPEC-037 AC1
 });
 
 it('SPEC-023: calls the settings page Tracefern, never C2PA Check', function (): void {
@@ -56,3 +57,26 @@ it('uses the old name only for the bundled verifier and in the history', functio
 
     expect($found)->toBe([]);
 });
+
+it('SPEC-037 AC2: puts no trademark in front of the name', function (): void {
+    $main = (string) file_get_contents(dirname(__DIR__, 2).'/tracefern-image-check-for-c2pa.php');
+    preg_match('/^ \* Plugin Name:\s+(.+)$/m', $main, $m);
+    $name = $m[1] ?? '';
+    $before = (string) strstr($name, ' for ', true);
+
+    expect($name)->toStartWith('Tracefern ')
+        ->and($before)->not->toBe('')
+        ->and($before)->not->toContain('C2PA')
+        ->and($before)->not->toContain('Content Credentials')
+        ->and((string) strstr($name, ' for '))->toContain('Content Credentials')->toContain('C2PA');
+})->group('SPEC-037');
+
+it('SPEC-037 AC3: uses the old display name only in the history', function (): void {
+    $root = dirname(__DIR__, 2);
+    $files = explode("\n", trim((string) shell_exec('git -C '.escapeshellarg($root).' ls-files')));
+    $history = '#^(AI-LOG\.md|specs/|notes/|tests/Unit/NameTest\.php$)#';
+    $found = array_values(array_filter($files, fn (string $f): bool => $f !== '' && preg_match($history, $f) !== 1
+        && is_file($root.'/'.$f) && str_contains((string) file_get_contents($root.'/'.$f), 'Tracefern Image Check')));
+
+    expect($found)->toBe([]);
+})->group('SPEC-037');
