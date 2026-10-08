@@ -4092,3 +4092,13 @@ README are where the disclosure lives.
   v0.5.2: identical, 1,208 runs; `MaintenanceCheckTest` red on the old
   pin, then `composer check`.
 - Decided by Maurice: amendment 15.
+
+## 2026-10-08 — Release commit 0.4.3
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, push 81ecdb9 en zet de plugin op 0.5.2" (the release
+  that carries it).
+- Produced: `Version: 0.4.3`, `Stable tag: 0.4.3` and the changelog entry
+  in `readme.txt`, replacing 0.4.2's.
+- Measured: `composer check`; the readme's size; the integration,
+  multisite and release suites (below, in the record of the release).
+- Decided by Maurice: none yet; push, SVN, tag and GitHub release wait.
