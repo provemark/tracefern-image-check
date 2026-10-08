@@ -4051,3 +4051,14 @@ README are where the disclosure lives.
   `src/Cli`: equal counts; `MaintenanceCheckTest` red on the old pin,
   then `composer check` (129 passed).
 - Decided by Maurice: SPEC-038 aside, and amendment 14.
+
+## 2026-10-08 — Release commit 0.4.2
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, bereid de release-commit 0.4.2 voor".
+- Produced: `Version: 0.4.2` in the plugin header, `Stable tag: 0.4.2`
+  and the changelog entry in `readme.txt` (replacing 0.4.1's, as the
+  readme sits near its size limit; earlier versions are linked).
+- Measured: `composer check`, first red on SPEC-037 AC6 (the readme at
+  10,222 bytes, over the 10,180 limit), then 129 passed with a shorter
+  line (10,169 bytes); the release suite on this commit (below).
+- Decided by Maurice: none yet; push, SVN, tag and GitHub release wait.
