@@ -295,6 +295,16 @@ None. Resolved by Maurice on 2026-09-26, as proposed in the draft:
     `src/` (without `src/Cli`) give 744 `ExceptionNotEscaped` and 4
     `fread` each. `composer.json` requires `^0.5.1`;
     `MaintenanceCheckTest` reads `v0.5.1` from the lock.
+15. **2026-10-08, approved by Maurice van Loon.** The bundled verifier moves to v0.5.2,
+    a security release: a certificate authority without keyUsage no
+    longer issues. Measured for this plugin: none of the 53 bundled
+    anchors lacks keyUsage, and all 604 files of the verifier's fixtures
+    give byte-identical results under 0.5.1 and 0.5.2 with the plugin's
+    bundled settings, DigiCert on and off (1,208 runs); the fix reaches
+    custom trust settings only. AC4's baseline is unchanged (744
+    `ExceptionNotEscaped`, 4 `fread`, measured on v0.5.2's `src/` without
+    `src/Cli`). `composer.json` requires `^0.5.2`; `MaintenanceCheckTest`
+    reads `v0.5.2` from the lock.
 
 ## Traceability
 

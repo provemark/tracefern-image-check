@@ -4078,3 +4078,17 @@ README are where the disclosure lives.
   the build; the release's zip SHA-256 equal to the build.
 - Decided by Maurice: the push, the SVN commit, the tag and the GitHub
   release.
+
+## 2026-10-08 — The bundled verifier to v0.5.2 (SPEC-006 amendment 15)
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, push 81ecdb9 en zet de plugin op 0.5.2", then
+  "akkoord, amendement 15 bevestigd".
+- Produced: `composer.json` `^0.5.2` and the lock on v0.5.2; SPEC-006
+  amendment 15; `MaintenanceCheckTest` on `v0.5.2`; a sentence in
+  `NOTES.md`.
+- Measured: the WPCS sniffs on v0.5.2's `src/` without `src/Cli` (the
+  baseline's counts); the verifier's 604 fixture files under the plugin's
+  bundled settings, DigiCert on and off, with v0.5.1 (a worktree) and
+  v0.5.2: identical, 1,208 runs; `MaintenanceCheckTest` red on the old
+  pin, then `composer check`.
+- Decided by Maurice: amendment 15.
