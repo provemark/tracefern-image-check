@@ -4034,3 +4034,20 @@ README are where the disclosure lives.
   SHA-256 equal to the build; the search places (unchanged so far).
 - Decided by Maurice: the push, the SVN commit, the tag and the GitHub
   release.
+
+## 2026-10-08 — The bundled verifier to v0.5.1 (SPEC-006 amendment 14)
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, begin met de plugin, SPEC-038 eerst opzij", then
+  "akkoord, amendement 14 bevestigd".
+- Produced: the unpushed SPEC-038 draft commit moved to branch
+  `spec-038-draft`, `main` reset to `origin/main`; `composer.json`
+  `^0.5.1` and the lock on v0.5.1; SPEC-006 amendment 14;
+  `MaintenanceCheckTest` on `v0.5.1`; a sentence in `NOTES.md`.
+- Measured: the validity of all 53 bundled anchors today (none outside;
+  earliest expiry 2030-05-08) and their newest `notBefore` dates; the
+  verifier's 601 fixture files under the plugin's bundled settings,
+  DigiCert on and off, with v0.5.0 (a worktree) and v0.5.1: identical,
+  1,202 runs; the WPCS sniffs on v0.5.0's and v0.5.1's `src/` without
+  `src/Cli`: equal counts; `MaintenanceCheckTest` red on the old pin,
+  then `composer check` (129 passed).
+- Decided by Maurice: SPEC-038 aside, and amendment 14.

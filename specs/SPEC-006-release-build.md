@@ -283,6 +283,18 @@ None. Resolved by Maurice on 2026-09-26, as proposed in the draft:
     explanation, which the plugin escapes where it shows one. The two reads
     take the stream in pieces of 64 KiB. Nothing new is executed.
     `MaintenanceCheckTest` reads `v0.5.0` from the lock.
+14. **2026-10-08, approved by Maurice van Loon.** The bundled verifier moves to v0.5.1,
+    a security release: a trust anchor outside its own validity no longer
+    vouches for a signer, and only the active manifest's own signer makes
+    a file `Trusted`. Measured for this plugin: every one of the 53
+    bundled anchors is valid today (the earliest expires 2030-05-08), and
+    all 601 files of the verifier's fixtures give byte-identical results
+    under 0.5.0 and 0.5.1 with the plugin's bundled settings, DigiCert on
+    and off (1,202 runs); the fix reaches custom trust settings only.
+    AC4's baseline is unchanged: the same sniffs on v0.5.0's and v0.5.1's
+    `src/` (without `src/Cli`) give 744 `ExceptionNotEscaped` and 4
+    `fread` each. `composer.json` requires `^0.5.1`;
+    `MaintenanceCheckTest` reads `v0.5.1` from the lock.
 
 ## Traceability
 
