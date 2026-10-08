@@ -433,3 +433,21 @@ Releases after 0.1.0:
   (the index is not rebuilt at once; measure again later). Git tag `v0.4.1`
   on `38ed6e2`, and a GitHub release with the same zip (SHA-256 equal), on
   Maurice's go.
+- **0.4.2, 2026-10-08** (bundles c2pa-verifier 0.5.1, a security
+  release: a trust anchor outside its own validity no longer vouches for
+  a signer; SPEC-006 amendment 14): built from `c16a4f7` (SHA-256
+  `79ab674a…cd1da`, 339,215 bytes, kept in `build/submitted/`). Before the
+  build: `composer check` (129), integration (287) and multisite (9) on
+  `9072fa9`, the Release suite (17) on `c16a4f7`. Measured for the
+  bundled lists: all 53 anchors valid today, and the verifier's 601
+  fixture files identical under 0.5.0 and 0.5.1 with the bundled settings
+  (1,202 runs). A fresh SVN working copy (r3735408): `trunk/` replaced by
+  the build, `tags/0.4.2` copied (`diff -r` empty both ways); Maurice
+  committed it as r3735411 (21:33 CEST), before the push's CI run had
+  finished (5 of 9 jobs green then; all 9 green afterwards, run
+  37831301072). Measured: the plugin API reported 0.4.2 (last updated
+  19:33 GMT); the public download and an export of SVN `tags/0.4.2` are
+  the build's files. Git tag `v0.4.2` on `c16a4f7` and a GitHub release
+  with the same zip, on Maurice's go after the green CI. The readme's
+  changelog keeps only 0.4.2 (10,169 bytes; a longer line had failed
+  SPEC-037 AC6 at 10,222).

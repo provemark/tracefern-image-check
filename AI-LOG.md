@@ -4062,3 +4062,19 @@ README are where the disclosure lives.
   10,222 bytes, over the 10,180 limit), then 129 passed with a shorter
   line (10,169 bytes); the release suite on this commit (below).
 - Decided by Maurice: none yet; push, SVN, tag and GitHub release wait.
+
+## 2026-10-08 — Release 0.4.2
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, push en zet de SVN-werkkopie klaar"; "svn commit is
+  gedaan"; "akkoord, maak de tag en de GitHub-release na groene CI".
+- Produced: push of `9072fa9` and `c16a4f7`; the build kept in
+  `build/submitted/`; a fresh SVN working copy `build/svn-0.4.2` (trunk
+  from the build, `tags/0.4.2`), committed by Maurice as r3735411;
+  annotated tag `v0.4.2` on `c16a4f7`; GitHub release 0.4.2 with the zip;
+  the record in `notes/wporg-submission.md` §5.
+- Measured: CI run 37831301072 (9 jobs green, finished after the SVN
+  commit); `diff -r` of the build against `trunk/` and `tags/0.4.2`; the
+  plugin API on 0.4.2; the public download and SVN `tags/0.4.2` equal to
+  the build; the release's zip SHA-256 equal to the build.
+- Decided by Maurice: the push, the SVN commit, the tag and the GitHub
+  release.
