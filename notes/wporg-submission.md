@@ -451,3 +451,20 @@ Releases after 0.1.0:
   with the same zip, on Maurice's go after the green CI. The readme's
   changelog keeps only 0.4.2 (10,169 bytes; a longer line had failed
   SPEC-037 AC6 at 10,222).
+- **0.4.3, 2026-10-08** (bundles c2pa-verifier 0.5.2, a security
+  release: a certificate authority without keyUsage no longer issues;
+  SPEC-006 amendment 15): built from `0e1a672` (SHA-256
+  `dc7a4e3d…25637`, 339,299 bytes, kept in `build/submitted/`). Before
+  the push: `composer check` (129), the Release suite (17) on the build,
+  integration (287) and multisite (9). Measured for the bundled lists:
+  none of the 53 anchors lacks keyUsage, and the verifier's 604 fixture
+  files identical under 0.5.1 and 0.5.2 with the bundled settings (1,208
+  runs). A fresh SVN working copy (r3735473): `trunk/` replaced by the
+  build, `tags/0.4.3` copied (`diff -r` empty both ways); Maurice
+  committed it as r3735479 (22:32 CEST), again before the push's CI run
+  had finished (3 of 9 jobs green then; all 9 green afterwards, run
+  37840036165). Measured: the plugin API reported 0.4.3 (last updated
+  20:32 GMT); the public download and an export of SVN `tags/0.4.3` are
+  the build's files. Git tag `v0.4.3` on `0e1a672` and a GitHub release
+  with the same zip (SHA-256 checked), on Maurice's go after the green
+  CI. The readme's changelog keeps only 0.4.3 (10,164 bytes).
