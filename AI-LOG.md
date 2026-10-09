@@ -4134,3 +4134,13 @@ README are where the disclosure lives.
   file (one more in `Jumbf/JumbfParser.php`); `MaintenanceCheckTest` red on
   the old pin, then `composer check` (129 passed).
 - Decided by Maurice: amendment 16, and the baseline of 745 after review.
+
+## 2026-10-09 — Release commit 0.4.4
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "push en begin met de WordPress-plugin 0.4.4" (the release that
+  carries verifier 0.5.3).
+- Produced: `Version: 0.4.4`, `Stable tag: 0.4.4` and the changelog entry
+  in `readme.txt`, replacing 0.4.3's.
+- Measured: `composer check`; the integration, multisite and release
+  suites (in the record of the release).
+- Decided by Maurice: none yet; push, SVN, tag and GitHub release wait.
