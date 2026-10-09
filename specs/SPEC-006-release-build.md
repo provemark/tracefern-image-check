@@ -305,6 +305,21 @@ None. Resolved by Maurice on 2026-09-26, as proposed in the draft:
     `ExceptionNotEscaped`, 4 `fread`, measured on v0.5.2's `src/` without
     `src/Cli`). `composer.json` requires `^0.5.2`; `MaintenanceCheckTest`
     reads `v0.5.2` from the lock.
+16. **2026-10-09, approved by Maurice van Loon.** The bundled verifier moves to v0.5.3.
+    It refuses four kinds of certificate or manifest box that 0.5.2 accepted: a
+    TSA leaf off the certificate profile, a JUMBF description box without
+    Requestable, a serial number that is not positive, and RSASSA-PSS
+    parameters outside SHA-256/384/512 or with another MGF1 hash. Two of
+    these gave `Trusted` for certificates issued as they are. Measured for
+    this plugin: the verifier's 483 JPEG, PNG and WebP fixture files under the
+    bundled settings, DigiCert on and off (966 runs), under 0.5.2 and 0.5.3.
+    36 runs move, all from `Valid` to `Invalid`, all synthetic probes of the
+    verifier's timestamp and trust matrices. No real file moves. AC4's
+    baseline: one more `ExceptionNotEscaped` (745), the new message in
+    `Jumbf/JumbfParser.php`, whose only value is an integer offset; the other
+    counts are unchanged (measured on v0.5.3's `src/` without `src/Cli`).
+    `composer.json` requires `^0.5.3`; `MaintenanceCheckTest` reads `v0.5.3`
+    from the lock.
 
 ## Traceability
 

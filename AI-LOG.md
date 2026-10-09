@@ -4119,3 +4119,18 @@ README are where the disclosure lives.
   equal to the build; the release's zip SHA-256 equal to the build.
 - Decided by Maurice: the push, the SVN commit, the tag and the GitHub
   release.
+
+## 2026-10-09 — The bundled verifier to v0.5.3 (SPEC-006 amendment 16)
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "push en begin met de WordPress-plugin 0.4.4", then "akkoord,
+  amendement 16 bevestigd".
+- Produced: `composer.json` `^0.5.3` and the lock on v0.5.3; SPEC-006
+  amendment 16; `MaintenanceCheckTest` on `v0.5.3`; the WPCS baseline at
+  745 `ExceptionNotEscaped` for v0.5.3; a sentence in `NOTES.md`.
+- Measured: the verifier's 483 JPEG, PNG and WebP fixtures under the
+  plugin's bundled settings, DigiCert on and off, with v0.5.2 and v0.5.3
+  (966 runs each; 36 moved, all synthetic probes, `Valid` to `Invalid`);
+  the WPCS sniffs on v0.5.2's and v0.5.3's `src/` without `src/Cli`, per
+  file (one more in `Jumbf/JumbfParser.php`); `MaintenanceCheckTest` red on
+  the old pin, then `composer check` (129 passed).
+- Decided by Maurice: amendment 16, and the baseline of 745 after review.

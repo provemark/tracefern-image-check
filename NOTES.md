@@ -183,7 +183,7 @@ v0.2.4** (SPEC-006 amendment 5), **and for v0.2.5** (SPEC-006 amendment
 v0.2.6 on 2026-09-28** (SPEC-006 amendment 8), **and for v0.2.7 on
 2026-09-30** (SPEC-006 amendment 9), **and for v0.2.8 the same day**
 (SPEC-006 amendment 10), **and for v0.3.0 on 2026-10-05** (SPEC-006 amendment 11), **and for v0.2.9 on 2026-10-02** (no
-amendment: `src/` unchanged, so the baseline counts stand). **And for v0.5.1 on 2026-10-08** (SPEC-006 amendment 14: `src/` changed in two files, the baseline counts stand; no verdict moves under the bundled lists). **And for v0.5.2 the same day** (SPEC-006 amendment 15: one file changed, the baseline counts stand; no verdict moves under the bundled lists). Point 2 was resolved by SPEC-013: v0.2.4
+amendment: `src/` unchanged, so the baseline counts stand). **And for v0.5.1 on 2026-10-08** (SPEC-006 amendment 14: `src/` changed in two files, the baseline counts stand; no verdict moves under the bundled lists). **And for v0.5.2 the same day** (SPEC-006 amendment 15: one file changed, the baseline counts stand; no verdict moves under the bundled lists). **And for v0.5.3 on 2026-10-09** (SPEC-006 amendment 16: seven files changed, one more `ExceptionNotEscaped` (745), an integer offset; under the bundled lists only synthetic probes of the verifier's matrices move, from `Valid` to `Invalid`). Point 2 was resolved by SPEC-013: v0.2.4
 bounds the known files, the background check the next unknown one.
 
 ## To measure before a spec relies on it
