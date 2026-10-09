@@ -4182,3 +4182,14 @@ README are where the disclosure lives.
 - Reasoned: a manifest label in an exception message cannot reach output,
   since the plugin stores status codes and never shows a verifier message.
 - Decided by Maurice: SPEC-006 amendment 17 and SPEC-036 amendment 1.
+
+## 2026-10-09 — Release 0.5.0 prepared
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, begin met stap 2" (the release that carries verifier
+  0.6.0).
+- Produced: `Version: 0.5.0`, `Stable tag: 0.5.0` and the changelog entry
+  in `readme.txt`, replacing 0.4.4's.
+- Measured: `composer check`; `readme.txt` under 10,180 bytes; the
+  integration, multisite and release suites (in the record of the
+  release).
+- Decided by Maurice: none yet; push, SVN, tag and GitHub release wait.
