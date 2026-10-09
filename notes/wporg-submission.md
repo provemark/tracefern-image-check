@@ -468,3 +468,21 @@ Releases after 0.1.0:
   the build's files. Git tag `v0.4.3` on `0e1a672` and a GitHub release
   with the same zip (SHA-256 checked), on Maurice's go after the green
   CI. The readme's changelog keeps only 0.4.3 (10,164 bytes).
+- **0.4.4, 2026-10-09** (bundles c2pa-verifier 0.5.3: RSASSA-PSS
+  parameters, a TSA off the profile, serial numbers and Requestable;
+  SPEC-006 amendment 16): built from `0c030b8` (SHA-256
+  `46d0654e…a490`, 340,715 bytes, kept in `build/submitted/`). Before the
+  push: `composer check` (129), the Release suite (17) on the build,
+  integration (287) and multisite (9). Measured for the bundled lists: the
+  verifier's 483 JPEG, PNG and WebP fixtures under 0.5.2 and 0.5.3, DigiCert
+  on and off (966 runs each): 36 runs moved, all synthetic probes, from
+  `Valid` to `Invalid`. A fresh SVN working copy (r3736168): `trunk/`
+  replaced by the build (19 files changed, none added or removed),
+  `tags/0.4.4` copied (`diff -r` empty both ways). This time the push's
+  CI run (37902821668, 9 jobs) was green before Maurice committed it as
+  r3736219 (10:38 CEST). Measured: the plugin API reported 0.4.4 (last
+  updated 08:38 GMT); the public download and an export of SVN
+  `tags/0.4.4` are the build's files. Git tag `v0.4.4` on `0c030b8` and
+  a GitHub release with the same zip (SHA-256 checked after download), on
+  Maurice's go. The readme's changelog keeps only 0.4.4 (10,179 bytes; the
+  tests allow 10,180, so the next line replaces it).

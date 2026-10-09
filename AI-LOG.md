@@ -4144,3 +4144,20 @@ README are where the disclosure lives.
 - Measured: `composer check`; the integration, multisite and release
   suites (in the record of the release).
 - Decided by Maurice: none yet; push, SVN, tag and GitHub release wait.
+
+## 2026-10-09 — Release 0.4.4
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, push en zet de SVN-werkkopie klaar"; "svn commit is
+  gedaan"; "akkoord, maak de tag en de GitHub-release".
+- Produced: push of `d1175ad` and `0c030b8`; the build kept in
+  `build/submitted/`; a fresh SVN working copy `build/svn-0.4.4` (trunk
+  from the build, `tags/0.4.4`), committed by Maurice as r3736219;
+  annotated tag `v0.4.4` on `0c030b8`; GitHub release 0.4.4 with the zip;
+  the record in `notes/wporg-submission.md` §5.
+- Measured: the Release (17), integration (287) and multisite (9) suites
+  before the push; CI run 37902821668 (9 jobs green, before the SVN
+  commit); `diff -r` of the build against `trunk/` and `tags/0.4.4`; the
+  plugin API on 0.4.4; the public download and SVN `tags/0.4.4` equal to
+  the build; the release's zip SHA-256 equal to the build.
+- Decided by Maurice: the push, the SVN commit, the tag and the GitHub
+  release.
