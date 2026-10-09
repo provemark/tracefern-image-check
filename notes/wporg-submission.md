@@ -486,3 +486,23 @@ Releases after 0.1.0:
   a GitHub release with the same zip (SHA-256 checked after download), on
   Maurice's go. The readme's changelog keeps only 0.4.4 (10,179 bytes; the
   tests allow 10,180, so the next line replaces it).
+- **0.5.0, 2026-10-09** (bundles c2pa-verifier 0.6.0: cloud data,
+  time-stamp assertions, the alternative content representation,
+  revocation beyond the signer's staple, the profile above the signer,
+  manifest labels; SPEC-006 amendment 17, SPEC-036 amendment 1): built
+  from `3dfacd1` (SHA-256 `722300eb…a83d0`, 352,830 bytes, kept in
+  `build/submitted/`). Before the push: `composer check` (129), the
+  Release suite (17) on the build, integration (287) and multisite (9),
+  the last two on `aec36bc` (`3dfacd1` changes only the version and the
+  changelog). Measured for the bundled lists: the verifier's 547 JPEG,
+  PNG and WebP fixtures under 0.5.3 and 0.6.0, DigiCert on and off (1,094
+  runs each): 22 files moved state, all synthetic probes; no real file
+  moved. A fresh SVN working copy (r3737031): `trunk/` replaced by the
+  build (31 files changed, 3 added, none removed), `tags/0.5.0` copied
+  (`diff -r` empty both ways). The push's CI run (37955478495, 9 jobs)
+  was green before Maurice committed it as r3737056 (18:15 CEST).
+  Measured: the plugin API reported 0.5.0 (last updated 16:15 GMT); the
+  public download and an export of SVN `tags/0.5.0` are the build's
+  files. Git tag `v0.5.0` on `3dfacd1` and a GitHub release with the same
+  zip (SHA-256 checked after download), on Maurice's go. The readme's
+  changelog keeps only 0.5.0 (10,164 bytes).
