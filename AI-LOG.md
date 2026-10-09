@@ -4161,3 +4161,24 @@ README are where the disclosure lives.
   the build; the release's zip SHA-256 equal to the build.
 - Decided by Maurice: the push, the SVN commit, the tag and the GitHub
   release.
+
+## 2026-10-09 — Bundle c2pa-verifier v0.6.0
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, begin met de WordPress-plugin"; "akkoord, begin met
+  stap 1"; "akkoord, amendement 1 goedgekeurd, maak stap 1 af".
+- Produced: `composer.json` `^0.6` and the lock on v0.6.0;
+  `MaintenanceCheckTest` reads `v0.6.0`; `tests/wpcs-verifier-baseline.json`
+  at 754 `ExceptionNotEscaped`; SPEC-006 amendment 17; SPEC-036 amendment
+  1 and `TextTest` AC4 on `manifest.text.multipleWrappers`; NOTES.
+- Measured: `MaintenanceCheckTest` red on `v0.5.3`, green after the
+  update; the release suite red on the baseline (754 against 745) and the
+  integration suite red on `TextTest` AC4 (`general.error`), both before
+  the change; phpcs with the plugin's sniffs on v0.5.3's and v0.6.0's
+  `src/` without `src/Cli` (745 and 754, the nine new lines read one by
+  one); the verifier's 547 JPEG, PNG and WebP fixtures under the bundled
+  settings with and without DigiCert, under 0.5.3 and 0.6.0 (1094 runs:
+  22 synthetic probes move state, no real file moves); `composer check`;
+  the release, integration and multisite suites after the change.
+- Reasoned: a manifest label in an exception message cannot reach output,
+  since the plugin stores status codes and never shows a verifier message.
+- Decided by Maurice: SPEC-006 amendment 17 and SPEC-036 amendment 1.

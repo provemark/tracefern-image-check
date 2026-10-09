@@ -108,7 +108,8 @@ source named.
   - Given `two-wrappers.txt` (two wrappers: the manifest was reached) and
     the signed text with one byte `FF` appended (built in the test; typed
     `text/plain` by WordPress, measured, but not UTF-8)
-  - Then the first is "Does not verify" (`Invalid`, `general.error`), the
+  - Then the first is "Does not verify" (`Invalid`,
+    `manifest.text.multipleWrappers`; amendment 1), the
     second "Could not be checked" (`error` / `unsupported`); each upload
     succeeds
 
@@ -191,7 +192,14 @@ final class Checker
 
 ## Amendments
 
-None.
+1. **2026-10-09, approved by Maurice van Loon.** AC4's first case names
+   `manifest.text.multipleWrappers` where it named `general.error`. The
+   bundled verifier v0.6.0 (SPEC-006 amendment 17) reports two wrappers in
+   one text with the C2PA 2.4 code for it (§15.12.1.3; the verifier's
+   SPEC-060 amendment 3); 0.5.x reported `general.error`. The state stays
+   `Invalid` and the column "Does not verify"; only the code changes.
+   Measured: `TextTest` AC4 red on `general.error` under v0.6.0, green on
+   the new code.
 
 ## Traceability
 

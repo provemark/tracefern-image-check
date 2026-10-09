@@ -320,6 +320,28 @@ None. Resolved by Maurice on 2026-09-26, as proposed in the draft:
     counts are unchanged (measured on v0.5.3's `src/` without `src/Cli`).
     `composer.json` requires `^0.5.3`; `MaintenanceCheckTest` reads `v0.5.3`
     from the lock.
+17. **2026-10-09, approved by Maurice van Loon.** The bundled verifier moves to v0.6.0,
+    the release that checks the rest of the C2PA 2.4 validator rules this
+    plugin's formats meet: cloud data, the time-stamp assertion, the
+    alternative content representation, revocation beyond the signer's own
+    staple, the certificate profile above the signer, duplicate and
+    malformed manifest labels. Measured for this plugin: the verifier's 547
+    JPEG, PNG and WebP fixture files under the bundled settings, DigiCert on
+    and off (1094 runs), under 0.5.3 and 0.6.0. 22 files move state, all
+    synthetic probes of the verifier (manifest, revocation, profile and
+    chain probes): 21 from `Valid` to `Invalid`, and `type-c2md.png` from
+    `Invalid` to `Valid` (the c2md box type is now read, as `c2patool`
+    does). Three more probes keep their state and change codes. No real
+    file moves state or codes. AC4's baseline: nine more
+    `ExceptionNotEscaped` (754). Four are in the plain-text reader's new
+    messages, whose values are integers (offsets, lengths, a version). Five
+    are in the two new label refusals (`Manifest/Manifest.php`,
+    `Manifest/ManifestStore.php`), whose value is the manifest label from
+    the file; the plugin stores and shows status codes only, never a
+    verifier message, so no label reaches output. The other counts are
+    unchanged (measured on v0.6.0's `src/` without `src/Cli`).
+    `composer.json` requires `^0.6`; `MaintenanceCheckTest` reads `v0.6.0`
+    from the lock. SPEC-036 amendment 1 follows the new text code.
 
 ## Traceability
 

@@ -74,7 +74,7 @@ it('AC4: two wrappers are "Does not verify"; a text that is not UTF-8 "Could not
 
     expect($two)->toBeGreaterThan(0)
         ->and(storedEntry($two)['state'] ?? null)->toBe('Invalid')
-        ->and(storedEntry($two)['codes'] ?? [])->toContain('general.error')
+        ->and(storedEntry($two)['codes'] ?? [])->toContain('manifest.text.multipleWrappers')   // amendment 1
         ->and(visibleText(columnHtml($two)))->toBe('Does not verify')
         ->and($broken)->toBeGreaterThan(0)
         ->and(storedEntry($broken)['state'] ?? null)->toBe('error')
