@@ -524,3 +524,23 @@ Releases after 0.1.0:
   page answers 200. Git tag `v0.5.1` on `403aece` and a GitHub release
   with the same zip (SHA-256 checked after download), on Maurice's go.
   The readme's changelog keeps only 0.5.1 (10,171 bytes).
+- **0.6.0, 2026-10-13** (bundles c2pa-verifier 0.7.0: a hash may no longer
+  leave the image outside what is signed; SPEC-006 amendment 19): built from
+  `b0adc4e` (SHA-256 `3d59ede7…0256f3e5`, 363,259 bytes, kept in
+  `build/submitted/`). Before the push: `composer check` (129),
+  integration (287), multisite (9) and the Release suite (17) on the
+  build, all on `b0adc4e`; AC4's WPCS baseline raised by fifteen reviewed
+  `ExceptionNotEscaped` (754 to 769). Measured for the bundled lists,
+  through the plugin's `Outcome`: the verifier's 563 JPEG, PNG and WebP
+  fixtures under 0.6.1 and 0.7.0, DigiCert on and off (1,126 runs): only
+  the eight `exclusion-coverage/` attack files move state (`Valid` to
+  `Invalid`), two `binding/` files change codes. A fresh SVN working copy
+  (r3744155): `trunk/` replaced by the build (22 files changed, 4 added,
+  none removed), `tags/0.6.0` copied (`diff -r` with the build empty). The
+  push's CI run (38410707128, 9 jobs) was green before Maurice committed it
+  as r3744205 (16:36 CEST). Measured: the plugin API reported 0.6.0 (last
+  updated 2:36pm GMT); the public download and an export of SVN
+  `tags/0.6.0` are the build's files; the plugin page answers 200. Git tag
+  `v0.6.0` on `b0adc4e` and a GitHub release with the same zip (SHA-256
+  checked after download), on Maurice's go. The readme's changelog keeps
+  only 0.6.0 (10,176 bytes).
