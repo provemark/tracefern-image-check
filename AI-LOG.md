@@ -4224,3 +4224,12 @@ README are where the disclosure lives.
   `Invalid` to `Valid`); `composer check` (129 passed), integration (287),
   multisite (9) and release (17, baseline unchanged) suites.
 - Decided by Maurice: release as 0.5.1; SPEC-006 amendment 18.
+
+## 2026-10-13 — Release 0.5.1
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "ja, pak het op als 0.5.1".
+- Produced: header `Version: 0.5.1`, `Stable tag: 0.5.1`, the changelog
+  entry for 0.5.1 replacing 0.5.0's (readme.txt 10,171 bytes).
+- Measured: the suites on this commit, recorded in
+  `notes/wporg-submission.md` §5 with the zip's SHA-256.
+- Decided by Maurice: release as 0.5.1, bundling c2pa-verifier 0.6.1.
