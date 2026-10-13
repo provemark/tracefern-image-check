@@ -357,6 +357,32 @@ None. Resolved by Maurice on 2026-09-26, as proposed in the draft:
     suite passes on v0.6.1's `src/` without `src/Cli`). `composer.json`
     keeps `^0.6`; `MaintenanceCheckTest` reads `v0.6.1` from the lock.
 
+19. **2026-10-13, approved by Maurice van Loon.** The bundled verifier moves to v0.7.0,
+    a minor: a data hash (or a BMFF hash) may no longer leave the image outside
+    what is signed (its SPEC-068, SPEC-069, SPEC-071), Pixel Camera video
+    verifies (SPEC-072), and an ingredient failure a signer acknowledged is
+    reported as an informational line (SPEC-070, `ValidationStatus::$acknowledged`).
+    The plugin reads `validation_status` (failures only) and an ingredient
+    delta's `failure` list, so the acknowledged lines change nothing it reads.
+    Measured for this plugin through its own `Outcome` (state, codes, AI
+    history): the verifier's 563 JPEG, PNG and WebP fixture files under the
+    bundled settings, DigiCert on and off (1,126 runs), under 0.6.1 and 0.7.0,
+    0 exceptions. 16 runs move state, all eight attack files of the verifier's
+    `exclusion-coverage/` (the five PNG and three JPEG shapes whose hash leaves
+    the image out), from `Valid` to `Invalid`; their throw-away signer is not
+    on the bundled list, hence `Valid` before, not `Trusted`. Two more files,
+    `binding/exclusion-extra.png` and `binding/exclusions-unsorted.png`, keep
+    `Invalid` and change their codes. Nothing else changes, the AI history
+    included. `composer.json` moves to `^0.7`; `MaintenanceCheckTest` reads
+    `v0.7.0` from the lock (red on `v0.6.1`, green after). AC4's baseline
+    rises by fifteen `ExceptionNotEscaped` (754 to 769), reviewed: twelve in
+    the new JPEG segment walk (`JpegExclusionAllowance`: offsets, lengths and
+    marker bytes, integers or hex only), two in `StreamReader::seek()` (an
+    offset and a fixed noun), and one in `BmffHashCheck`'s refused-exclusion
+    message (the xpath from the file). The plugin keeps only failure codes
+    (`Outcome::failureCodes()`) and never shows a verifier message, so none
+    of them reaches a page.
+
 ## Traceability
 
 | Acceptance criterion | Test (file :: name / group) | Source (file/symbol) |

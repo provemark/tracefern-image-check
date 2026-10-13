@@ -4245,3 +4245,21 @@ README are where the disclosure lives.
   download. The release notes' first wording ("now verifies") was
   corrected to the plugin's own label, "Intact: signer not trusted".
 - Decided by Maurice: the push, the SVN commit (his), the tag and release.
+
+## 2026-10-13 — Bundle c2pa-verifier v0.7.0
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, begin met de plugin"; "akkoord, amendement 19 approved,
+  plugin 0.6.0".
+- Produced: `composer.json` at `^0.7` and the lock on v0.7.0;
+  `MaintenanceCheckTest` reads `v0.7.0`; SPEC-006 amendment 19; NOTES.
+- Measured: `MaintenanceCheckTest` red on `v0.6.1`, green after
+  `composer update provemark/c2pa-verifier`; the plugin's `Outcome` over
+  the verifier's 563 JPEG, PNG and WebP fixtures under the bundled settings
+  with and without DigiCert, under 0.6.1 and 0.7.0 (1,126 runs, 0
+  exceptions: only the eight `exclusion-coverage/` attack files move state,
+  `Valid` to `Invalid`, and two `binding/` files change codes); `composer
+  check` (129 passed), integration (287) and multisite (9) suites; the
+  release suite (17) after raising AC4's WPCS baseline by fifteen reviewed
+  `ExceptionNotEscaped` (754 to 769: the new JPEG segment walk, `seek()`,
+  and one BMFF message; the plugin never shows a verifier message).
+- Decided by Maurice: SPEC-006 amendment 19; release as 0.6.0.
