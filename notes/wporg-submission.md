@@ -506,3 +506,21 @@ Releases after 0.1.0:
   files. Git tag `v0.5.0` on `3dfacd1` and a GitHub release with the same
   zip (SHA-256 checked after download), on Maurice's go. The readme's
   changelog keeps only 0.5.0 (10,164 bytes).
+- **0.5.1, 2026-10-13** (bundles c2pa-verifier 0.6.1: an icon in a data
+  box is read and its hash checked; SPEC-006 amendment 18): built from
+  `403aece` (SHA-256 `b7b45622…aca23f02`, 354,085 bytes, kept in
+  `build/submitted/`). Before the push: `composer check` (129),
+  integration (287), multisite (9) and the Release suite (17) on the
+  build, all on `403aece`. Measured for the bundled lists: the verifier's
+  552 JPEG, PNG and WebP fixtures under 0.6.0 and 0.6.1, DigiCert on and
+  off (1,104 runs): only the five `databox/` files differ, and only the
+  real C2PA Sign file moves state (`Invalid` to `Valid`). A fresh SVN
+  working copy (r3742962): `trunk/` replaced by the build (10 files
+  changed, none added or removed), `tags/0.5.1` copied (`diff -r` with
+  the build empty). The push's CI run (38354438297, 9 jobs) was green
+  before Maurice committed it as r3743011 (08:23 CEST). Measured: the
+  plugin API reported 0.5.1 (last updated 06:23 GMT); the public download
+  and an export of SVN `tags/0.5.1` are the build's files; the plugin
+  page answers 200. Git tag `v0.5.1` on `403aece` and a GitHub release
+  with the same zip (SHA-256 checked after download), on Maurice's go.
+  The readme's changelog keeps only 0.5.1 (10,171 bytes).

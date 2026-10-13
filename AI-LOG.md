@@ -4233,3 +4233,15 @@ README are where the disclosure lives.
 - Measured: the suites on this commit, recorded in
   `notes/wporg-submission.md` §5 with the zip's SHA-256.
 - Decided by Maurice: release as 0.5.1, bundling c2pa-verifier 0.6.1.
+
+## 2026-10-13 — Record the 0.5.1 release
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "ja, push het maar"; "svn commit is gedaan"; "ja, doe het maar".
+- Produced: the 0.5.1 entry in `notes/wporg-submission.md` §5; tag
+  `v0.5.1` and the GitHub release with the submitted zip.
+- Measured: CI run 38354438297 green (9 jobs) before the SVN commit;
+  r3743011; the plugin API at 0.5.1; the public download and an export of
+  `tags/0.5.1` equal to the build; the release asset's SHA-256 after
+  download. The release notes' first wording ("now verifies") was
+  corrected to the plugin's own label, "Intact: signer not trusted".
+- Decided by Maurice: the push, the SVN commit (his), the tag and release.
