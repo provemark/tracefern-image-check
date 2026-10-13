@@ -342,6 +342,20 @@ None. Resolved by Maurice on 2026-09-26, as proposed in the draft:
     unchanged (measured on v0.6.0's `src/` without `src/Cli`).
     `composer.json` requires `^0.6`; `MaintenanceCheckTest` reads `v0.6.0`
     from the lock. SPEC-036 amendment 1 follows the new text code.
+18. **2026-10-13, approved by Maurice van Loon.** The bundled verifier moves to v0.6.1.
+    It reads an icon stored in a data box, the mechanism of earlier C2PA
+    versions, and checks its hash, where 0.6.0 refused it. Real files have
+    one: the Drupal module C2PA Sign 1.4.11 stores the site's logo that way
+    in every manifest it writes. Measured for this plugin: the verifier's
+    552 JPEG, PNG and WebP fixture files under the bundled settings,
+    DigiCert on and off (1,104 runs), under 0.6.0 and 0.6.1. 2 runs move
+    state, both of `databox/c2pasign-logo.png`, the real C2PA Sign file,
+    from `Invalid` to `Valid` (its signer is not on the bundled list). The
+    four synthetic data-box probes stay `Invalid`; one changes its code
+    from `assertion.missing` to `assertion.hashedURI.mismatch`. No other
+    file changes state or codes. AC4's baseline is unchanged (the release
+    suite passes on v0.6.1's `src/` without `src/Cli`). `composer.json`
+    keeps `^0.6`; `MaintenanceCheckTest` reads `v0.6.1` from the lock.
 
 ## Traceability
 

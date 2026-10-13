@@ -4210,3 +4210,17 @@ README are where the disclosure lives.
   the build; the release's zip SHA-256 equal to the build.
 - Decided by Maurice: the push, the SVN commit, the tag and the GitHub
   release.
+
+## 2026-10-13 — Bundle c2pa-verifier v0.6.1
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "ja, pak het op als 0.5.1"; "ja, amendement 18 goedgekeurd".
+- Produced: the lock on v0.6.1; `MaintenanceCheckTest` reads `v0.6.1`;
+  SPEC-006 amendment 18; NOTES.
+- Measured: `MaintenanceCheckTest` red on `v0.6.0`, green after
+  `composer update provemark/c2pa-verifier`; the verifier's 552 JPEG, PNG
+  and WebP fixtures under the bundled settings with and without DigiCert,
+  under 0.6.0 and 0.6.1 (1,104 runs, 0 exceptions: only the five
+  `databox/` files differ, and only `c2pasign-logo.png` moves state,
+  `Invalid` to `Valid`); `composer check` (129 passed), integration (287),
+  multisite (9) and release (17, baseline unchanged) suites.
+- Decided by Maurice: release as 0.5.1; SPEC-006 amendment 18.
