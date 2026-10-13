@@ -4263,3 +4263,12 @@ README are where the disclosure lives.
   `ExceptionNotEscaped` (754 to 769: the new JPEG segment walk, `seek()`,
   and one BMFF message; the plugin never shows a verifier message).
 - Decided by Maurice: SPEC-006 amendment 19; release as 0.6.0.
+
+## 2026-10-13 — Release 0.6.0
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, amendement 19 approved, plugin 0.6.0".
+- Produced: version 0.6.0 in the plugin header and `readme.txt` (Stable
+  tag, changelog: bundles c2pa-verifier 0.7.0).
+- Measured: `composer check`, and the release suite on the release commit
+  (below, before any push).
+- Decided by Maurice: release as 0.6.0.
