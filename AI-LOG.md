@@ -4320,3 +4320,19 @@ README are where the disclosure lives.
   SPEC-037 AC6's budget (red), shortened to 10,149 bytes; `composer
   check` (129 passed); the release suite (17) on the built zip.
 - Decided by Maurice: release as 0.6.1.
+
+## 2026-10-21 — Record the 0.6.1 release
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, push, tag en commit naar WordPress.org"; "svn commit is
+  gedaan".
+- Produced: the 0.6.1 entry in `notes/wporg-submission.md` §5; the SVN
+  working copy prepared (trunk replaced, `tags/0.6.1` copied); tag
+  `v0.6.1` and the GitHub release with the submitted zip.
+- Measured: the multisite suite (9); the zip the earlier Release run
+  tested still said 0.6.0 (built before the release commit), so the
+  release entry above overstated it; rebuilt on `5eb2f8c` and the Release
+  suite rerun (17). CI run 39564975308 green (9 jobs) before the SVN
+  commit; r3757915; the plugin API at 0.6.1; the public download and an
+  export of `tags/0.6.1` equal to the build; the plugin page 200; the
+  release asset's SHA-256 after download.
+- Decided by Maurice: the push, the SVN commit (his), the tag and release.

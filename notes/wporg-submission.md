@@ -544,3 +544,23 @@ Releases after 0.1.0:
   `v0.6.0` on `b0adc4e` and a GitHub release with the same zip (SHA-256
   checked after download), on Maurice's go. The readme's changelog keeps
   only 0.6.0 (10,176 bytes).
+- **0.6.1, 2026-10-21** (bundles the C2PA trust lists of 2026-10-17,
+  `47009ee`: three NETLOCK certificates added, none removed; SPEC-004
+  amendment 2): built from `5eb2f8c` (SHA-256 `e104d43d…4a183530`,
+  364,788 bytes, kept in `build/submitted/`). Before the push: `composer
+  check` (129), integration (287), multisite (9) and the Release suite
+  (17) on the build, all on `5eb2f8c`; a first Release run had tested a
+  zip built before the release commit (still 0.6.0), caught by reading the
+  zip's header, rebuilt and rerun. Measured for the bundled lists: the
+  verifier's 563 JPEG, PNG and WebP fixtures under old and new lists,
+  DigiCert on and off (2,252 runs): no state moves. A fresh SVN working
+  copy: `trunk/` replaced by the build (11 files changed, none added or
+  removed; in `vendor/` only the build reference and autoloader hash),
+  `tags/0.6.1` copied (`diff -r` with the build empty). The push's CI run
+  (39564975308, 9 jobs) was green before Maurice committed it as r3757915
+  (10:10 CEST). Measured: the plugin API reported 0.6.1 (last updated
+  8:10am GMT); the public download and an export of SVN `tags/0.6.1` are
+  the build's files; the plugin page answers 200. Git tag `v0.6.1` on
+  `5eb2f8c` and a GitHub release with the same zip (SHA-256 checked after
+  download), on Maurice's go. The readme's changelog keeps only 0.6.1
+  (10,149 bytes).
