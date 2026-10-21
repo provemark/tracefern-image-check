@@ -4310,3 +4310,13 @@ README are where the disclosure lives.
 - Reasoned: only a file signed under NETLOCK can move, `Valid` to
   `Trusted`; earlier entries keep their recorded source.
 - Decided by Maurice: the update; closing #2; SPEC-004 amendment 2.
+
+## 2026-10-21 — Release 0.6.1
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "amendement 2 approved, ga door met 0.6.1".
+- Produced: version 0.6.1 in the plugin header and `readme.txt` (Stable
+  tag, changelog: bundles the C2PA trust lists of 2026-10-17).
+- Measured: the first changelog wording put `readme.txt` 38 bytes over
+  SPEC-037 AC6's budget (red), shortened to 10,149 bytes; `composer
+  check` (129 passed); the release suite (17) on the built zip.
+- Decided by Maurice: release as 0.6.1.
