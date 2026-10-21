@@ -7,8 +7,8 @@ on Settings → Tracefern.
 
 | file | source | what it anchors |
 |---|---|---|
-| `C2PA-TRUST-LIST.pem` | [`c2pa-org/conformance-public`](https://github.com/c2pa-org/conformance-public/tree/main/trust-list), `trust-list/`, commit `99927ca` (2026-08-14) | the certificate authorities the C2PA conformance programme accepts for signers (trust kind `manifest`); 30 certificates |
-| `C2PA-TSA-TRUST-LIST.pem` | the same directory and commit | the timestamp authorities the programme accepts (trust kind `tsa`); 22 certificates |
+| `C2PA-TRUST-LIST.pem` | [`c2pa-org/conformance-public`](https://github.com/c2pa-org/conformance-public/tree/main/trust-list), `trust-list/`, commit `47009ee` (2026-10-17) | the certificate authorities the C2PA conformance programme accepts for signers (trust kind `manifest`); 32 certificates |
+| `C2PA-TSA-TRUST-LIST.pem` | the same directory and commit | the timestamp authorities the programme accepts (trust kind `tsa`); 23 certificates |
 | `DigiCertTrustedRootG4.crt.pem` | [DigiCert](https://cacerts.digicert.com/DigiCertTrustedRootG4.crt.pem) | timestamp authorities (trust kind `tsa`), used only when the DigiCert option is on (the default) |
 
 The two C2PA lists are © the Coalition for Content Provenance and

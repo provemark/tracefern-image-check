@@ -29,14 +29,14 @@ it('builds the bundled lists with DigiCert, by the verifier\'s recipe', function
     [$settings, $source] = $config->build();
 
     expect($settings)->not->toBeNull()
-        ->and($source)->toBe('c2pa-2026-08-14+digicert')
+        ->and($source)->toBe('c2pa-2026-10-17+digicert')
         ->and($config->settingsJson())->toBe(recipeSettings(true));
 })->group('SPEC-004');
 
 it('builds the bundled lists without DigiCert', function (): void {
     $config = new TrustConfig(bundledTrustDir(), '', false);
 
-    expect($config->build()[1])->toBe('c2pa-2026-08-14')
+    expect($config->build()[1])->toBe('c2pa-2026-10-17')
         ->and($config->settingsJson())->toBe(recipeSettings(false));
 })->group('SPEC-004');
 
@@ -61,8 +61,8 @@ it('AC6: builds nothing, and says `none`, when the settings cannot be built', fu
 ])->group('SPEC-004');
 
 it('AC9: calls the bundled list stale 183 days after its date, not before', function (): void {
-    expect(TrustConfig::isStale(new DateTimeImmutable('2027-02-12T23:59:59Z')))->toBeFalse()
-        ->and(TrustConfig::isStale(new DateTimeImmutable('2027-02-13T00:00:00Z')))->toBeTrue()
+    expect(TrustConfig::isStale(new DateTimeImmutable('2027-04-17T23:59:59Z')))->toBeFalse()
+        ->and(TrustConfig::isStale(new DateTimeImmutable('2027-04-18T00:00:00Z')))->toBeTrue()
         ->and(TrustConfig::isStale(new DateTimeImmutable('2026-09-26T12:00:00Z')))->toBeFalse();
 })->group('SPEC-004');
 

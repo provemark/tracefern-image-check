@@ -10,7 +10,7 @@ it('AC1: trusts a Pixel 10 photo with the default settings', function (): void {
 
     expect(storedEntry($id)['state'] ?? null)->toBe('Trusted')
         ->and(stable((array) storedEntry($id)))->toBe(expectedEntry($path, defaultSettingsFile()))
-        ->and(storedEntry($id)['trust'] ?? null)->toBe('c2pa-2026-08-14+digicert')
+        ->and(storedEntry($id)['trust'] ?? null)->toBe('c2pa-2026-10-17+digicert')
         ->and(visibleText(columnHtml($id)))->toBe('Verified: trusted signer');
 })->group('SPEC-004');
 
@@ -32,8 +32,8 @@ it('AC3: lets DigiCert decide an expired signer with a DigiCert timestamp', func
         ->and(stable((array) storedEntry($id)))->toBe(expectedEntry($path, defaultSettingsFile($digiCert)))
         ->and(storedEntry($id)['trust'] ?? null)->toBe($trust);
 })->with([
-    'DigiCert on' => [true, 'Valid', 'c2pa-2026-08-14+digicert'],
-    'DigiCert off' => [false, 'Invalid', 'c2pa-2026-08-14'],
+    'DigiCert on' => [true, 'Valid', 'c2pa-2026-10-17+digicert'],
+    'DigiCert off' => [false, 'Invalid', 'c2pa-2026-10-17'],
 ])->group('SPEC-004');
 
 it('AC4: lets custom settings replace the bundled lists', function (): void {
@@ -90,8 +90,8 @@ it('AC7: names the trust source in the details', function (?string $trust, strin
 
     expect(visibleText(detailsHtml(attachmentWithEntry($entry), false)))->toMatch('/'.preg_quote($ending, '/').'$/');
 })->with([
-    ['c2pa-2026-08-14+digicert', 'Trust list C2PA, 2026-08-14 (with DigiCert timestamps)'],
-    ['c2pa-2026-08-14', 'Trust list C2PA, 2026-08-14'],
+    ['c2pa-2026-10-17+digicert', 'Trust list C2PA, 2026-10-17 (with DigiCert timestamps)'],
+    ['c2pa-2026-10-17', 'Trust list C2PA, 2026-10-17'],
     ['custom', 'Trust list Custom trust settings'],
     ['none', 'Trust list None'],
     [null, 'Checked 2026-09-26 12:00 UTC, c2pa-verifier v0.2.3'],
@@ -103,8 +103,8 @@ it('AC8: shows the settings page to administrators only, escaped', function (): 
     wpEval("remove_all_filters('sanitize_option_tracefern_custom_trust'); update_option('tracefern_custom_trust', base64_decode('$hostile'));");
     $page = wpEval("require_once ABSPATH.'wp-admin/includes/admin.php'; (new Tracefern\\ImageCheck\\SettingsPage)->render();");
 
-    expect(visibleText($page))->toContain('2026-08-14')
-        ->toContain('99927ca')
+    expect(visibleText($page))->toContain('2026-10-17')
+        ->toContain('47009ee')
         ->toContain('new uploads')
         ->and($page)->toMatch('/name="tracefern_digicert"[^>]*checked/')
         ->and($page)->toContain('&lt;/textarea&gt;&lt;script&gt;')
@@ -116,6 +116,6 @@ it('AC8: shows the settings page to administrators only, escaped', function (): 
     wpCli(['user', 'delete', 'm4-subscriber', '--yes']);
 })->group('SPEC-004');
 
-it('AC9: shows no age warning for a list from 2026-08-14 today', function (): void {
+it('AC9: shows no age warning for a list from 2026-10-17 today', function (): void {
     expect(visibleText(wpEval("require_once ABSPATH.'wp-admin/includes/admin.php'; (new Tracefern\\ImageCheck\\SettingsPage)->render();")))->not->toContain('older than');
 })->group('SPEC-004');

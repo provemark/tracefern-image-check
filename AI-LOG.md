@@ -4285,3 +4285,28 @@ README are where the disclosure lives.
   `tags/0.6.0` equal to the build; the plugin page 200; the release asset's
   SHA-256 after download.
 - Decided by Maurice: the push, the SVN commit (his), the tag and release.
+
+## 2026-10-21 — Bundle the C2PA trust lists of 2026-10-17
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "moet deze nog een update of is er iets gewijzigd upstream?";
+  "akkoord, en sluit #2 maar".
+- Produced: `trust/C2PA-TRUST-LIST.pem` and `C2PA-TSA-TRUST-LIST.pem`
+  from `c2pa-org/conformance-public` `47009ee`, unchanged;
+  `TrustConfig::LIST_DATE` and `LIST_COMMIT`; `trust/README.md`; the tests
+  that name the list (`TrustConfigTest`, `TrustTest`,
+  `MaintenanceCheckTest`); SPEC-004 amendment 2. Issue #2 closed as
+  superseded (v0.7.0 is bundled).
+- Measured: the certificate subjects of old and new lists (three NETLOCK
+  certificates added, none removed); the unit tests red on the new date
+  and commit (3 failed), then green (129) after the change, AC9's stale
+  boundary moved to 2027-04-18 along the way (it was red too, missed in
+  the first pass); the SPEC-004 integration group (15); the verifier's
+  563 JPEG, PNG and WebP fixtures under old and new lists, DigiCert on and
+  off (2,252 runs, 0 exceptions, 0 state moves); unit (129) and
+  integration (287) suites green. A first integration run had 8 failures
+  in `VerdictTest` while a second run overlapped it on the same wp-env;
+  `VerdictTest` alone (7) and a clean full run were green, so the overlap
+  is the likely cause (reasoned).
+- Reasoned: only a file signed under NETLOCK can move, `Valid` to
+  `Trusted`; earlier entries keep their recorded source.
+- Decided by Maurice: the update; closing #2; SPEC-004 amendment 2.

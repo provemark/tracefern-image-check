@@ -38,7 +38,7 @@ it('AC1: reads the three local values from the repository', function (): void {
     $root = dirname(__DIR__, 2);
 
     expect(testedUpTo((string) file_get_contents($root.'/readme.txt')))->toBe('7.1')
-        ->and(bundledTrustCommit((string) file_get_contents($root.'/trust/README.md')))->toBe('99927ca')
+        ->and(bundledTrustCommit((string) file_get_contents($root.'/trust/README.md')))->toBe('47009ee')
         ->and(lockedVerifier((string) file_get_contents($root.'/composer.lock')))->toBe('v0.7.0');
 })->group('SPEC-030');
 

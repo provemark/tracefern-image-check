@@ -201,6 +201,22 @@ None. Resolved by Maurice on 2026-09-26, as proposed in the draft:
    DigiCert timestamps)", "C2PA, 2026-08-14", "Custom trust settings",
    "None"; an entry without `trust` has no such row and ends with the
    **Checked** row.
+2. **2026-10-21, approved by Maurice van Loon.** The bundled C2PA lists move from
+   `c2pa-org/conformance-public` commit `99927ca` (2026-08-14) to `47009ee`
+   (2026-10-17), the latest commit touching `trust-list/` (reported by the
+   weekly maintenance check, issue #3). Measured: nothing is removed; three
+   certificates of one new CA are added, NETLOCK Kft. (HU): *NETLOCK ECC
+   C2PA Root CA G2* and *NETLOCK ECC C2PA Claim Signing G2 CA 1* on the
+   signer list (30 to 32), *NETLOCK ECC C2PA TSA G2 CA 1* on the TSA list
+   (22 to 23). `TrustConfig::LIST_DATE` and `LIST_COMMIT` follow, so new
+   checks record `c2pa-2026-10-17` (with `+digicert`), the settings page
+   names the new date and commit, and AC9's age warning starts on
+   2027-04-18. Entries checked before keep the source they were checked
+   with; nothing is re-checked. Measured with the verifier's 563 JPEG, PNG
+   and WebP fixtures, DigiCert on and off, old against new lists (2,252
+   runs): 0 exceptions, no state moves; none of them is signed under
+   NETLOCK. Reasoned: a file signed under NETLOCK goes from `Valid` to
+   `Trusted`; no other file can move, since nothing was removed.
 
 ## Traceability
 
