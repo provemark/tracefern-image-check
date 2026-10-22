@@ -4353,3 +4353,13 @@ README are where the disclosure lives.
   `Invalid`); `composer check` (129 passed), integration (287), multisite
   (9) and release (17) suites, the last with the baseline counts unchanged.
 - Decided by Maurice: SPEC-006 amendment 20; release as 0.6.2.
+
+## 2026-10-22 — Release 0.6.2
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, amendement 20 goedgekeurd, plugin 0.6.2".
+- Produced: version 0.6.2 in the plugin header and `readme.txt` (Stable
+  tag, changelog: bundles c2pa-verifier 0.7.1).
+- Measured: `composer check` (129 passed; the first changelog line was 16
+  bytes over SPEC-037 AC6's room and was shortened), and the release suite
+  (17 passed) on the release commit, before any push.
+- Decided by Maurice: release as 0.6.2.
