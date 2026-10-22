@@ -383,6 +383,27 @@ None. Resolved by Maurice on 2026-09-26, as proposed in the draft:
     (`Outcome::failureCodes()`) and never shows a verifier message, so none
     of them reaches a page.
 
+20. **2026-10-22, approved by Maurice van Loon.** The bundled verifier moves to v0.7.1,
+    a patch: an ingredient failure counts as acknowledged only when the
+    signer recorded it under `failure` (its SPEC-070 amendment 2, C2PA 2.4
+    §18.16.12.4.3). A failure a v3 ingredient assertion files under
+    `success` or `informational` used to be acknowledged; it now stays a
+    failure, so the file reads `Invalid`. `src/` changes in one file
+    (`Verifier/IngredientManifestCheck.php`), with no new message.
+    Measured for this plugin through its own `Outcome` (state, codes, AI
+    history): the verifier's 566 JPEG, PNG and WebP fixture files (its 563
+    of amendment 19 and the three new `acknowledged-kind/` files) under the
+    bundled settings, DigiCert on and off (1,132 runs), under 0.7.0 and
+    0.7.1, 0 exceptions. 4 runs move state, the two crafted files
+    `acknowledged-kind/recorded-success.jpg` and
+    `recorded-informational.jpg`, from `Valid` to `Invalid` with
+    `claimSignature.mismatch` (and `signingCredential.untrusted`: their
+    throw-away signer is not on the bundled list). Nothing else changes, the
+    AI history included. `composer.json` keeps `^0.7`; `MaintenanceCheckTest`
+    reads `v0.7.1` from the lock (red on `v0.7.0`, green after). AC4's
+    baseline counts stand (the release suite passes on v0.7.1's `src/`);
+    only its `verifier` field moves.
+
 ## Traceability
 
 | Acceptance criterion | Test (file :: name / group) | Source (file/symbol) |

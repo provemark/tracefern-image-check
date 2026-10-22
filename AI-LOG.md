@@ -4336,3 +4336,20 @@ README are where the disclosure lives.
   export of `tags/0.6.1` equal to the build; the plugin page 200; the
   release asset's SHA-256 after download.
 - Decided by Maurice: the push, the SVN commit (his), the tag and release.
+
+## 2026-10-22 — Bundle c2pa-verifier v0.7.1
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "kan je er ook voor zorgen dat het overal wordt doorgevoerd in elke
+  repo waar de verifier wordt gebruikt"; "akkoord"; "akkoord, amendement 20
+  goedgekeurd, plugin 0.6.2".
+- Produced: the lock on v0.7.1 (`composer.json` keeps `^0.7`);
+  `MaintenanceCheckTest` reads `v0.7.1`; the `verifier` field of
+  `tests/wpcs-verifier-baseline.json`; SPEC-006 amendment 20; NOTES.
+- Measured: `MaintenanceCheckTest` red on `v0.7.0`, green after
+  `composer update provemark/c2pa-verifier`; the plugin's `Outcome` over the
+  verifier's 566 JPEG, PNG and WebP fixtures under the bundled settings with
+  and without DigiCert, under 0.7.0 and 0.7.1 (1,132 runs, 0 exceptions:
+  only the two crafted `acknowledged-kind/` files move state, `Valid` to
+  `Invalid`); `composer check` (129 passed), integration (287), multisite
+  (9) and release (17) suites, the last with the baseline counts unchanged.
+- Decided by Maurice: SPEC-006 amendment 20; release as 0.6.2.
