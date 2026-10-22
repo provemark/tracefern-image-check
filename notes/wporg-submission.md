@@ -564,3 +564,25 @@ Releases after 0.1.0:
   `5eb2f8c` and a GitHub release with the same zip (SHA-256 checked after
   download), on Maurice's go. The readme's changelog keeps only 0.6.1
   (10,149 bytes).
+- **0.6.2, 2026-10-22** (bundles c2pa-verifier 0.7.1: an ingredient
+  failure counts as accepted by its signer only when recorded as a
+  failure; SPEC-006 amendment 20): built from `7c75f45` (SHA-256
+  `7bbb78cf…878987a3`, 365,076 bytes, kept in `build/submitted/`). Before
+  the push: `composer check` (129), integration (287), multisite (9) and
+  the Release suite (17). The first Release run again tested a zip built
+  before the release commit; rerun on the `7c75f45` build, its five
+  Playground preview tests could not download
+  `playground.wordpress.net/wp-cli.phar` (this machine now gets a bot
+  challenge there, HTTP 403), the other twelve passed; the push's CI run
+  (39841930510, 9 jobs) ran all 17 green on the same commit. Measured for
+  the bundled verifier: its 566 JPEG, PNG and WebP fixtures under 0.7.0
+  and 0.7.1, DigiCert on and off (1,132 runs): only the two crafted
+  `acknowledged-kind/` files move, `Valid` to `Invalid`. A fresh SVN
+  working copy: `trunk/` replaced by the build (9 files changed, none
+  added or removed), `tags/0.6.2` copied (`diff -r` with the build
+  empty); committed by Maurice as r3760512 (22:39 CEST). Measured: the
+  plugin API reported 0.6.2 (last updated 8:39pm GMT); the public download
+  and an export of SVN `tags/0.6.2` are the build's files; the plugin page
+  answers 200. Git tag `v0.6.2` on `7c75f45` and a GitHub release with the
+  same zip (SHA-256 checked after download), on Maurice's go. The readme's
+  changelog keeps only 0.6.2 (10,173 bytes).

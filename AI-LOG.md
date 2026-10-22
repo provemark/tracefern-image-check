@@ -4363,3 +4363,17 @@ README are where the disclosure lives.
   bytes over SPEC-037 AC6's room and was shortened), and the release suite
   (17 passed) on the release commit, before any push.
 - Decided by Maurice: release as 0.6.2.
+
+## 2026-10-22 — Record the 0.6.2 release
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "ik heb de svn gedaan, dan kan 2 ook".
+- Produced: the zip in `build/submitted/`; a fresh SVN working copy with
+  `trunk/` replaced and `tags/0.6.2` copied (committed by Maurice as
+  r3760512); git tag `v0.6.2` on `7c75f45` and a GitHub release with the
+  zip; the 0.6.2 entry in `notes/wporg-submission.md`.
+- Measured: the Release suite on the `7c75f45` build (12 passed, the five
+  Playground tests blocked by a bot challenge on `playground.wordpress.net`
+  here; 17 green in CI run 39841930510); the plugin API reports 0.6.2; the
+  public download and an export of SVN `tags/0.6.2` equal the build; the
+  plugin page answers 200; the release zip's SHA-256 after download.
+- Decided by Maurice: the SVN commit (his own), then the tag and release.
