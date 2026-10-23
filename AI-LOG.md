@@ -4407,3 +4407,15 @@ README are where the disclosure lives.
 - Measured: on the release commit, before any push: `composer check`
   (129 passed), `ReleaseTest` (11 passed) and `PreviewTest` (6 passed,
   once playground.wordpress.net answered again): the release suite 17 of 17.
+
+## 2026-10-23 — Record the 0.7.0 release
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "ja publiceren"; "ik heb de svn gedaan".
+- Produced: the push of `main`; the zip in `build/submitted/`; a fresh SVN
+  working copy with `trunk/` replaced and `tags/0.7.0` copied (committed
+  by Maurice as r3762121); git tag `v0.7.0` on `f489a5f` and a GitHub
+  release with the zip; the 0.7.0 entry in `notes/wporg-submission.md`.
+- Measured: CI run 39991992440 (9 of 9); the plugin API reports 0.7.0;
+  the public download and an export of SVN `tags/0.7.0` equal the build;
+  the plugin page answers 200; the release zip's SHA-256 after download.
+- Decided by Maurice: publish; the SVN commit (his own).

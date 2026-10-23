@@ -586,3 +586,22 @@ Releases after 0.1.0:
   answers 200. Git tag `v0.6.2` on `7c75f45` and a GitHub release with the
   same zip (SHA-256 checked after download), on Maurice's go. The readme's
   changelog keeps only 0.6.2 (10,173 bytes).
+- **0.7.0, 2026-10-23** (bundles c2pa-verifier 0.8.0: the fixes of a
+  review of its whole code base, two of which reach JPEG, PNG and WebP;
+  SPEC-006 amendment 21): built from `f489a5f` (SHA-256
+  `a21586cf…73b254df`, 379,996 bytes, kept in `build/submitted/`). Before
+  the push: `composer check` (129), integration (287), multisite (9) and
+  the Release suite (17; the six Playground preview tests first blocked
+  by HTTP 403 on `playground.wordpress.net/wp-cli.phar`, then green once
+  it answered). The push's CI run (39991992440) 9 of 9 green. Measured for
+  the bundled verifier: its 572 JPEG, PNG and WebP fixtures under 0.7.1
+  and 0.8.0, DigiCert on and off (1,144 runs): no entry moves in any
+  field. The WPCS baseline grew by seven discouraged-function findings and
+  27 `ExceptionNotEscaped`, all in code the plugin never calls, reviewed
+  by Maurice. A fresh SVN working copy: `trunk/` replaced by the build (30
+  files changed, 4 added), `tags/0.7.0` copied (`diff -r` with the build
+  empty); committed by Maurice as r3762121 (19:29 CEST). Measured: the
+  plugin API reported 0.7.0 (last updated 5:29pm GMT); the public download
+  and an export of SVN `tags/0.7.0` are the build's files; the plugin page
+  answers 200. Git tag `v0.7.0` on `f489a5f` and a GitHub release with the
+  same zip (SHA-256 checked after download).
