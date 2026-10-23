@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4edbafb80ce6f1c21d2b1db41885e429",
+    "content-hash": "b75157c8bb047fccb22b2a28ead51ff7",
     "packages": [
         {
             "name": "provemark/c2pa-verifier",
-            "version": "v0.7.1",
+            "version": "v0.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/provemark/c2pa-verifier.git",
-                "reference": "fe6906d46746101764f48122018cce78da48491a"
+                "reference": "94b659d123afcfd30628a65c8f347ab6678e5fe0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/provemark/c2pa-verifier/zipball/fe6906d46746101764f48122018cce78da48491a",
-                "reference": "fe6906d46746101764f48122018cce78da48491a",
+                "url": "https://api.github.com/repos/provemark/c2pa-verifier/zipball/94b659d123afcfd30628a65c8f347ab6678e5fe0",
+                "reference": "94b659d123afcfd30628a65c8f347ab6678e5fe0",
                 "shasum": ""
             },
             "require": {
@@ -29,6 +29,7 @@
                 "deptrac/deptrac": "^4.7",
                 "ext-phar": "*",
                 "laravel/pint": "^1.32",
+                "opis/json-schema": "^2.6",
                 "pestphp/pest": "^4.0",
                 "phpstan/phpstan": "^2.2",
                 "provemark/content-credentials": "^0.15"
@@ -66,9 +67,9 @@
             ],
             "support": {
                 "issues": "https://github.com/provemark/c2pa-verifier/issues",
-                "source": "https://github.com/provemark/c2pa-verifier/tree/v0.7.1"
+                "source": "https://github.com/provemark/c2pa-verifier/tree/v0.8.0"
             },
-            "time": "2026-10-22T18:22:22+00:00"
+            "time": "2026-10-23T15:53:50+00:00"
         }
     ],
     "packages-dev": [

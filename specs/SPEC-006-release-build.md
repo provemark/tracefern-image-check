@@ -404,6 +404,8 @@ None. Resolved by Maurice on 2026-09-26, as proposed in the draft:
     baseline counts stand (the release suite passes on v0.7.1's `src/`);
     only its `verifier` field moves.
 
+21. **2026-10-23, approved by Maurice van Loon ("wordpress kan nu al"; the baseline and plugin 0.7.0: "ja goed").** The bundled verifier moves to v0.8.0, a minor: a validation time, crJSON and the conformance programme's trust lists, none of which the plugin calls, and the fixes of a review of the whole code base, two of which (an ingredient acknowledging its own failures; a redaction reaching the active manifest) apply to JPEG, PNG and WebP. `composer.json` moves to `^0.8`; `MaintenanceCheckTest` reads `v0.8.0` from the lock (red on `v0.7.1`, green after). Measured for this plugin through its own `Outcome` (every field): the verifier's 572 JPEG, PNG and WebP fixture files under the bundled settings, DigiCert on and off (1,144 runs), under 0.7.1 and 0.8.0, 0 exceptions: no entry moves, in any field. AC4's baseline grows, each finding reviewed: two `json_encode`, two `serialize` (a comparison; nothing is unserialized), two `base64_encode`, one `base64_decode` and 27 `ExceptionNotEscaped`, all in code the plugin never calls (`toCrJson()`, `fromTrustLists()`); `tests/wpcs-verifier-baseline.json` names each.
+
 ## Traceability
 
 | Acceptance criterion | Test (file :: name / group) | Source (file/symbol) |

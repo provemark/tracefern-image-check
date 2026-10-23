@@ -4377,3 +4377,24 @@ README are where the disclosure lives.
   public download and an export of SVN `tags/0.6.2` equal the build; the
   plugin page answers 200; the release zip's SHA-256 after download.
 - Decided by Maurice: the SVN commit (his own), then the tag and release.
+
+## 2026-10-23 — Bundle c2pa-verifier v0.8.0
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "zet eerst op de demo. De drupal module gaat pas op alpha2 en
+  wordpress kan nu al"; "ja goed" (the baseline and plugin 0.7.0).
+- Produced: `composer.json` on `^0.8` and the lock on v0.8.0;
+  `MaintenanceCheckTest` reads `v0.8.0`; `tests/wpcs-verifier-baseline.json`
+  (verifier field, counts and the review of each new finding); SPEC-006
+  amendment 21; NOTES.
+- Measured: `MaintenanceCheckTest` red on `v0.7.1`, green after; the
+  plugin's `Outcome` over the verifier's 572 JPEG, PNG and WebP fixtures
+  under the bundled settings with and without DigiCert, under 0.7.1 and
+  0.8.0 (1,144 runs, 0 exceptions, no entry moves in any field); WPCS on
+  the shipped `src/` of both versions, finding by finding;
+  `composer check` (129 passed), integration (287), multisite (9),
+  release: `ReleaseTest` 11 of 11 with the new baseline, `PreviewTest`
+  green on the first run of this build and then blocked by
+  playground.wordpress.net answering 403 for `wp-cli.phar` (outside the
+  plugin).
+- Decided by Maurice: bundle 0.8.0; the baseline as reviewed; release as
+  0.7.0.
