@@ -4398,3 +4398,12 @@ README are where the disclosure lives.
   plugin).
 - Decided by Maurice: bundle 0.8.0; the baseline as reviewed; release as
   0.7.0.
+
+## 2026-10-23 — Release 0.7.0
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "ja goed" (plugin 0.7.0).
+- Produced: version 0.7.0 in the plugin header and `readme.txt` (Stable
+  tag, changelog: bundles c2pa-verifier 0.8.0).
+- Measured: on the release commit, before any push: `composer check`
+  (129 passed), `ReleaseTest` (11 passed) and `PreviewTest` (6 passed,
+  once playground.wordpress.net answered again): the release suite 17 of 17.
