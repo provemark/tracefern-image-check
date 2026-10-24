@@ -4434,3 +4434,13 @@ README are where the disclosure lives.
   move, `Valid` to `Invalid`, in both modes; WPCS on the verifier's `src/`
   of both versions: the same counts.
 - Decided by Maurice: bundle 0.8.1; release as 0.7.1.
+
+## 2026-10-24 — Release 0.7.1
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, bouw stap 1 en 2" (plugin 0.7.1).
+- Produced: version 0.7.1 in the plugin header and `readme.txt` (Stable
+  tag, changelog: bundles c2pa-verifier 0.8.1). The first changelog line
+  was seven bytes over SPEC-037 AC6's room and was shortened.
+- Measured: on the release commit, before any push: `composer check`
+  (129 passed) and the release suite (17 of 17, `PreviewTest` included),
+  on a build whose zip carries 0.7.1 and verifier 0.8.1.
