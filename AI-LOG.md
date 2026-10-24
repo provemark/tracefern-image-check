@@ -4419,3 +4419,18 @@ README are where the disclosure lives.
   the public download and an export of SVN `tags/0.7.0` equal the build;
   the plugin page answers 200; the release zip's SHA-256 after download.
 - Decided by Maurice: publish; the SVN commit (his own).
+
+## 2026-10-24 — Bundle c2pa-verifier v0.8.1
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "doe nu de WordPress-plugin"; "akkoord, bouw stap 1 en 2" (bundle
+  0.8.1, then release 0.7.1).
+- Produced: the lock on v0.8.1 (`composer.json` stays `^0.8`);
+  `MaintenanceCheckTest` reads `v0.8.1`; `tests/wpcs-verifier-baseline.json`
+  (verifier field and review note); SPEC-006 amendment 22; NOTES.
+- Measured: `MaintenanceCheckTest` red on `v0.8.0`, green after; the
+  plugin's `Outcome` over the verifier's 581 JPEG, PNG and WebP fixtures
+  under the bundled settings with and without DigiCert, under 0.8.0 and
+  0.8.1 (1,162 runs, 0 exceptions): only the five graph-fuzz fault files
+  move, `Valid` to `Invalid`, in both modes; WPCS on the verifier's `src/`
+  of both versions: the same counts.
+- Decided by Maurice: bundle 0.8.1; release as 0.7.1.
