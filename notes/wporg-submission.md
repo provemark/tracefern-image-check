@@ -605,3 +605,20 @@ Releases after 0.1.0:
   and an export of SVN `tags/0.7.0` are the build's files; the plugin page
   answers 200. Git tag `v0.7.0` on `f489a5f` and a GitHub release with the
   same zip (SHA-256 checked after download).
+- **0.7.1, 2026-10-24** (bundles c2pa-verifier 0.8.1: two ways to a
+  wrong `Trusted` closed, both reaching JPEG, PNG and WebP; SPEC-006
+  amendment 22): built from `432aecd` (SHA-256 `b5b726cc…eaf9383a`,
+  380,383 bytes, kept in `build/submitted/`). Before the push: `composer
+  check` (129), integration (287), multisite (9) and the Release suite
+  (17, the Playground preview tests included). The push's CI run
+  (40079040451) 9 of 9 green. Measured for the bundled verifier: its 581
+  JPEG, PNG and WebP fixtures under 0.8.0 and 0.8.1, DigiCert on and off
+  (1,162 runs): only the five graph-fuzz fault files move, `Valid` to
+  `Invalid`, in both modes; the WPCS counts stand. A fresh SVN working
+  copy: `trunk/` replaced by the build (12 files changed, none added or
+  removed), `tags/0.7.1` copied (`diff -r` with the build empty);
+  committed by Maurice as r3762970 (11:00 CEST). Measured: the plugin API
+  reported 0.7.1 (last updated 9:00am GMT); the public download and an
+  export of SVN `tags/0.7.1` are the build's files; the plugin page
+  answers 200. Git tag `v0.7.1` on `432aecd` and a GitHub release with the
+  same zip (SHA-256 checked after download).

@@ -4444,3 +4444,17 @@ README are where the disclosure lives.
 - Measured: on the release commit, before any push: `composer check`
   (129 passed) and the release suite (17 of 17, `PreviewTest` included),
   on a build whose zip carries 0.7.1 and verifier 0.8.1.
+
+## 2026-10-24 — Record the 0.7.1 release
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, push en tag v0.7.1 en maak de GitHub-release";
+  "akkoord, zet de SVN-werkkopie klaar"; "ik heb de svn gedaan".
+- Produced: the push of `main`; the zip in `build/submitted/`; git tag
+  `v0.7.1` on `432aecd` and a GitHub release with the zip; a fresh SVN
+  working copy with `trunk/` replaced and `tags/0.7.1` copied (committed
+  by Maurice as r3762970); the 0.7.1 entry in `notes/wporg-submission.md`.
+- Measured: CI run 40079040451 (9 of 9); the release zip's SHA-256 after
+  download; the plugin API reports 0.7.1; the public download and an
+  export of SVN `tags/0.7.1` equal the build; the plugin page answers 200.
+- Decided by Maurice: push, tag and GitHub release; the SVN commit (his
+  own).
