@@ -4458,3 +4458,22 @@ README are where the disclosure lives.
   export of SVN `tags/0.7.1` equal the build; the plugin page answers 200.
 - Decided by Maurice: push, tag and GitHub release; the SVN commit (his
   own).
+
+## 2026-10-25 — Bundle c2pa-verifier v0.8.2
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, stop colima en doe de plugin en demo" (bundle 0.8.2,
+  then release 0.7.2).
+- Produced: the lock on v0.8.2 (`composer.json` stays `^0.8`);
+  `MaintenanceCheckTest` reads `v0.8.2`; `tests/wpcs-verifier-baseline.json`
+  (verifier field, `ExceptionNotEscaped` 796 to 802, review note); SPEC-006
+  amendment 23; NOTES.
+- Measured: `MaintenanceCheckTest` red on `v0.8.1`, green after; the
+  plugin's `Outcome` over the verifier's 598 JPEG, PNG and WebP fixtures
+  under the bundled settings with and without DigiCert, under 0.8.1 and
+  0.8.2 (1,196 runs, 0 exceptions): only six files new in the verifier
+  move (12 runs); WPCS on the verifier's `src/` of both versions: six more
+  `ExceptionNotEscaped`, all in `Cose/SignatureVerifier.php`'s new
+  message; `composer check` (129 passed); the integration suite (287
+  passed) and the multisite suite (9 passed).
+- Decided by Maurice: bundle 0.8.2. The baseline's six new findings are
+  for him to review.
