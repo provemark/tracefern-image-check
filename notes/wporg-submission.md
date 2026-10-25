@@ -622,3 +622,21 @@ Releases after 0.1.0:
   export of SVN `tags/0.7.1` are the build's files; the plugin page
   answers 200. Git tag `v0.7.1` on `432aecd` and a GitHub release with the
   same zip (SHA-256 checked after download).
+- **0.7.2, 2026-10-25** (bundles c2pa-verifier 0.8.2: two signatures
+  `c2patool` refuses are refused, and a manifest nothing reaches is no
+  longer judged; SPEC-006 amendment 23): built from `5ad019d` (SHA-256
+  `a03e2efb…b847099d`, 380,905 bytes, kept in `build/submitted/`). Before
+  the push: `composer check` (129), integration (287), multisite (9) and
+  the Release suite (17). The push's CI run (40184774296) 9 of 9 green.
+  Measured for the bundled verifier: its 598 JPEG, PNG and WebP fixtures
+  under 0.8.1 and 0.8.2, DigiCert on and off (1,196 runs): only six files
+  new in the verifier move, four `Valid` to `Invalid` and two `Invalid` to
+  `Valid`, in both modes. The WPCS baseline grew by six
+  `ExceptionNotEscaped`, all in one new message the plugin never shows. A
+  fresh SVN working copy: `trunk/` replaced by the build (13 files
+  changed, none added or removed), `tags/0.7.2` copied (`diff -r` with the
+  build empty); committed by Maurice as r3764366 (11:52 CET). Measured:
+  the plugin API reported 0.7.2 (last updated 10:52am GMT); the public
+  download and an export of SVN `tags/0.7.2` are the build's files; the
+  plugin page answers 200. Git tag `v0.7.2` on `5ad019d` and a GitHub
+  release with the same zip (SHA-256 checked after download).

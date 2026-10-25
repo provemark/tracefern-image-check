@@ -4487,3 +4487,18 @@ README are where the disclosure lives.
   (129 passed), `ReadmeTest` (SPEC-037 AC6, the readme still fits) and the
   release suite (17 of 17), on a build whose zip carries 0.7.2 and
   verifier 0.8.2 (zip SHA-256 begins `abd9d4756559bfc3`).
+
+## 2026-10-25 — Record the 0.7.2 release
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, push, tag v0.7.2 en maak de GitHub-release", "heb je
+  commando's voor de svn?", "svn commit gedaan, controleer het".
+- Produced: `main` pushed; tag `v0.7.2`; the GitHub release with the zip
+  built from `5ad019d`; a fresh SVN working copy (`trunk/` replaced by the
+  build, `tags/0.7.2` copied) for Maurice to commit; the 0.7.2 entry in
+  `notes/wporg-submission.md`.
+- Measured: CI run 40184774296 (9 of 9); the release zip's SHA-256 after
+  download; `diff -r` of `tags/0.7.2` with the build before the commit;
+  after r3764366, the plugin API (0.7.2), the public download and an
+  export of SVN `tags/0.7.2` (both equal to the build) and the plugin page
+  (200).
+- Decided by Maurice: push, tag and release; he committed to SVN.
