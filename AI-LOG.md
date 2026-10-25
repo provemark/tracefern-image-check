@@ -4477,3 +4477,13 @@ README are where the disclosure lives.
   passed) and the multisite suite (9 passed).
 - Decided by Maurice: bundle 0.8.2. The baseline's six new findings are
   for him to review.
+
+## 2026-10-25 — Release 0.7.2
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, stop colima en doe de plugin en demo" (plugin 0.7.2).
+- Produced: version 0.7.2 in the plugin header and `readme.txt` (Stable
+  tag, changelog: bundles c2pa-verifier 0.8.2).
+- Measured: on the release commit, before any push: `composer check`
+  (129 passed), `ReadmeTest` (SPEC-037 AC6, the readme still fits) and the
+  release suite (17 of 17), on a build whose zip carries 0.7.2 and
+  verifier 0.8.2 (zip SHA-256 begins `abd9d4756559bfc3`).
