@@ -640,3 +640,23 @@ Releases after 0.1.0:
   download and an export of SVN `tags/0.7.2` are the build's files; the
   plugin page answers 200. Git tag `v0.7.2` on `5ad019d` and a GitHub
   release with the same zip (SHA-256 checked after download).
+- **0.7.3, 2026-10-26** (bundles c2pa-verifier 0.8.3: a `c2pa.opened`
+  action with a second reference and a BMFF hash with no algorithm follow
+  `c2patool`, an ingredient's own stapled `revoked` counts, and an MP4
+  Merkle tree the plugin never checks is read; SPEC-006 amendment 24):
+  built from `d2f2abc` (SHA-256 `6ff7034f…f519d1de`, 385,610 bytes, kept in
+  `build/submitted/`). Before the push: `composer check` (129),
+  integration (287, run alone), multisite (9) and the Release suite (17).
+  The push's CI run (40286947917) 9 of 9 green. Measured for the bundled
+  verifier: its 623 JPEG, PNG and WebP fixtures under 0.8.2 and 0.8.3,
+  DigiCert on and off (1,246 runs): only four files new in the verifier
+  move, `Valid` to `Invalid`, in both modes. The WPCS baseline grew by
+  eight `ExceptionNotEscaped` (nine new in the ISOBMFF proof-box walk, one
+  fewer in `BmffHashCheck`), messages the plugin never shows. A fresh SVN
+  working copy: `trunk/` replaced by the build (15 files changed, none
+  added or removed), `tags/0.7.3` copied (`diff -r` with the build empty);
+  committed by Maurice as r3765776 (09:00 CET). Measured: the plugin API
+  reported 0.7.3 (last updated 8:00am GMT); the public download and an
+  export of SVN `tags/0.7.3` are the build's files; the plugin page
+  answers 200. Git tag `v0.7.3` on `d2f2abc` and a GitHub release with the
+  same zip (SHA-256 checked after download).

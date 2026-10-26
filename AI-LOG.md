@@ -4534,3 +4534,20 @@ README are where the disclosure lives.
   on a build whose zip carries 0.7.3 and verifier 0.8.3. The suite ran on
   the commit before this log entry was added to it; `AI-LOG.md` does not
   ship, and the zip was built again from this commit.
+
+## 2026-10-26 — Record the 0.7.3 release
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, push, tag en publiceer 0.7.3", "svn commit gedaan,
+  controleer het".
+- Produced: `main` pushed; tag `v0.7.3`; the GitHub release with the zip
+  built from `d2f2abc`; a fresh SVN working copy (`trunk/` replaced by the
+  build, `tags/0.7.3` copied) for Maurice to commit; the 0.7.3 entry in
+  `notes/wporg-submission.md`.
+- Measured: CI run 40286947917 (9 of 9); the release zip's SHA-256 after
+  download; `diff -r` of `tags/0.7.3` with the build before the commit;
+  after r3765776, the plugin API (0.7.3), the public download and an
+  export of SVN `tags/0.7.3` (both equal to the build) and the plugin page
+  (200).
+- Decided by Maurice: push, tag, publish and the WPCS baseline; he
+  committed to SVN.
+
