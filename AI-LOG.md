@@ -4502,3 +4502,24 @@ README are where the disclosure lives.
   export of SVN `tags/0.7.2` (both equal to the build) and the plugin page
   (200).
 - Decided by Maurice: push, tag and release; he committed to SVN.
+
+## 2026-10-26 — Bundle c2pa-verifier v0.8.3
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, ga door met de WordPress-plugin" (bundle 0.8.3, then
+  release 0.7.3).
+- Produced: the lock on v0.8.3 (`composer.json` stays `^0.8`);
+  `MaintenanceCheckTest` reads `v0.8.3`; `tests/wpcs-verifier-baseline.json`
+  (verifier field, `ExceptionNotEscaped` 802 to 810, review note); SPEC-006
+  amendment 24; NOTES.
+- Measured: `MaintenanceCheckTest` red on `v0.8.2`, green after; the
+  plugin's `Outcome` over the verifier's 623 JPEG, PNG and WebP fixtures
+  under the bundled settings with and without DigiCert, under 0.8.2 and
+  0.8.3 (1,246 runs, 0 exceptions): only four files new in the verifier
+  move (8 runs), `Valid` to `Invalid`; WPCS on the verifier's `src/` of both
+  versions: nine new `ExceptionNotEscaped` in the ISOBMFF extractor, one
+  fewer in `BmffHashCheck`; `composer check` (129 passed); the integration
+  suite (287 passed, run alone; two earlier runs overlapped on the same
+  site and failed only where they overlapped) and the multisite suite (9
+  passed).
+- Decided by Maurice: bundle 0.8.3. The baseline's eight new findings are
+  for him to review.
