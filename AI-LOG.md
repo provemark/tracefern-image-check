@@ -4551,3 +4551,25 @@ README are where the disclosure lives.
 - Decided by Maurice: push, tag, publish and the WPCS baseline; he
   committed to SVN.
 
+
+## 2026-10-28 — The weekly check compares the trust lists, not only the commit
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "Heb je een suggestie wat hier nog moet gebeuren", "akkoord,
+  begin met punt 1" (the new upstream trust lists), "akkoord, optie A",
+  "akkoord, amendement goedgekeurd, schrijf de tests".
+- Produced: SPEC-030 amendment 1; `tools/maintenance-check.php` fetches
+  the two PEM lists at a new upstream commit and reports the trust lists
+  only when one differs from `trust/`; tests for AC3, AC3a and AC6.
+- Measured: upstream commit `d6dec63` (2026-10-26) leaves both PEM lists
+  byte for byte equal to the bundled `47009ee`; its JSON lists hold the
+  same entities, services and certificates in another order, with only
+  the sequence number, issue date and next update changed. The new tests
+  red first (6 of 21), green after; `composer check` (134 passed); the
+  script against the real sources reports only verifier v0.9.0; on a
+  copy with a changed TSA list it names that file; with a list removed it
+  exits 1 without a report.
+- Reasoned: no verdict can move, since the bundled files are unchanged;
+  comparing bytes can still report a list upstream only reformats, which
+  errs towards a report.
+- Decided by Maurice: option A (compare contents) and the amendment; no
+  trust-list update and no release.

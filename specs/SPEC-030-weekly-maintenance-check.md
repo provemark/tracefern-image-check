@@ -157,6 +157,48 @@ function newestVersionTag(array $tags): ?string;        // 'v0.10.0'
 - Approved as proposed (2026-09-29): Monday 06:00 UTC, and a public
   issue in this repository.
 
+## Amendments
+
+1. **2026-10-28, approved by Maurice van Loon ("akkoord, amendement goedgekeurd").**
+   AC3 compares the lists, not only the commit. Upstream's automated sync
+   makes commits under `trust-list/` that change only the JSON forms of
+   the lists, which the plugin does not bundle. Measured: commit `d6dec63`
+   (2026-10-26) leaves `C2PA-TRUST-LIST.pem` and `C2PA-TSA-TRUST-LIST.pem`
+   byte for byte equal to `47009ee`, the bundled source; its JSON lists
+   hold the same entities, services, certificates, statuses and starting
+   times in another order, and change only `LoTESequenceNumber` (1 to 2),
+   `ListIssueDateTime` (to 2026-10-23) and `NextUpdate` (to 2027-01-21).
+   Under AC3 as written, the check would open an issue for it on the next
+   Monday, and open it again each week after it is closed, while there is
+   nothing to bundle.
+
+   - **AC3 becomes:** given `trust/README.md` at `47009ee` and a latest
+     commit touching `trust-list/` that differs from it, the check fetches
+     `trust-list/C2PA-TRUST-LIST.pem` and `trust-list/C2PA-TSA-TRUST-LIST.pem`
+     at that commit (`https://raw.githubusercontent.com/c2pa-org/conformance-public/<sha>/trust-list/<file>`)
+     and compares each byte for byte with the file of that name in
+     `trust/`. The report has one line, as before, only when at least one
+     differs, and that line names the files that differ. When both are
+     equal, it reports nothing for the trust lists. When the commit is the
+     bundled one, it fetches nothing, as before.
+   - **AC3a (new):** a latest commit whose two PEM files equal `trust/`
+     reports nothing (the case of `d6dec63`).
+   - **AC6 also covers:** a PEM file that cannot be fetched or is empty,
+     at the latest commit, or a missing file in `trust/`, stops the check
+     (exit 1, no report), as any other value it cannot read.
+   - The comparison stays a function without network access (bundled and
+     current contents in, the names of the differing files out); the
+     fetch is two more calls through `fetchUrl()`, only when the commit
+     differs. No token is sent to `raw.githubusercontent.com`.
+   - Unchanged: `trust/README.md`, `TrustConfig::LIST_DATE` and
+     `LIST_COMMIT` keep `47009ee` and 2026-10-17, the source of the
+     bundled files; the plugin, its zip and its behaviour do not change,
+     so no release follows from this amendment.
+   - Reasoned: comparing bytes, not certificate sets, can still report a
+     PEM file that upstream only reformats. That errs towards a report,
+     which a person can close, never towards silence about a new or a
+     removed authority.
+
 ## Traceability
 
 Filled at implementation (2026-09-29). Unit tests in
@@ -173,6 +215,20 @@ became `implemented` after the manual run for AC8.
 | AC6                  | MaintenanceCheckTest :: AC6 (both; `MAINTENANCE_CHECK_OFFLINE=1` stands in for an unreachable remote) | the readers above; `fetchUrl()`, `main()` (exit 1, nothing on stdout) |
 | AC7                  | MaintenanceCheckTest :: AC7 | `.github/workflows/maintenance.yml` (`on`, `permissions`) |
 | AC8                  | by hand: run 36529574384 (`workflow_dispatch` on `e23fcc7`, 2026-09-29) green, "All current.", no issue; the duplicate search itself checked on sample data only, since nothing was behind | `.github/workflows/maintenance.yml` (issue search before `gh issue create`) |
+
+Amendment 1 (2026-10-28): AC3 is `MaintenanceCheckTest` :: AC3 (both:
+the line names the files that differ; the two PEM lists and their URL at
+a commit), AC3a is :: AC3a (the bundled files against themselves, under
+a new commit, report nothing), and AC6 gains three datasets (a fetched
+list empty or missing, a bundled list missing); source
+`trustListFiles()`, `trustListUrl()`, `bundledTrustLists()`,
+`trustListsThatDiffer()`, `maintenanceReport()`, `main()` (fetches the
+lists only when the commit differs). Seen red first (6 of 21, undefined
+functions). By hand on 2026-10-28: the script against the real sources
+reports only `verifier v0.9.0`, nothing for `d6dec63`; on a copy of the
+repository with one line added to the TSA list it reports the trust
+lists, naming `C2PA-TSA-TRUST-LIST.pem`; with the signer list removed it
+exits 1 with no report.
 
 Also checked by hand on 2026-09-29: the script against the real sources
 reports nothing (all current, exit 0); with older local values it reports

@@ -68,6 +68,64 @@ function latestTrustCommit(string $commits): array
 }
 
 /**
+ * The bundled C2PA lists in trust/, compared with upstream's (SPEC-030
+ * amendment 1); upstream's JSON forms are not bundled.
+ *
+ * @return list<string>
+ */
+function trustListFiles(): array
+{
+    return ['C2PA-TRUST-LIST.pem', 'C2PA-TSA-TRUST-LIST.pem'];
+}
+
+/** Where upstream keeps one of those lists at a commit. */
+function trustListUrl(string $sha, string $file): string
+{
+    return "https://raw.githubusercontent.com/c2pa-org/conformance-public/$sha/trust-list/$file";
+}
+
+/**
+ * The bundled lists, by file name.
+ *
+ * @return array<string, string>
+ */
+function bundledTrustLists(string $dir): array
+{
+    $lists = [];
+    foreach (trustListFiles() as $file) {
+        $content = is_file($dir.'/'.$file) ? file_get_contents($dir.'/'.$file) : false;
+        $lists[$file] = is_string($content) ? $content : throw new RuntimeException("could not read trust/$file");
+    }
+
+    return $lists;
+}
+
+/**
+ * The lists whose bytes differ between the bundled and the current copy,
+ * in the order of trustListFiles(); a missing or empty copy is an error.
+ *
+ * @param  array<string, string>  $bundled
+ * @param  array<string, string>  $current
+ * @return list<string>
+ */
+function trustListsThatDiffer(array $bundled, array $current): array
+{
+    $differs = [];
+    foreach (trustListFiles() as $file) {
+        $mine = $bundled[$file] ?? '';
+        $theirs = $current[$file] ?? '';
+        if ($mine === '' || $theirs === '') {
+            throw new RuntimeException("no content for the trust list $file");
+        }
+        if ($mine !== $theirs) {
+            $differs[] = $file;
+        }
+    }
+
+    return $differs;
+}
+
+/**
  * The tag names from GitHub's list of tags.
  *
  * @return list<string>
@@ -100,7 +158,7 @@ function newestVersionTag(array $tags): ?string
  * verifier; empty when all are current.
  *
  * @param  array{wordpress: string, trust: string, verifier: string}  $local
- * @param  array{wordpress: string, trust: array{sha: string, date: string}, verifier: string}  $current
+ * @param  array{wordpress: string, trust: array{sha: string, date: string, differs: list<string>}, verifier: string}  $current
  * @return list<array{title: string, line: string}>
  */
 function maintenanceReport(array $local, array $current): array
@@ -112,11 +170,13 @@ function maintenanceReport(array $local, array $current): array
             'line' => "- WordPress {$current['wordpress']} is out; `readme.txt` says `Tested up to: {$local['wordpress']}`. Run the tests on {$current['wordpress']} first, then change the line (no new plugin version is needed for that alone).",
         ];
     }
-    if (! str_starts_with($current['trust']['sha'], $local['trust'])) {
+    // A new commit that leaves the bundled files as they are is nothing to bundle (amendment 1).
+    if (! str_starts_with($current['trust']['sha'], $local['trust']) && $current['trust']['differs'] !== []) {
         $short = substr($current['trust']['sha'], 0, 7);
+        $files = implode(', ', array_map(static fn (string $file): string => "`$file`", $current['trust']['differs']));
         $report[] = [
             'title' => 'trust lists',
-            'line' => "- The C2PA trust lists changed: `c2pa-org/conformance-public` commit `{$short}` ({$current['trust']['date']}); the bundled lists are from `{$local['trust']}` (`trust/README.md`).",
+            'line' => "- The C2PA trust lists changed: `c2pa-org/conformance-public` commit `{$short}` ({$current['trust']['date']}) differs in {$files}; the bundled lists are from `{$local['trust']}` (`trust/README.md`).",
         ];
     }
     if (version_compare(ltrim($current['verifier'], 'v'), ltrim($local['verifier'], 'v'), '>')) {
@@ -182,9 +242,18 @@ function main(): int
             'verifier' => lockedVerifier(repositoryFile('composer.lock')),
         ];
         $newest = newestVersionTag(tagNames(fetchUrl('https://api.github.com/repos/provemark/c2pa-verifier/tags?per_page=100')));
+        $trust = latestTrustCommit(fetchUrl('https://api.github.com/repos/c2pa-org/conformance-public/commits?path=trust-list&per_page=1'));
+        $differs = [];
+        if (! str_starts_with($trust['sha'], $local['trust'])) {
+            $upstream = [];
+            foreach (trustListFiles() as $file) {
+                $upstream[$file] = fetchUrl(trustListUrl($trust['sha'], $file));
+            }
+            $differs = trustListsThatDiffer(bundledTrustLists(dirname(__DIR__).'/trust'), $upstream);
+        }
         $current = [
             'wordpress' => wordpressMajorMinor(fetchUrl('https://api.wordpress.org/core/version-check/1.7/')),
-            'trust' => latestTrustCommit(fetchUrl('https://api.github.com/repos/c2pa-org/conformance-public/commits?path=trust-list&per_page=1')),
+            'trust' => $trust + ['differs' => $differs],
             'verifier' => $newest ?? throw new RuntimeException('the verifier has no version tag'),
         ];
     } catch (RuntimeException $e) {
