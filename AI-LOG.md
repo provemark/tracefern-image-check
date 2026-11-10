@@ -4603,3 +4603,16 @@ README are where the disclosure lives.
   the verifier's CHANGELOG.
 - Decided by Maurice: bundle 0.10.0 in one step; the amendment; the new
   baseline and the eight findings of 0.8.3 left for his review.
+
+## 2026-11-10 — Release 0.8.0
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, bereid de release-commit voor 0.8.0 voor".
+- Produced: version 0.8.0 in the plugin header and `readme.txt` (Stable
+  tag, changelog: bundles c2pa-verifier 0.10.0, with the fixes of its
+  security review; a longer line went over SPEC-037 AC6's byte cap and was
+  shortened).
+- Measured: on the release commit, before any push: `ReadmeTest` (SPEC-037
+  AC6, 10,134 bytes; 21 passed) and the release suite (17 of 17), on a
+  build whose zip carries 0.8.0 and verifier v0.10.0. The suite ran on the
+  commit before this log entry was added to it; `AI-LOG.md` does not ship,
+  and the zip was built again from this commit.
