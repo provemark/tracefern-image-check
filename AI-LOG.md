@@ -4573,3 +4573,33 @@ README are where the disclosure lives.
   errs towards a report.
 - Decided by Maurice: option A (compare contents) and the amendment; no
   trust-list update and no release.
+
+## 2026-11-10 — Bundle c2pa-verifier v0.10.0
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "Kan je deze module updaten naar de nieuwste verifier?", then
+  "akkoord, bouw stap 1 en 2", "… stap 3", "… stap 4", "akkoord, bouw
+  stap 5 en keur de 8 goed".
+- Produced: SPEC-006 amendment 25; `composer.json` on `^0.10` and the lock
+  on v0.10.0 (from v0.8.3, over v0.9.0); `MaintenanceCheckTest` reads
+  `v0.10.0`; `tests/wpcs-verifier-baseline.json` (verifier field,
+  `base64_encode` 8 to 12, `json_encode` 4 to 6, `ExceptionNotEscaped` 810
+  to 836, review notes).
+- Measured: `MaintenanceCheckTest` red on `v0.8.3`, green after; the
+  plugin's `Outcome` over the verifier's 668 JPEG, PNG and WebP fixtures
+  under the bundled settings with and without DigiCert, under 0.8.3 and
+  0.10.0 (1,336 runs, 0 exceptions escaping `Checker`): 14 files move,
+  alike in both modes (28 runs): six `numeric-label/` files from `error`
+  to a verdict, three CAWG files `Valid` to `Invalid`, five
+  `assertion-cbor-*` files keep `Invalid` with `assertion.cbor.invalid`
+  for `general.error`; no `Trusted` moves; `error` runs 22 to 10. WPCS on
+  the verifier's `src/` of both versions (0.8.3 equal to the old
+  baseline); `composer check` (134 passed); the integration
+  suite (287 passed) and the multisite suite (9 passed), run one after
+  the other; the release suite with AC4 on the build of this commit
+  follows it, as the build packs HEAD.
+- Reasoned: no plugin code changes, as the plugin calls none of the new
+  API and tests for no status code; the sodium_compat fix and the JPEG
+  segment and PNG chunk limits are not in the fixture corpus and rest on
+  the verifier's CHANGELOG.
+- Decided by Maurice: bundle 0.10.0 in one step; the amendment; the new
+  baseline and the eight findings of 0.8.3 left for his review.
