@@ -660,3 +660,24 @@ Releases after 0.1.0:
   export of SVN `tags/0.7.3` are the build's files; the plugin page
   answers 200. Git tag `v0.7.3` on `d2f2abc` and a GitHub release with the
   same zip (SHA-256 checked after download).
+- **0.8.0, 2026-11-10** (bundles c2pa-verifier 0.10.0, from 0.8.3 over
+  0.9.0: the fixes of the verifier's security review, CAWG identities in
+  ingredients and under instance labels refused, numeric labels and
+  sodium_compat no longer throw, `assertion.cbor.invalid` for
+  `general.error`, a JPEG segment and PNG chunk limit; SPEC-006 amendment
+  25): built from `6b74900` (SHA-256 `a2f89b07…afe65b`, 407,960 bytes, kept
+  in `build/submitted/`). Before the push: `composer check` (134),
+  integration (287, run alone), multisite (9) and the Release suite (17).
+  The push's CI run (42786236874) 9 of 9 green. Measured for the bundled
+  verifier: its 668 JPEG, PNG and WebP fixtures under 0.8.3 and 0.10.0,
+  DigiCert on and off (1,336 runs): 14 files move, alike in both modes,
+  and no `Trusted` verdict moves. The WPCS baseline grew by 26
+  `ExceptionNotEscaped`, four `base64_encode` and two `json_encode`,
+  reviewed by Maurice with the eight of 0.8.3. A fresh SVN working copy:
+  `trunk/` replaced by the build (49 files changed, 9 added, none
+  removed), `tags/0.8.0` copied (`diff -r` with the build empty);
+  committed by Maurice as r3794221 (12:15 CET). Measured: the plugin API
+  reported 0.8.0 (last updated 11:15am GMT); the public download and an
+  export of SVN `tags/0.8.0` are the build's files; the plugin page
+  answers 200. Git tag `v0.8.0` on `6b74900` and a GitHub release with the
+  same zip (SHA-256 checked after download).

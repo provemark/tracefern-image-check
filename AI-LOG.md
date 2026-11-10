@@ -4616,3 +4616,19 @@ README are where the disclosure lives.
   build whose zip carries 0.8.0 and verifier v0.10.0. The suite ran on the
   commit before this log entry was added to it; `AI-LOG.md` does not ship,
   and the zip was built again from this commit.
+
+## 2026-11-10 — Record the 0.8.0 release
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "akkoord, push maar", "gecommit, controleer de release",
+  "akkoord, tag en release maar".
+- Produced: the push of `a6d9ab3` and `6b74900`; a sparse SVN working copy
+  with `trunk/` replaced by the build and `tags/0.8.0` copied; tag `v0.8.0`
+  and the GitHub release with the zip; the 0.8.0 entry in
+  `notes/wporg-submission.md` §5.
+- Measured: CI run 42786236874 (9 of 9); `diff -r` of `trunk/` with the
+  build before the commit; after r3794221, the plugin API (0.8.0), the
+  public download and an export of SVN `tags/0.8.0` (both equal to the
+  build; the directory repacks the zip, so its SHA-256 differs) and the
+  plugin page (200); the GitHub release's zip SHA-256 after download,
+  equal to the build.
+- Decided by Maurice: push, tag and release; he committed to SVN.
