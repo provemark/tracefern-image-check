@@ -4655,3 +4655,11 @@ README are where the disclosure lives.
 - Reasoned: only a file whose signer or time-stamp chains to the Samsung
   root can move; earlier entries keep their recorded source.
 - Decided by Maurice: the update; closing #4.
+
+## 2026-11-11 — Bundle c2pa-verifier v0.10.1
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "push maar en bereid tracefern 0.8.1 voor".
+- Produced: `composer.lock` (v0.10.0 → v0.10.1, `composer.json` unchanged at `^0.10`); `MaintenanceCheckTest` reads `v0.10.1`; SPEC-006 amendment 26.
+- Measured: the plugin's `Outcome` over the verifier's 677 JPEG, PNG and WebP fixtures, DigiCert on and off, under both versions (1,354 runs, 0 exceptions): 5 files move alike in both modes, all `Valid` to `Invalid` with `hashedURI.missing` (`icons/agents-icon.png` and four `icon-forms/` probes); no `Trusted` verdict moves; `error` runs stay 10. The verifier's own note names one file because it measured at 2026-10-27, before the probes' certificates (checked: all eight probes `Invalid` under both versions at that time). `MaintenanceCheckTest` red on the old lock, green after (a first edit also changed AC4's fixed tag list and turned it red; reverted). Unit (134), integration (287), multisite (9), release suite (17, nothing beyond the WPCS baseline) green.
+- Reasoned: no plugin code changes; the plugin has no `match` over `StatusCode`.
+- Decided by Maurice: the update (a patch, 0.10.1).
