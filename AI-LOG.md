@@ -4632,3 +4632,26 @@ README are where the disclosure lives.
   plugin page (200); the GitHub release's zip SHA-256 after download,
   equal to the build.
 - Decided by Maurice: push, tag and release; he committed to SVN.
+
+## 2026-11-11 — Bundle the C2PA trust lists of 2026-11-04
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "sluit #4 en werk de trust lists bij in tracefern".
+- Produced: `trust/C2PA-TRUST-LIST.pem` and `C2PA-TSA-TRUST-LIST.pem`
+  from `c2pa-org/conformance-public` `a95f2c4`, unchanged;
+  `TrustConfig::LIST_DATE` and `LIST_COMMIT`; `trust/README.md`; the tests
+  that name the list (`TrustConfigTest`, `TrustTest`,
+  `MaintenanceCheckTest`); SPEC-004 amendment 3. Issue #4 closed (v0.10.0
+  is bundled since 0.8.0).
+- Measured: the certificate subjects and SHA-256 fingerprints of old and
+  new lists (one certificate added to both, *Samsung C2PA Root CA G1*;
+  none removed; nothing else in the files changed); the unit tests red on
+  the new date, commit and stale boundary (4 failed), then green (134);
+  the verifier's 677 JPEG, PNG and WebP fixtures under old and new lists,
+  DigiCert on and off (2,708 runs, 0 exceptions, 0 state moves), and the
+  same probe against a signer list cut to one certificate (4 moves), so
+  the probe sees a change. Last week's red CI run 42806432173 was a failed
+  download of a fixture from raw.githubusercontent.com in the release
+  build (the URL answers 200 now); its failed jobs were run again.
+- Reasoned: only a file whose signer or time-stamp chains to the Samsung
+  root can move; earlier entries keep their recorded source.
+- Decided by Maurice: the update; closing #4.

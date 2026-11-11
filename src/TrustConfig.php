@@ -21,9 +21,9 @@ use Throwable;
  */
 final class TrustConfig
 {
-    public const string LIST_DATE = '2026-10-17';
+    public const string LIST_DATE = '2026-11-04';
 
-    public const string LIST_COMMIT = '47009ee';
+    public const string LIST_COMMIT = 'a95f2c4';
 
     public const int STALE_AFTER_DAYS = 183;
 

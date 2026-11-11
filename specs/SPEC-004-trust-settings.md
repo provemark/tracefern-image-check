@@ -218,6 +218,26 @@ None. Resolved by Maurice on 2026-09-26, as proposed in the draft:
    NETLOCK. Reasoned: a file signed under NETLOCK goes from `Valid` to
    `Trusted`; no other file can move, since nothing was removed.
 
+3. **2026-11-11, approved by Maurice van Loon.** The bundled C2PA lists move from
+   `47009ee` (2026-10-17) to `a95f2c4` (2026-11-04), the latest commit
+   touching `trust-list/` (reported by the weekly maintenance check, issue
+   #5). Measured: nothing is removed; one certificate is added to both
+   lists, *Samsung C2PA Root CA G1* (Samsung Electronics Co., Ltd., KR;
+   SHA-256 `98:91:8F:06…E3:5A:9E`, valid to 2046-10-26), so the signer
+   list goes from 32 to 33 and the TSA list from 23 to 24. The files are
+   otherwise byte for byte the same. `TrustConfig::LIST_DATE` and
+   `LIST_COMMIT` follow, so new checks record `c2pa-2026-11-04` (with
+   `+digicert`), the settings page names the new date and commit, and
+   AC9's age warning starts on 2027-05-06. Entries checked before keep the
+   source they were checked with; nothing is re-checked. Measured with the
+   verifier's 677 JPEG, PNG and WebP fixtures, DigiCert on and off, old
+   against new lists (2,708 runs): 0 exceptions, no state moves; the same
+   probe with the signer list cut to one certificate moves four, so it
+   sees a change. None of the fixtures is signed under the Samsung root.
+   Reasoned: only a file whose signer or time-stamp chains to that root
+   can move (a signer from `Valid` to `Trusted`); no other file can, since
+   nothing was removed.
+
 ## Traceability
 
 Filled when status becomes `implemented`. Every acceptance criterion maps to at
