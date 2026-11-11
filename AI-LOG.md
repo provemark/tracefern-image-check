@@ -4663,3 +4663,10 @@ README are where the disclosure lives.
 - Measured: the plugin's `Outcome` over the verifier's 677 JPEG, PNG and WebP fixtures, DigiCert on and off, under both versions (1,354 runs, 0 exceptions): 5 files move alike in both modes, all `Valid` to `Invalid` with `hashedURI.missing` (`icons/agents-icon.png` and four `icon-forms/` probes); no `Trusted` verdict moves; `error` runs stay 10. The verifier's own note names one file because it measured at 2026-10-27, before the probes' certificates (checked: all eight probes `Invalid` under both versions at that time). `MaintenanceCheckTest` red on the old lock, green after (a first edit also changed AC4's fixed tag list and turned it red; reverted). Unit (134), integration (287), multisite (9), release suite (17, nothing beyond the WPCS baseline) green.
 - Reasoned: no plugin code changes; the plugin has no `match` over `StatusCode`.
 - Decided by Maurice: the update (a patch, 0.10.1).
+
+## 2026-11-11 — Release 0.8.1
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "bereid tracefern 0.8.1 voor".
+- Produced: version 0.8.1 in the plugin header and `readme.txt` (Stable tag, changelog: bundles c2pa-verifier 0.10.1 and the C2PA trust lists of 2026-11-04).
+- Measured: `readme.txt` 10,134 bytes (under ReadmeTest's 10,240); a first build from the commit before the header change carried `Version: 0.8.0` (the build reads the commit, not the working tree), so the release suite runs on a build of this commit.
+- Decided by Maurice: release 0.8.1 prepared; push, SVN, tag and GitHub release wait for his word.
