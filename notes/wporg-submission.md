@@ -681,3 +681,23 @@ Releases after 0.1.0:
   export of SVN `tags/0.8.0` are the build's files; the plugin page
   answers 200. Git tag `v0.8.0` on `6b74900` and a GitHub release with the
   same zip (SHA-256 checked after download).
+- **0.8.1, 2026-11-11** (bundles c2pa-verifier 0.10.1, an icon that is
+  not a hashed URI is `hashedURI.missing`, SPEC-006 amendment 26; and the
+  C2PA trust lists of 2026-11-04, `a95f2c4`, Samsung C2PA Root CA G1 added
+  to both, SPEC-004 amendment 3): built from `af14591` (SHA-256
+  `ddffbda2…fd6eac1c`, 409,317 bytes, kept in `build/submitted/`). Before
+  the push: `composer check` (134), integration (287), multisite (9) and
+  the Release suite (17). The push's CI run (43023049606) 9 of 9 green.
+  Measured for the bundled verifier: its 677 JPEG, PNG and WebP fixtures
+  under 0.10.0 and 0.10.1, DigiCert on and off (1,354 runs): 5 files move
+  `Valid` to `Invalid`, alike in both modes, no `Trusted` verdict moves;
+  for the trust lists, the 677 fixtures under old and new lists (2,708
+  runs): no state moves. The WPCS check finds nothing beyond the baseline.
+  A fresh sparse SVN working copy (r3796360): `trunk/` replaced by the
+  build (15 files changed, none added or removed), `tags/0.8.1` copied
+  (`diff -r` with the build empty); committed by Maurice as r3796376
+  (14:13 CET). Measured: the plugin API reported 0.8.1 (last updated
+  1:13pm GMT); the public download and an export of SVN `tags/0.8.1` are
+  the build's files; the plugin page answers 200. Git tag `v0.8.1` on
+  `af14591` and a GitHub release with the same zip (SHA-256 checked after
+  download).

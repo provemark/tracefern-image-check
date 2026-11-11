@@ -4670,3 +4670,10 @@ README are where the disclosure lives.
 - Produced: version 0.8.1 in the plugin header and `readme.txt` (Stable tag, changelog: bundles c2pa-verifier 0.10.1 and the C2PA trust lists of 2026-11-04).
 - Measured: `readme.txt` 10,134 bytes (under ReadmeTest's 10,240); a first build from the commit before the header change carried `Version: 0.8.0` (the build reads the commit, not the working tree), so the release suite runs on a build of this commit.
 - Decided by Maurice: release 0.8.1 prepared; push, SVN, tag and GitHub release wait for his word.
+
+## 2026-11-11 — Record the 0.8.1 release
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "push maar"; "zet de SVN working copy klaar"; "svn commit is gedaan"; "tag en release v0.8.1 maar".
+- Produced: the push of `7b807e0` and `af14591`; a sparse SVN working copy with `trunk/` replaced by the build and `tags/0.8.1` copied; tag `v0.8.1` and the GitHub release with the zip; the 0.8.1 entry in `notes/wporg-submission.md` §5.
+- Measured: CI run 43023049606 (9 of 9); `diff -r` of `trunk/` and `tags/0.8.1` with the build before the commit; after r3796376, the plugin API (0.8.1), the public download and an export of SVN `tags/0.8.1` (both equal to the build) and the plugin page (200); the GitHub release's zip SHA-256 after download, equal to the build.
+- Decided by Maurice: push, tag and release; he committed to SVN.
