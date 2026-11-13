@@ -4677,3 +4677,35 @@ README are where the disclosure lives.
 - Produced: the push of `7b807e0` and `af14591`; a sparse SVN working copy with `trunk/` replaced by the build and `tags/0.8.1` copied; tag `v0.8.1` and the GitHub release with the zip; the 0.8.1 entry in `notes/wporg-submission.md` §5.
 - Measured: CI run 43023049606 (9 of 9); `diff -r` of `trunk/` and `tags/0.8.1` with the build before the commit; after r3796376, the plugin API (0.8.1), the public download and an export of SVN `tags/0.8.1` (both equal to the build) and the plugin page (200); the GitHub release's zip SHA-256 after download, equal to the build.
 - Decided by Maurice: push, tag and release; he committed to SVN.
+
+## 2026-11-13 — Bundle c2pa-verifier v0.11.0
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "werk Tracefern bij naar verifier 0.11.0".
+- Produced:
+  - `composer.json` on `^0.11` and the lock on v0.11.0 (from v0.10.1);
+  - `MaintenanceCheckTest` reads `v0.11.0`;
+  - SPEC-006 amendment 27;
+  - `tests/wpcs-verifier-baseline.json`: `verifier` v0.11.0,
+    `ExceptionNotEscaped` 836 to 846, the `about` text;
+- Measured:
+  - `MaintenanceCheckTest` red on the v0.10.1 lock, green after.
+  - The plugin's `Checker` and `Outcome` over the verifier's 700 JPEG,
+    PNG and WebP fixtures (at `7e325eb`), DigiCert on and off, under both
+    versions: 1,400 runs, 0 exceptions. Each side loaded its own vendor
+    tree.
+    - 23 files move alike in both modes, all of them the verifier's
+      probes. Six go `Invalid` to `Valid`: five `box-hash/written*` and
+      `slashless/all-slashless.png`. The rest stay `Invalid` with codes
+      that now name the cause; the Bing file now reports its expired leaf.
+    - No `Trusted` verdict moves; `error` runs stay 10.
+  - WPCS on both versions' `src/` (without `src/Cli`): +10
+    `ExceptionNotEscaped`, all in `Hash/JpegBoxMap.php` (integers, hex
+    bytes, names from its own table).
+  - `composer check` (134 passed), integration (287) and multisite (9)
+    green.
+  - The release suite was not run: the build packs `HEAD`, so it needs
+    the commit.
+- Reasoned: no plugin code changes; the plugin has no `match` over
+  `StatusCode` and calls none of the new API.
+- Decided by Maurice: the update; amendment 27 and the ten new findings
+  ("goedgekeurd, commit en draai de release-suite").
