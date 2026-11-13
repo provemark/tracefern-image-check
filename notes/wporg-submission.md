@@ -701,3 +701,23 @@ Releases after 0.1.0:
   the build's files; the plugin page answers 200. Git tag `v0.8.1` on
   `af14591` and a GitHub release with the same zip (SHA-256 checked after
   download).
+- **0.8.2, 2026-11-13** (bundles c2pa-verifier 0.11.0, the general box
+  hash in a JPEG as Microsoft Bing Image Creator writes it, and JUMBF URIs
+  without the leading slash, SPEC-006 amendment 27): built from `fc6958c`
+  (SHA-256 `8fa0f278…6a3de292`, 417,724 bytes, kept in `build/submitted/`).
+  Before the push: `composer check` (134), integration (287), multisite (9)
+  and the Release suite (17, on a build of `463e2a6` and again on
+  `fc6958c`). The push's CI runs green: 43398000012 on `463e2a6`,
+  43406697314 on `fc6958c` (9 of 9). Measured for the bundled verifier: its
+  700 JPEG, PNG and WebP fixtures under 0.10.1 and 0.11.0, DigiCert on and
+  off (1,400 runs): 23 files move, alike in both modes, 6 `Invalid` to
+  `Valid`, the rest stay `Invalid` with other codes; no `Trusted` verdict
+  moves. WPCS: ten more `ExceptionNotEscaped`, all in `Hash/JpegBoxMap.php`,
+  reviewed by Maurice. A fresh sparse SVN working copy (r3800183): `trunk/`
+  replaced by the build (17 files changed, 3 added, none removed),
+  `tags/0.8.2` copied (`diff -r` with the build empty); committed by
+  Maurice as r3800187 (11:29 CET). Measured: the plugin API reported 0.8.2
+  (last updated 10:29am GMT); the public download and an export of SVN
+  `tags/0.8.2` are the build's files; the plugin page answers 200. Git tag
+  `v0.8.2` on `fc6958c` and a GitHub release with the same zip (SHA-256
+  checked after download).

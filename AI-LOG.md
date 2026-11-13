@@ -4716,3 +4716,10 @@ README are where the disclosure lives.
 - Produced: version 0.8.2 in the plugin header and `readme.txt` (Stable tag, changelog: bundles c2pa-verifier 0.11.0, which verifies the box hash that Microsoft Bing Image Creator writes in JPEGs); the 463e2a6 entry no longer says the release suite was not run.
 - Measured: `readme.txt` 10,174 bytes (under ReadmeTest's 10,240; ReadmeTest 21 passed); the release suite on a build of this commit (the build reads the commit, not the working tree).
 - Decided by Maurice: release 0.8.2 prepared; push, SVN, tag and GitHub release wait for his word.
+
+## 2026-11-13 — Record the 0.8.2 release
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "push"; "bereid de svn-release van tracefern 0.8.2 voor"; "svn commit is gedaan"; "tag en release v0.8.2 maar"; "leg de 0.8.2-release vast".
+- Produced: the push of `fc6958c`; a sparse SVN working copy with `trunk/` replaced by the build and `tags/0.8.2` copied; tag `v0.8.2` and the GitHub release with the zip; the 0.8.2 entry in `notes/wporg-submission.md` §5.
+- Measured: CI run 43406697314 (9 of 9); `diff -r` of `trunk/` and `tags/0.8.2` with the build before the commit; after r3800187, the plugin API (0.8.2), the public download and an export of SVN `tags/0.8.2` (both equal to the build) and the plugin page (200); the GitHub release's zip SHA-256 after download, equal to the build.
+- Decided by Maurice: push, tag and release; he committed to SVN.
