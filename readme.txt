@@ -4,7 +4,7 @@ Tags: c2pa, content credentials, provenance, media library, ai
 Requires at least: 7.1
 Tested up to: 7.1
 Requires PHP: 8.3
-Stable tag: 0.8.1
+Stable tag: 0.8.2
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -212,8 +212,8 @@ licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).
 
 == Changelog ==
 
-= 0.8.1 =
+= 0.8.2 =
 
-* Bundles c2pa-verifier 0.10.1 and the C2PA trust lists of 2026-11-04.
+* Bundles c2pa-verifier 0.11.0, which verifies the box hash that Microsoft Bing Image Creator writes in JPEGs.
 
 Earlier versions: https://github.com/provemark/tracefern-image-check/releases

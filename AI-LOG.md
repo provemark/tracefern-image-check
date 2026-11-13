@@ -4703,9 +4703,16 @@ README are where the disclosure lives.
     bytes, names from its own table).
   - `composer check` (134 passed), integration (287) and multisite (9)
     green.
-  - The release suite was not run: the build packs `HEAD`, so it needs
-    the commit.
+  - The release suite followed the commit, on a build of `463e2a6`: 17
+    passed, AC4 within the new baseline.
 - Reasoned: no plugin code changes; the plugin has no `match` over
   `StatusCode` and calls none of the new API.
 - Decided by Maurice: the update; amendment 27 and the ten new findings
   ("goedgekeurd, commit en draai de release-suite").
+
+## 2026-11-13 — Release 0.8.2
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "bereid tracefern 0.8.2 voor".
+- Produced: version 0.8.2 in the plugin header and `readme.txt` (Stable tag, changelog: bundles c2pa-verifier 0.11.0, which verifies the box hash that Microsoft Bing Image Creator writes in JPEGs); the 463e2a6 entry no longer says the release suite was not run.
+- Measured: `readme.txt` 10,174 bytes (under ReadmeTest's 10,240; ReadmeTest 21 passed); the release suite on a build of this commit (the build reads the commit, not the working tree).
+- Decided by Maurice: release 0.8.2 prepared; push, SVN, tag and GitHub release wait for his word.
