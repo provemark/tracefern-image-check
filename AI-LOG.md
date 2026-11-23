@@ -4749,9 +4749,18 @@ README are where the disclosure lives.
     of a validation time; a fixed text and the caller's time).
   - `composer check` (134 passed), integration (287) and multisite (9)
     green.
-  - The release suite was not run: the build packs `HEAD`, so it needs
-    the commit.
+  - The release suite followed the commit, on a build of `7d67fb0`: 17
+    passed, AC4 within the new baseline. A first attempt ran no test: the
+    release environment was not started. The commit was pushed before the
+    suite had run. CI on it: 9 of 9.
 - Reasoned: no plugin code changes; the one code the plugin reads by
   name (`signingCredential.untrusted`, alone) is unaffected.
 - Decided by Maurice: the update and the plan; amendment 28 and the one new
   finding ("goedgekeurd, commit en draai de release-suite").
+
+## 2026-11-23 — Release 0.8.3
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "push maar en bereid release 0.8.3 voor".
+- Produced: version 0.8.3 in the plugin header and `readme.txt` (Stable tag, changelog: bundles c2pa-verifier 0.11.5); the 7d67fb0 entry now records the release suite.
+- Measured: `readme.txt` 10,160 bytes (ReadmeTest's limit is 10,180; a longer changelog line was red at 10,186); `composer check` (134 passed); the release suite on a build of this commit (the build reads the commit, not the working tree).
+- Decided by Maurice: release 0.8.3 prepared; push, SVN, tag and GitHub release wait for his word.
