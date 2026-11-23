@@ -4723,3 +4723,35 @@ README are where the disclosure lives.
 - Produced: the push of `fc6958c`; a sparse SVN working copy with `trunk/` replaced by the build and `tags/0.8.2` copied; tag `v0.8.2` and the GitHub release with the zip; the 0.8.2 entry in `notes/wporg-submission.md` §5.
 - Measured: CI run 43406697314 (9 of 9); `diff -r` of `trunk/` and `tags/0.8.2` with the build before the commit; after r3800187, the plugin API (0.8.2), the public download and an export of SVN `tags/0.8.2` (both equal to the build) and the plugin page (200); the GitHub release's zip SHA-256 after download, equal to the build.
 - Decided by Maurice: push, tag and release; he committed to SVN.
+
+## 2026-11-23 — Bundle c2pa-verifier v0.11.5
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "werk de WordPress-plugin bij naar 0.11.5"; the plan: "ja akkoord".
+- Produced:
+  - the lock on v0.11.5 (from v0.11.0); `composer.json` stays on `^0.11`;
+  - `MaintenanceCheckTest` reads `v0.11.5`;
+  - SPEC-006 amendment 28;
+  - `tests/wpcs-verifier-baseline.json`: `verifier` v0.11.5,
+    `ExceptionNotEscaped` 846 to 847, the `about` text.
+- Measured:
+  - `MaintenanceCheckTest` red on the v0.11.0 lock, green after.
+  - The plugin's `Checker` and `Outcome` over the verifier's 702 JPEG,
+    PNG and WebP fixtures (at `88a1202`), DigiCert on and off, under both
+    versions: 1,404 runs, 0 exceptions. Each side loaded its own copied
+    vendor tree.
+    - 11 timestamp probes move alike in both modes, `Invalid` to `Valid`
+      (0.11.4).
+    - Two `expired-signer-tsa-leaf-*` probes lose
+      `signingCredential.invalid` from their codes.
+    - No `Trusted` verdict moves; `error` runs stay 10.
+  - WPCS on both versions' `src/` (without `src/Cli`): +1
+    `ExceptionNotEscaped`, in `Verifier/Verifier.php` (0.11.2's refusal
+    of a validation time; a fixed text and the caller's time).
+  - `composer check` (134 passed), integration (287) and multisite (9)
+    green.
+  - The release suite was not run: the build packs `HEAD`, so it needs
+    the commit.
+- Reasoned: no plugin code changes; the one code the plugin reads by
+  name (`signingCredential.untrusted`, alone) is unaffected.
+- Decided by Maurice: the update and the plan; amendment 28 and the one new
+  finding ("goedgekeurd, commit en draai de release-suite").
