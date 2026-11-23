@@ -721,3 +721,24 @@ Releases after 0.1.0:
   `tags/0.8.2` are the build's files; the plugin page answers 200. Git tag
   `v0.8.2` on `fc6958c` and a GitHub release with the same zip (SHA-256
   checked after download).
+- **0.8.3, 2026-11-23** (bundles c2pa-verifier 0.11.5, a faulty timestamp
+  certificate no longer makes an image `Invalid`, SPEC-006 amendment 28):
+  built from `4eefb5f` (SHA-256 `71f95b20…ff37d1f`, 419,891 bytes, kept in
+  `build/submitted/`). `composer check` (134), integration (287), multisite
+  (9) and the Release suite (17) were green on `7d67fb0`, the last after its
+  push; before the push of `4eefb5f`, `composer check` and the Release suite
+  (17) on it. The push's CI runs green: 45140270734 on `7d67fb0`,
+  45151768203 on `4eefb5f` (9 of 9). Measured for the bundled verifier: its
+  702 JPEG, PNG and WebP fixtures under 0.11.0 and 0.11.5, DigiCert on and
+  off (1,404 runs): 13 files move, alike in both modes, all timestamp
+  probes, 11 `Invalid` to `Valid`, two stay `Invalid` with one code less; no
+  `Trusted` verdict moves. WPCS: one more `ExceptionNotEscaped`, in
+  `Verifier/Verifier.php`, reviewed by Maurice. Git tag `v0.8.3` on
+  `4eefb5f` and a GitHub release with the zip (SHA-256 checked after
+  download) came before SVN this time. A fresh sparse SVN working copy
+  (r3818262): `trunk/` replaced by the build (14 files changed, none added
+  or removed), `tags/0.8.3` copied (`diff -r` with the build empty);
+  committed by Maurice as r3818335 (13:58 CET). Measured: the plugin API
+  reported 0.8.3 (last updated 12:58pm GMT); the public download and exports
+  of SVN `trunk/` and `tags/0.8.3` are the build's files; the plugin page
+  answers 200 and names 0.8.3.
