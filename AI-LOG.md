@@ -4771,3 +4771,27 @@ README are where the disclosure lives.
 - Produced: the push of `4eefb5f`; tag `v0.8.3` and the GitHub release with the zip; a sparse SVN working copy with `trunk/` replaced by the build and `tags/0.8.3` copied; the 0.8.3 entry in `notes/wporg-submission.md` §5.
 - Measured: the release suite on `4eefb5f` (17 passed) before the push; CI run 45151768203 (9 of 9); the GitHub release's zip SHA-256 after download, equal to the build; `diff -r` of `trunk/` and `tags/0.8.3` with the build before the commit; after r3818335, the plugin API (0.8.3), the public download and exports of SVN `trunk/` and `tags/0.8.3` (all equal to the build) and the plugin page (200, 0.8.3).
 - Decided by Maurice: push, tag and release; he committed to SVN.
+
+## 2026-11-27 — Bundle the C2PA trust lists of 2026-11-26
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "stel amendement 4 op", then "goedgekeurd, voer amendement 4 uit".
+- Produced: `trust/C2PA-TRUST-LIST.pem` and `C2PA-TSA-TRUST-LIST.pem`
+  from `c2pa-org/conformance-public` `c68494b`, unchanged;
+  `TrustConfig::LIST_DATE` and `LIST_COMMIT`; `trust/README.md`; the tests
+  that name the list (`TrustConfigTest`, `TrustTest`,
+  `MaintenanceCheckTest`); SPEC-004 amendment 4.
+- Measured: the certificate subjects and SHA-256 fingerprints of old and
+  new lists. Signer list 33 to 34: *Aretiico C2PA Issuing CA G1* added;
+  Verimago LLC's May 2026 root and issuing CA replaced by the pair issued
+  2026-11-12. The TSA list is unchanged (24). The unit tests red on the
+  new date, commit and stale boundary (4 failed), then green (134); the
+  verifier's 702 JPEG, PNG and WebP fixtures under old and new lists,
+  DigiCert on and off (2,808 runs, 0 exceptions, 0 state moves; five
+  truncated fixtures `unreadable` under both), and the same probe against
+  a signer list cut to one certificate (4 moves), so the probe sees a
+  change. No fixture is signed under Verimago or Aretiico.
+- Reasoned: the first bundle that removes certificates, so a file signed
+  under the old Verimago pair can go from `Trusted` to `Valid` on a new
+  check; one signed under the new pair or Aretiico can go up. No fixture
+  exercises either. Earlier entries keep their recorded source.
+- Decided by Maurice: the update (amendment 4 approved 2026-11-27).

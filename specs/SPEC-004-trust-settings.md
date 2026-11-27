@@ -238,6 +238,49 @@ None. Resolved by Maurice on 2026-09-26, as proposed in the draft:
    can move (a signer from `Valid` to `Trusted`); no other file can, since
    nothing was removed.
 
+4. **2026-11-27, approved by Maurice van Loon.** The bundled C2PA lists
+   move from `a95f2c4` (2026-11-04) to `c68494b` (2026-11-26), the latest
+   commit touching `trust-list/` (reported by the weekly maintenance check,
+   issue #7, which named the intermediate `285d98e`). Four upstream commits
+   lie between them; only the signer list's PEM changes, and the TSA list
+   stays byte for byte the same (24 certificates). Measured, the net
+   change to `C2PA-TRUST-LIST.pem`, 33 to 34 certificates:
+   - **added**: *Aretiico C2PA Issuing CA G1* (Aretiico Group PLC, GB;
+     SHA-256 `13:0C:D5:CF…49:77:3F`, valid 2026-09-23 to 2031-09-22),
+     in `92de7d8`;
+   - **replaced**: Verimago LLC (US) re-keyed. *Verimago Root CA*
+     (`BB:5A:A6:5A…86:CE:7D:7F`, to 2046-11-12) and *Verimago Claim
+     Signing Issuing CA* (`05:9E:7A:19…A7:43:68:69`, to 2031-11-12),
+     both issued 2026-11-12, are added in `285d98e`; the May 2026 pair
+     (`67:68:3E:19…8B:F1:9C:B6` and `10:D4:FB:A2…7E:BA:D0:D0`) is
+     removed in `c68494b`.
+
+   **This is the first bundle that removes certificates.** Amendments 2
+   and 3 could reason that no file moves except up; this one cannot. A
+   file signed under the May 2026 Verimago pair goes from `Trusted` to
+   `Valid` (signer untrusted) on a new check; a file signed under the new
+   Verimago pair or under Aretiico goes from `Valid` to `Trusted`. Entries
+   checked before keep the verdict and the source they were checked with;
+   nothing is re-checked, as before, so an entry checked against
+   `c2pa-2026-11-04` can say `Trusted` for a signer the current list no
+   longer accepts. That is what the recorded source is for, and it is not
+   changed here.
+
+   `TrustConfig::LIST_DATE` and `LIST_COMMIT` follow, so new checks
+   record `c2pa-2026-11-26` (with `+digicert`), the settings page names
+   the new date and commit, and AC9's age warning starts on 2027-05-28.
+   `trust/README.md` names `c68494b` and 34 certificates.
+
+   Measured with the verifier's 702 JPEG, PNG and WebP fixtures, DigiCert
+   on and off, old against new lists (2,808 runs): 0 exceptions, no state
+   moves; five deliberately truncated fixtures are `unreadable` under both
+   lists. The same probe with the signer list cut to one certificate
+   moves four, so it sees a change. No fixture is signed under Verimago or
+   Aretiico (`grep -a` finds both names only in the verifier's own copy of
+   the trust list, under `tests/Fixtures/trust/conformance-public/`), so
+   the removal is exercised by no fixture: the downward move is reasoned,
+   not measured.
+
 ## Traceability
 
 Filled when status becomes `implemented`. Every acceptance criterion maps to at
