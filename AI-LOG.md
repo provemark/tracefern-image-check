@@ -4806,3 +4806,15 @@ README are where the disclosure lives.
   `Tested up to: 7.1` against api.wordpress.org (latest 7.1.5);
   `composer check` (134 passed).
 - Decided by Maurice: release 0.8.4.
+
+## 2026-11-27 — Record the 0.8.4 release
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "svn commit gedaan, controleer het".
+- Produced: the 0.8.4 entry in `notes/wporg-submission.md`.
+- Measured: before the SVN commit, the integration (287), multisite (9)
+  and Release (17) suites on `584adf5`, CI 9 of 9 on it, tag `v0.8.4`, and
+  the GitHub release zip equal to the build by SHA-256. After it: SVN
+  r3829284; the exports of `trunk/` and `tags/0.8.4` and the public
+  download equal to the build (`diff -r` empty); the plugin API at 0.8.4;
+  the plugin page 200 with 0.8.4.
+- Decided by Maurice: push, tag, GitHub release; the SVN commit (his).

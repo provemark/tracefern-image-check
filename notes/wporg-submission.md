@@ -742,3 +742,22 @@ Releases after 0.1.0:
   reported 0.8.3 (last updated 12:58pm GMT); the public download and exports
   of SVN `trunk/` and `tags/0.8.3` are the build's files; the plugin page
   answers 200 and names 0.8.3.
+- **0.8.4, 2026-11-27** (bundles the C2PA trust list of 2026-11-26,
+  `c68494b`: Aretiico added, Verimago re-keyed, the first bundle that
+  removes certificates; SPEC-004 amendment 4): built from `584adf5`
+  (SHA-256 `52d8c785…5d0d45f644`, 420,527 bytes, kept in
+  `build/submitted/`). `composer check` (134), integration (287), multisite
+  (9) and the Release suite (17) green on `584adf5` before its push; CI
+  runs green on `8ba8cc1` and on `584adf5` (45977900878), 9 of 9 each.
+  Measured for the list: the verifier's 702 JPEG, PNG and WebP fixtures
+  under old and new lists, DigiCert on and off (2,808 runs): 0 exceptions,
+  0 state moves; none is signed under Verimago or Aretiico. Git tag
+  `v0.8.4` (annotated, where `v0.8.3` is lightweight) on `584adf5` and a
+  GitHub release with the zip (SHA-256 checked after download) before
+  SVN. A fresh sparse SVN working copy (r3829203): `trunk/` replaced by
+  the build (10 files changed, none added or removed), `tags/0.8.4`
+  copied (`diff -r` with the build empty); committed by Maurice as
+  r3829284 (11:48 CET). Measured: the plugin API reported 0.8.4 (last
+  updated 10:48am GMT) within a minute; the public download and exports
+  of SVN `trunk/` and `tags/0.8.4` are the build's files; the plugin page
+  answers 200 and names 0.8.4.
