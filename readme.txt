@@ -4,7 +4,7 @@ Tags: c2pa, content credentials, provenance, media library, ai
 Requires at least: 7.1
 Tested up to: 7.1
 Requires PHP: 8.3
-Stable tag: 0.8.3
+Stable tag: 0.8.4
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -212,8 +212,8 @@ licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).
 
 == Changelog ==
 
-= 0.8.3 =
+= 0.8.4 =
 
-* Bundles c2pa-verifier 0.11.5: a faulty timestamp certificate no longer makes an image Invalid.
+* Bundles the C2PA trust list of 2026-11-26: Aretiico is added, and Verimago's new keys replace its old ones.
 
 Earlier versions: https://github.com/provemark/tracefern-image-check/releases

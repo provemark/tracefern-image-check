@@ -4795,3 +4795,14 @@ README are where the disclosure lives.
   check; one signed under the new pair or Aretiico can go up. No fixture
   exercises either. Earlier entries keep their recorded source.
 - Decided by Maurice: the update (amendment 4 approved 2026-11-27).
+
+## 2026-11-27 — Release 0.8.4
+- Model: Claude Opus 5.5, Claude Code CLI
+- Asked: "push het en sluit #6", then "maak release 0.8.4".
+- Produced: version 0.8.4 in the plugin header and `readme.txt` (Stable
+  tag, changelog: bundles the C2PA trust list of 2026-11-26); issue #6
+  closed (v0.11.5 is bundled since 0.8.3).
+- Measured: `readme.txt` 10,173 bytes (ReadmeTest's limit is 10,240);
+  `Tested up to: 7.1` against api.wordpress.org (latest 7.1.5);
+  `composer check` (134 passed).
+- Decided by Maurice: release 0.8.4.
